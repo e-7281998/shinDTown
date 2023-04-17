@@ -10,14 +10,15 @@
 .main_script{
 	display : grid;
 	width : 80%;
+	overflow: visible;
 	grid-template-rows: repeat(5, 3fr);
-	grid-template-columns: 0.3fr 2fr 0.8fr 5fr 0.3fr;
+	grid-template-columns: 50px 2fr 0.8fr 5fr 50px;
 	grid-template-areas: 
-	". script1 btn greet ."
-	". script2 . greet ."
-	". . . greet ."
-	". . . greet ."
-	". . . greet .";
+	". script1 btn greet greet"
+	". script2 . greet greet"
+	". . . greet greet"
+	". . . greet greet"
+	". . . greet greet";
 }
 
 .script_1{
@@ -32,6 +33,8 @@
 .greeting_img{
 	grid-area: greet;
 	background-image: url('img/greetingImg.jpg');
+	background-size : contain;
+	background-repeat : no-repeat;
 }
 
 .btn{
@@ -62,7 +65,7 @@
 .main_page{
 	display : grid;
 	grid-template-rows: 1fr 1fr 0.3fr 1fr;
-	grid-template-columns: 0.3fr 2.5fr 1.2fr 0.3fr;
+	grid-template-columns: 0.3fr 2.5fr 1.5fr 0.3fr;
 	grid-template-areas: 
 	". main_board git . "
 	". main_board calendar . "
@@ -73,7 +76,7 @@
 
 .board_title {
 	list-style: none;
-	width : 400px; 
+	width : 350px;
 	padding-left : 15px;
 }
 
@@ -92,11 +95,13 @@
 .git {
 	grid-area : git;
 	border: 2px solid gray;
+	margin-top : 9px;
 }
 
 .calendar{
 grid-area : calendar;
 border: 2px solid;
+margin-top : 5px;
 }
 
 .main_board{
@@ -136,6 +141,15 @@ border: 2px solid;
 	display : grid;
 	grid-template-rows: 1fr;
 	grid-template-columns: repeat(2, 1fr);
+	grid-template-areas: 
+	"board_5_1 board_5_2";
+}
+
+.left{
+	grid-area: board_5_1;
+}
+.right{
+	grid-area: board_5_2;
 }
 
 

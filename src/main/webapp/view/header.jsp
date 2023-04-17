@@ -14,7 +14,7 @@
 	grid-template-columns: 0.3fr 1fr 3fr 2fr 0.3fr;
 	grid-template-areas: ". logo . bar_menu .";
 	place-items : center center;
-	padding : 20px 0;
+	padding-top : 10px;
 }
 
 .logo {
@@ -31,6 +31,9 @@
 .menu{
 margin : auto 10px;
 }
+a{
+text-decoration: none;
+}
 
 hr {
 	margin: 0px 0px 40px 0px;
@@ -46,9 +49,8 @@ hr {
 		</a>
 		</div>
 		<div class="bar_menu">
-			<h2 class="menu">회원가입</h2>
-			<h2 class="menu"></h2>
-			<h2>로그인</h2>
+		<a href="/shinDTown/view/memberView/MemberSignUp.jsp"><h2 class="menu">회원가입</h2></a>
+		<a href="/shinDTown/view/memberView/MemberLogin.jsp"><h2 class="menu">로그인</h2></a>
 		</div>
 	</div>
 </div>
