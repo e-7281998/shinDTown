@@ -1,0 +1,87 @@
+@charset "UTF-8";
+
+.body {
+	display: flex;
+	justify-content: center;
+/* 	background-image: url('../img/Vector.png'); */
+/* 	background-repeat: no-repeat; */
+/* 	background-size: 600px 450px; */
+/* 	background-attachment: fixed; */
+/* 	background-position:center; */
+
+}
+
+.signup {
+	width: 500px;
+	margin-top: 10px;
+}
+
+.form {
+	display: grid;
+	grid-template-rows: repeat(6, 1fr);
+	grid-template-columns: 1fr 1fr;
+	grid-template-areas: "name name" "id  id" "pwd pwd" "pwd_c pwd_c"
+		"class verify" "sub sub";
+}
+
+.form_2 {
+	margin-top: 25%;
+	display: grid;
+	grid-template-rows: repeat(3, 1fr);
+	grid-template-columns: 1fr 1fr;
+	grid-template-areas: "id  id" "pwd pwd" "sub sub";
+}
+
+input {
+	margin: 10px;
+	height: 50px;
+	outline: none;
+	border-radius: 20px;
+	border: 3px solid;
+	border-color: #558BCF;
+	font-size: 15px;
+}
+
+select {
+	margin: 10px;
+	height: 57px;
+	outline: none;
+	border-radius: 20px;
+	border: 3px solid;
+	border-color: #558BCF;
+	font-size: 15px;
+}
+
+input::focus {
+	outline: none;
+}
+
+.name {
+	grid-area: name;
+}
+
+.id {
+	grid-area: id;
+}
+
+.pwd {
+	grid-area: pwd;
+}
+
+.pwd_check {
+	grid-area: pwd_c;
+}
+
+.class {
+	grid-area: class;
+}
+
+.verify {
+	grid-area: verify;
+}
+
+.submit {
+	grid-area: sub;
+	background-color: #558BCF;
+	color: white;
+}
