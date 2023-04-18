@@ -20,9 +20,9 @@
 	margin-top: 10%;
 	display: grid;
 	grid-template-rows: repeat(6, 1fr);
-	grid-template-columns: 1fr 1fr;
-	grid-template-areas: "name name" "id  id" "pwd pwd" "pwd_c pwd_c"
-		"class verify" "sub sub";
+	grid-template-columns: 250px 250px 100px;
+	grid-template-areas: "name name ." "id id id_c " "pwd pwd . " "pwd_c pwd_c ."
+		"class verify ." "sub sub .";
 		row-gap : 10px;
 }
 
@@ -88,6 +88,11 @@ input::focus {
 }
 .id_t{
 	grid-area : id_t;
+}
+#id_check{
+	grid-area: id_c;
+	background-color: #558BCF;
+	color: white;
 }
 
 .pwd {

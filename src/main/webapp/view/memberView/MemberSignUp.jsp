@@ -14,6 +14,7 @@
 			<form class="form">
 				<input type="text" name="name" class="name fom" placeholder="이름" />
 				<input type="text" name="id" class="id fom" placeholder="아이디" /> 
+				<input type="button" id="id_check" value="중복확인">
 				<input type="text" name="pwd" class="pwd fom" placeholder="비밀번호" /> 
 				<input type="text" name="pwd_check" class="pwd_check fom" placeholder="비밀번호 확인" /> 
 				<select name="class" class="class">
