@@ -1,0 +1,104 @@
+@charset "UTF-8";
+
+.body {
+	display: flex;
+	justify-content: center;
+}
+
+.board_detail {
+	display: grid;
+	width: 80%;
+	border: 2px solid gray;
+	grid-template-rows: 0.3fr 1fr 1fr;
+	grid-template-columns: 0.3fr 2fr 2fr 0.3fr;
+	grid-template-areas: ". board_title . . " ". board_list post_detail . "
+		". board_list post_detail . ";
+	gap: 2%;
+}
+
+.board_title {
+	grid-area: board_title;
+}
+
+.board_list {
+	grid-area: board_list;
+}
+
+.post_detail {
+	grid-area: post_detail;
+	display: grid;
+	grid-template-rows: 2fr 50px 1fr;
+	grid-template-areas: "post" "comment" "comment_list";
+}
+
+.post {
+	grid-area: post;
+	border: 2px solid gray;
+	border-radius: 20px;
+}
+
+.comment {
+	grid-area: comment;
+}
+
+.comment_list {
+	grid-area: comment_list;
+}
+
+.create_comment {
+	width: 100%;
+}
+
+input[type="text"] {
+	margin: 10px;
+	height: 40px;
+	width: 75%;
+	outline: none;
+	border-radius: 20px;
+	border: 3px solid;
+	border-color: #558BCF;
+	font-size: 15px;
+}
+
+input[type="submit"] {
+	height: 40px;
+	outline: none;
+	border-radius: 15px;
+	border: 3px solid;
+	border-color: #558BCF;
+	font-size: 15px;
+}
+
+.comms {
+	display: grid;
+	grid-template-rows: 1fr;
+	grid-template-columns: 3fr 0.5fr 0.5fr;
+	grid-template-areas: "comm good points";
+	align-items: center
+}
+
+.comms:nth-child(3){
+	
+}
+
+.comm {
+	grid-area: comm;
+	margin-left: 20px;
+}
+
+.good {
+	justify-content: center;
+	grid-area : good;
+	width: 50px;
+	height: 30px;
+	outline: none;
+	border-radius: 15px;
+	border: 3px solid;
+	border-color: #558BCF;
+	font-size: 15px;
+	margin-right: 100px;
+}
+
+.points {
+	grid-area: points;
+}
