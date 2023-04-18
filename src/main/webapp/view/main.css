@@ -91,6 +91,14 @@
 	grid-area : more;
 	justify-self: end;
 }
+.more_btn > button{
+	width : 70px;
+	height : 30px;
+	background-color: #558BCF;
+	color: white;
+	border : none;
+	border-radius : 20px;
+}
 
 .git {
 	grid-area : git;
@@ -115,30 +123,47 @@ margin-top : 5px;
 	gap: 2%;
 }
 
+
 .board_list_1{
 	grid-area : board_1;
+	border: 3px solid;
+	border-color: #558BCF;
+	border-radius: 20px;
 }
 
 .board_list_2{
 	grid-area : board_2;
+	border: 3px solid;
+	border-color: #558BCF;
+	border-radius: 20px;
 }
 
 .board_list_3{
 	grid-area : board_3;
+	border: 3px solid;
+	border-color: #558BCF;
+	border-radius: 20px;
 }
 
 .board_list_4{
 	grid-area : board_4;
+	border: 3px solid;
+	border-color: #558BCF;
+	border-radius: 20px;
 }
 
 .hot_board{
 	grid-area: hot_board;
 	display : flex;
+	border: 3px solid;
+	border-color: #558BCF;
+	border-radius: 20px;
 	
 }
 
 .board_list_5{
 	display : grid;
+	border : none;
 	grid-template-rows: 1fr;
 	grid-template-columns: repeat(2, 1fr);
 	grid-template-areas: 
