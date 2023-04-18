@@ -51,6 +51,7 @@ hr {
 		<div class="bar_menu">
 		<a href="/shinDTown/view/memberView/MemberSignUp.jsp"><h2 class="menu">회원가입</h2></a>
 		<a href="/shinDTown/view/memberView/MemberLogin.jsp"><h2 class="menu">로그인</h2></a>
+		<a href="/shinDTown/view/boardView/BoardRead.jsp"><h2 class="menu">게시판</h2></a>
 		</div>
 	</div>
 </div>
