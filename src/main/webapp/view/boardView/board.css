@@ -1,0 +1,110 @@
+@charset "UTF-8";
+
+
+.body {
+	display: flex;
+	justify-content: center;
+}
+
+.board_page{
+	display : grid;
+	width : 80%;
+	grid-template-rows: 1fr;
+	grid-template-columns: 0.3fr 1fr 1fr 0.3fr;
+	grid-template-areas: 
+	". boards find . ";
+	gap: 2%;
+}
+
+.boards {
+	grid-area : boards;
+	display : grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 2%;
+}
+
+.board_title > li {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.find{
+	grid-area: find;
+	display : grid;
+	grid-template-rows: 0.1fr 1fr;
+	grid-template-columns: 1fr ;
+	grid-template-areas: 
+	"search"
+	"list";
+	gap: 2%;
+}
+fieldset{
+	border: 3px solid;
+	border-color: #558BCF;
+	border-radius: 20px;
+}
+.board_title {
+	list-style: none;
+	width : 350px;
+	padding-left : 15px;
+	cursor : pointer;
+}
+.search{
+	grid-area :search;
+	margin-top : 10px;
+}
+.title{
+	outline: none;
+	height : 30px;
+	width : 70%;
+	margin-left : 0;
+	border-radius: 20px;
+	border: 3px solid;
+	border-color: #558BCF;
+	font-size: 15px;
+}
+.search_btn{
+	width : 20%;
+	height : 30px;
+	background-color: #558BCF;
+	color: white;
+	border : none;
+	border-radius : 20px;
+}
+.list{
+	grid-area: list;
+	border: 2px solid  #558BCF;
+	border-radius : 20px;
+	display : grid;
+	
+	
+	grid-template-rows: repeat(5, 1fr);
+	grid-template-columns: 1fr;
+	grid-template-areas: 
+	"lists"
+	"lists"
+	"lists"
+	"lists"
+	"lists";
+/* 	여기 이상  */
+}
+.lists{
+	grid-area: lists;
+
+}
+.lists > li{
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	margin-bottom : 10px;
+	margin-top: 0;
+}
+
+.line{
+	width : 80%;
+	margin-bottom : 10px;
+}
+
+
+
