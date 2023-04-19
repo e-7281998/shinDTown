@@ -30,11 +30,7 @@ public class FrontController_EJ extends HttpServlet {
 		CommonControllerInterface controller = null;
 		Map<String, Object> data = new HashMap<>();
 		data.put("method", request.getMethod());
-		data.put("request", request);
-		
-		
-		System.out.println("aaaa:" + request.getServletPath());
-		System.out.println("bbb:" + path);
+		data.put("request", request); 
 		
 		switch (path) { 
 		case "/view/memberView/signup":

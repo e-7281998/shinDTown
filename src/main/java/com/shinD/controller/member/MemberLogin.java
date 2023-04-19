@@ -18,8 +18,7 @@ public class MemberLogin implements CommonControllerInterface{
 	@Override
 	public String execute(Map<String, Object> data) throws Exception {
 		HttpServletRequest request = (HttpServletRequest)data.get("request");
-		System.out.println("로그인 넘오엄");
-		
+ 		
 		MemberService service = new MemberService();
 		
 		String id = request.getParameter("id");
@@ -46,7 +45,7 @@ public class MemberLogin implements CommonControllerInterface{
 			app.setAttribute("memberList", memberList);
 			
 			for(MemberVO vo:memberList) {
-				System.out.println(vo);
+				//System.out.println(vo);
 			}
 			
 			HttpSession session = request.getSession();

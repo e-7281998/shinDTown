@@ -19,9 +19,7 @@ public class MemberDAO {
 	public int registertUser(String userName, String userId,String userPwd, int userClass, String salt){
 		String sql = "insert into users(USER_NAME,USER_ID,USER_PWD,USER_CLASS,USER_SALT) values(?,?,?,?,?)";
 		conn = MySQLUtil.getConnection();
-		
-		System.out.println("옴");
-		
+				
 		try {
 			pst = conn.prepareStatement(sql);
 			pst.setString(1,userName);
@@ -30,9 +28,7 @@ public class MemberDAO {
 			pst.setInt(4,userClass);
 			pst.setString(5,salt);
 			
-			result = pst.executeUpdate();
-			
-			System.out.println("결과 : " +result);
+			result = pst.executeUpdate(); 
 			
 		}catch (SQLException e) {
 			e.printStackTrace();
@@ -75,8 +71,7 @@ public class MemberDAO {
 		String salt = "";
 		conn = MySQLUtil.getConnection();
 
-		System.out.println("salt 가지러 옴");
-		try {
+ 		try {
 			pst = conn.prepareStatement(sql);
 			pst.setString(1, id);
 			rs = pst.executeQuery();
