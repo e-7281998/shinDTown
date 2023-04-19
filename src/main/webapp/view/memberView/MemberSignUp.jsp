@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="member.css" rel="stylesheet" />
+<script src="<%=request.getContextPath()%>/js/jquery-3.6.4.min.js"></script>
 </head>
 <body>
 	<%@include file="../header.jsp"%>
@@ -27,5 +28,30 @@
 			</form>
 		</div>
 	</div>
+	
+	<script>
+	$(() => {
+		
+ 		//page이동 없이 서버에 요청 보내고 응답받기 : ajax
+		$(".id").on("click",() =>{
+  			$.ajax({
+				url:"idDupCheck",
+				data:{"id":$(".id").val()},
+				success: (responseData)=>{ 
+ 					var message = responseData ==1 ? "이미 존재하는 아이디" : "사용 가능한 아이디";
+ 					console.log(message);
+					/* $("#message").text(message);
+					if(responseData == 1){
+						$("#m_email").val("");
+						$("#m_email").focus();
+					}  */
+				},
+				error:(message) => {
+					alert(message);
+				}
+			});
+		})
+	});
+</script>
 </body>
 </html>

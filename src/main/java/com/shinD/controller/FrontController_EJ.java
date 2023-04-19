@@ -15,7 +15,6 @@ import javax.servlet.http.HttpSession;
 
 import com.shinD.controller.member.MemberLogin;
 import com.shinD.controller.member.MemberSignUp;
-import com.shinD.model.member.MemberService;
  
 @WebServlet({"/view/memberView/signup","/view/memberView/login"})
 public class FrontController_EJ extends HttpServlet {
@@ -44,6 +43,9 @@ public class FrontController_EJ extends HttpServlet {
 		case "/view/memberView/login":
  			controller = new MemberLogin();
 			 break;
+		case "/view/memberView/idDupCheck":
+ 			controller = new MemberLogin();
+			 break;
 		default:
 			break;
 		}
@@ -55,7 +57,6 @@ public class FrontController_EJ extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 		if(page.indexOf("redirect:") >= 0) {
  			response.sendRedirect(page.substring(9));
 		}else if(page.indexOf("responseBody") >= 0){

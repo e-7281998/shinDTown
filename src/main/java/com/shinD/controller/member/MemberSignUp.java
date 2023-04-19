@@ -14,6 +14,9 @@ public class MemberSignUp implements CommonControllerInterface{
 	@Override
 	public String execute(Map<String, Object> data) throws Exception {
 		HttpServletRequest request = (HttpServletRequest)data.get("request");
+		String path = request.getContextPath();	
+		System.out.println("path ===> " + path);
+		
 		
 		MemberService service = new MemberService();
 		
@@ -29,7 +32,6 @@ public class MemberSignUp implements CommonControllerInterface{
 		System.out.println("pwd.... => " + pwd);
 		//회원가입 신청
 		int result = service.registertUser(name, id, pwd, classNum, salt);
-		String path = request.getContextPath();	
 		return "redirect:"+path+"/view/memberView/MemberLogin.jsp";
 	} 
 }

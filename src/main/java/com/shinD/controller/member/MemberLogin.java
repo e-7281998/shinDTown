@@ -51,6 +51,8 @@ public class MemberLogin implements CommonControllerInterface{
 			
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", member);
+			session.setAttribute("user_code", member.getUser_code());
+			session.setAttribute("user_name", member.getUser_name());
 			
 			String path = request.getContextPath();			
 			return  "redirect:"+path+"/index.jsp";
