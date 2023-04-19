@@ -90,7 +90,7 @@
 			<div class="find">
 				<div class="search">
 					<form class="search_form">
-						<input type="text" name="search" class="title"
+						<input type="text" name="search" class="search_title"
 							placeholder="게시판 명을 입력해 주세요 "> <input type="button"
 							class="search_btn" value="찾기">
 					</form>
