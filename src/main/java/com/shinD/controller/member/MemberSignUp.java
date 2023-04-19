@@ -14,7 +14,6 @@ public class MemberSignUp implements CommonControllerInterface{
 	@Override
 	public String execute(Map<String, Object> data) throws Exception {
 		HttpServletRequest request = (HttpServletRequest)data.get("request");
-		System.out.println("넘어옴");
 		
 		MemberService service = new MemberService();
 		
