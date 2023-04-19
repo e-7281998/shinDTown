@@ -4,7 +4,13 @@ import java.util.List;
 
 public class MemberService {
 	MemberDAO dao = new MemberDAO();
-	public List<MemberVO> registertUser(String userName, String userId,String userPwd, int useClass){
-		return dao.registertUser(userName, userId, userPwd, useClass);
+	public int registertUser(String userName, String userId,String userPwd, int userClass, String salt){
+		return dao.registertUser(userName, userId, userPwd, userClass, salt);
+	}
+	public String getSalt(String id) {
+		return dao.getSalt(id);
+	}
+	public MemberVO loginCheck(String id, String pwd) {
+		return dao.loginCheck(id, pwd);
 	}
 }

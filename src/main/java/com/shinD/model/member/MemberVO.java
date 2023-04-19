@@ -12,9 +12,9 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class MemberVO {
-	int USER_CODE;
-	String USER_NAME;
-	String USER_ID;
-	String USER_PWD;
-	int USER_CLASS;
+	int user_code;
+	String user_name; 
+	String user_id; 
+	String user_pwd; 
+	int user_class; 
 }
