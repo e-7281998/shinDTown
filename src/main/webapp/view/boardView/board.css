@@ -54,7 +54,7 @@ fieldset{
 	grid-area :search;
 	margin-top : 10px;
 }
-.title{
+.search_title{
 	outline: none;
 	height : 30px;
 	width : 70%;
@@ -106,5 +106,107 @@ fieldset{
 	margin-bottom : 10px;
 }
 
+.post{
+	display: grid;
+	
+	grid-template-rows: 0.5fr 5fr;
+	grid-template-columns: 1fr 5fr 0.5fr;
+	grid-template-areas: 
+	"post_selector . ."
+	". posting ."
+}
+
+.post_selector{
+	grid-area: post_selector;
+	display : inline;
+}
+
+.posting{
+	grid-area : posting;
+	display: grid;
+	border: 2px solid  #558BCF;
+	border-radius : 20px;
+	padding: 10px 10px;
+	grid-template-rows: 1fr 4fr 50px 4fr 30px;
+	grid-template-columns: 1fr;
+	grid-template-areas: 
+	"title"
+	"content"
+	"photo"
+	"code"
+	"postbtn";
+}
+
+#form_code{
+	height: 100%;
+}
+.title{
+	grid-area: title;
+	width : 80%;
+	height : 40px;
+}
+
+#form_photo{
+	margin-top:10px;
+}
+.content{
+	grid-area: content;
+	width : 80%;
+	height : 300px;
+}
+.photo{
+	grid-area: photo;
+}
+.code{
+	display: none;
+	grid-area: code;
+	width : 80%;
+	padding : 10px;
+	border-radius: 20px;
+	border: 3px solid;
+	border-color: #558BCF;
+	font-size : 1.2em;
+	font-weight: bold;
+}
+.code:focus{
+	outline: none;
+}
+.postbtn{
+	grid-area: postbtn;
+	width : 80px;
+	background-color : #5588CF;
+	color : white;
+}
+
+.post_form{
+	display : flex;
+}
+label{
+	margin-right: 7px;
+	margin-top : 3px;
+}
+
+.post_form.btn{
+	display : flex;
+	justify-content: flex-end;
+    align-items: flex-start;
+	
+}
+.post_form > input{
+	outline: none;
+	margin-left : 0;
+	border-radius: 20px;
+	border: 3px solid;
+	border-color: #558BCF;
+	font-size: 15px;
+	padding-left : 5px;
+}
 
 
+input[type="file"]::file-selector-button{
+	border-radius: 20px;
+	border: 3px solid;
+	border-color: #558BCF;
+	background-color : #5588CF;
+	color : white;
+}
