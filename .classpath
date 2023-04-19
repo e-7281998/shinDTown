@@ -13,8 +13,8 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="C:/Users/fzaca/Downloads/lombok.jar"/>
-	<classpathentry kind="lib" path="C:/eclipse-jee-2022-12-R-win32-x86_64/mysql-connector-java-8.0.25.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse-workspace/lombok.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse-workspace/mysql-connector-java-8.0.25.jar"/>
 	<classpathentry kind="lib" path="C:/oraclexe/app/oracle/product/11.2.0/server/jdbc/lib/ojdbc6_g.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
