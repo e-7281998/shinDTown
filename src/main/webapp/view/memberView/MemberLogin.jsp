@@ -11,7 +11,7 @@
 <%@include file="../header.jsp"%>
 	<div class="body">
 		<div class="signup">
-			<form class="form_2">
+			<form class="form_2" method="post" action="login">
 				<input type="text" name="id" class="id fom" placeholder="아이디" />
 				<input type="text" name="pwd" class="pwd fom" placeholder="비밀번호" /> 
 				<input type="submit" class="submit" value="로그인 하기">
