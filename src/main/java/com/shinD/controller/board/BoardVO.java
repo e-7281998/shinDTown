@@ -15,4 +15,5 @@ public class BoardVO {
 	private int BOARD_CODE;
 	private int USER_CODE;
 	private String BOARD_NAME;
+	
 }
