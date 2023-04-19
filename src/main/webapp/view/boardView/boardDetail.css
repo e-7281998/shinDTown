@@ -8,11 +8,12 @@
 .board_detail {
 	display: grid;
 	width: 80%;
-	border: 2px solid gray;
 	grid-template-rows: 0.3fr 1fr 1fr;
 	grid-template-columns: 0.3fr 2fr 2fr 0.3fr;
-	grid-template-areas: ". board_title . . " ". board_list post_detail . "
-		". board_list post_detail . ";
+	grid-template-areas: 
+	". board_title . . " 
+	". board_list post_detail . "
+	". board_list post_detail . ";
 	gap: 2%;
 }
 
@@ -22,19 +23,96 @@
 
 .board_list {
 	grid-area: board_list;
+	display : grid;
+	grid-template-rows: 350px 40px;
+	grid-template-columns: 550px;
+	grid-template-areas: 
+	"post_title"
+	"posting";
+	gap: 2%;
 }
 
 .post_detail {
 	grid-area: post_detail;
+	visibility: hidden;
 	display: grid;
-	grid-template-rows: 2fr 50px 1fr;
-	grid-template-areas: "post" "comment" "comment_list";
+	grid-template-rows: 300px 60px 200px;
+	grid-template-columns: 550px;
+	grid-template-areas: 
+	"post" 
+	"comment" 
+	"comment_list";
+}
+.post_title{
+	grid-area: post_title;
+	margin-left : 0;
+	overflow: scroll;
+	overflow-x: hidden;
+}
+ul {
+	padding-left : 0;
+}
+
+li{
+	margin-left : 0;
+	margin-top : 7px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.like{
+	display: inline;
+}
+.com_count{
+	display: inline;
+}
+
+.posting{
+	grid-area: posting;
+	display : flex;
+	justify-content: flex-end;
+}
+
+.posting_btn{
+	height: 40px;
+	outline: none;
+	border-radius: 15px;
+	border: 3px solid;
+	border-color: #558BCF;
+	background-color : #558BCF;
+	color : white;
+	font-size: 15px;
+	margin-right: 20px;
 }
 
 .post {
 	grid-area: post;
 	border: 2px solid gray;
 	border-radius: 20px;
+	margin-left : 10px;
+	
+	display : grid;
+	grid-template-rows: 1fr 1fr 1fr;
+	grid-template-columns: 1fr 0.5fr;
+	grid-template-areas: 
+	"title date" 
+	"content content" 
+	"like like";
+	
+	padding-left : 10px;
+}
+
+.title{
+	grid-area: title;
+}
+.date{
+	grid-area: date;
+}
+.content{
+	grid-area: content;
+}
+.like{
+	grid-area: like;
 }
 
 .comment {
@@ -43,6 +121,9 @@
 
 .comment_list {
 	grid-area: comment_list;
+	margin-left: 15px;
+	overflow: scroll;
+	overflow-x: hidden;
 }
 
 .create_comment {
@@ -66,6 +147,8 @@ input[type="submit"] {
 	border-radius: 15px;
 	border: 3px solid;
 	border-color: #558BCF;
+	background-color : #558BCF;
+	color : white;
 	font-size: 15px;
 }
 
@@ -73,16 +156,13 @@ input[type="submit"] {
 	display: grid;
 	grid-template-rows: 1fr;
 	grid-template-columns: 3fr 0.5fr 0.5fr;
-	grid-template-areas: "comm good points";
+	grid-template-areas: "com good points";
 	align-items: center
 }
 
-.comms:nth-child(3){
-	
-}
 
-.comm {
-	grid-area: comm;
+.com {
+	grid-area: com;
 	margin-left: 20px;
 }
 
@@ -95,10 +175,16 @@ input[type="submit"] {
 	border-radius: 15px;
 	border: 3px solid;
 	border-color: #558BCF;
+	background-color : #558BCF;
+	color : white;
 	font-size: 15px;
 	margin-right: 100px;
 }
 
 .points {
 	grid-area: points;
+}
+
+.line{
+	margin : 0px 0px 3px 0px;
 }
