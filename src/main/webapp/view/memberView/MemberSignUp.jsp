@@ -11,7 +11,7 @@
 	<%@include file="../header.jsp"%>
 	<div class="body">
 		<div class="signup">
-			<form class="form">
+			<form class="form" mehtod="post" action="signup">
 				<input type="text" name="name" class="name fom" placeholder="이름" />
 				<input type="text" name="id" class="id fom" placeholder="아이디" /> 
 				<input type="button" id="id_check" value="중복확인">
