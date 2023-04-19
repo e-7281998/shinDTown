@@ -12,18 +12,19 @@ public class BoardRead implements CommonControllerInterface {
 
 	@Override
 	public String execute(Map<String, Object> data) throws Exception {
+		HttpServletRequest request = (HttpServletRequest) data.get("request");//입력받은 값 가져오기
+		request.setCharacterEncoding("utf-8");//인코딩
 		String method = (String)data.get("method");
 		String page = "";
 		
 		BoardService bserbive = new  BoardService();
-		List<BoardVO> boardlist = bserbive.boardAll();
+		List<BoardVO> boardlist = bserbive.boardAll();//보드 목록을 받아서 리스트로 만듦
 		
-		HttpServletRequest request = (HttpServletRequest) data.get("request");
-		request.setAttribute("boardlist", boardlist);
-		
+		request.setAttribute("boardlist", boardlist);//보드리스트 값 리퀘스트에넣기
+	
 		System.out.println(request);
 		System.out.println(boardlist);
-		return null;
+		return "responseBody:boardlist";
 	}
 
 }
