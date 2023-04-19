@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,15 +13,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.shinD.controller.member.MemberLogin;
 import com.shinD.controller.member.MemberSignUp;
 import com.shinD.model.member.MemberService;
  
-@WebServlet("/*")
+@WebServlet({"/view/memberView/signup","/view/memberView/login"})
 public class FrontController_EJ extends HttpServlet {
 	private static final long serialVersionUID = 1L;
- 
+	
+	ServletContext application;
+
  	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
  
+ 		application = getServletContext();
 		//String path = request.getServletPath(); 
  		String path = request.getRequestURI().substring(request.getContextPath().length());
 		CommonControllerInterface controller = null;
@@ -33,10 +38,12 @@ public class FrontController_EJ extends HttpServlet {
 		System.out.println("bbb:" + path);
 		
 		switch (path) { 
-		case "/signup":
+		case "/view/memberView/signup":
  			controller = new MemberSignUp();
 			 break;
-		 
+		case "/view/memberView/login":
+ 			controller = new MemberLogin();
+			 break;
 		default:
 			break;
 		}
