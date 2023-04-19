@@ -29,7 +29,7 @@
 				</ul>
 				<div class="posting">
 					<button class="posting_btn"
-						onclick="location.href='BoardCreate.jsp';">글쓰기</button>
+						onclick="location.href='../postView/PostCreate.jsp';">글쓰기</button>
 				</div>
 			</div>
 

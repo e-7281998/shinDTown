@@ -55,7 +55,7 @@
 			
 			<div class="more_btn">
 				<button>더보기</button>
-				<button>새게시판</button>
+				<button onclick="location.href="">새게시판</button>
 			</div>
 			
 			<div class="calendar">

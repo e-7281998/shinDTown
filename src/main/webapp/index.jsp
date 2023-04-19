@@ -19,7 +19,7 @@
 				<h3>신한 DS 금융 과정을 모두 함께해요</h3>
 			</div>
 			<div class="btn">
-				<button onClick="">회원 가입 하기</button>
+				<button onClick="location.href='view/memberView/MemberSignUp.jsp'">회원 가입 하기</button>
 			</div>
 			<div class="greeting_img">
 			</div>
