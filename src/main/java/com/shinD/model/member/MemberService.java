@@ -13,4 +13,7 @@ public class MemberService {
 	public MemberVO loginCheck(String id, String pwd) {
 		return dao.loginCheck(id, pwd);
 	}
+	public int dupCheck(String id) {
+		return dao.dupCheck(id);
+	}
 }

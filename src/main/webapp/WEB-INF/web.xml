@@ -10,6 +10,21 @@
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
   
+ 
+	 <!-- 반 인증번호  -->
+	<context-param>
+		<param-name>class0</param-name>
+		<param-value>0000</param-value>
+	</context-param>
+	<context-param>
+		<param-name>class1</param-name>
+		<param-value>1111</param-value>
+	</context-param>
+  	<context-param>
+		<param-name>class2</param-name>
+		<param-value>fz202302</param-value>
+	</context-param>
+  
   <resource-ref> 
     <description>jsptest db</description> 
     <res-ref-name>jdbc/jsptest</res-ref-name> 

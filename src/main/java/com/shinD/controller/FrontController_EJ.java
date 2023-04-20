@@ -16,17 +16,19 @@ import javax.servlet.http.HttpSession;
 import com.shinD.controller.member.MemberLogin;
 import com.shinD.controller.member.MemberSignUp;
  
-@WebServlet({"/view/memberView/signup","/view/memberView/login"})
+@WebServlet({"/view/memberView/signup",
+			"/view/memberView/login",
+			"/view/memberView/idDupCheck", 
+			"/view/memberView/classCheck"})
 public class FrontController_EJ extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	ServletContext application;
-
+ 
  	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
  
- 		application = getServletContext();
-		//String path = request.getServletPath(); 
- 		String path = request.getRequestURI().substring(request.getContextPath().length());
+ 		String path = request.getServletPath(); 
+ 		//String path = request.getRequestURI().substring(request.getContextPath().length());
+ 		//System.out.println("url 찍어봄 : " +request.getRequestURL());
 		CommonControllerInterface controller = null;
 		Map<String, Object> data = new HashMap<>();
 		data.put("method", request.getMethod());
@@ -34,14 +36,13 @@ public class FrontController_EJ extends HttpServlet {
 		
 		switch (path) { 
 		case "/view/memberView/signup":
+		case "/view/memberView/idDupCheck":
+		case "/view/memberView/classCheck":
  			controller = new MemberSignUp();
 			 break;
 		case "/view/memberView/login":
  			controller = new MemberLogin();
-			 break;
-		case "/view/memberView/idDupCheck":
- 			controller = new MemberLogin();
-			 break;
+			 break; 
 		default:
 			break;
 		}
