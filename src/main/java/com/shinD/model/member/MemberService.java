@@ -16,4 +16,7 @@ public class MemberService {
 	public int dupCheck(String id) {
 		return dao.dupCheck(id);
 	}
+	public int withdrawUser(String id) {
+		return dao.withdrawUser(id);		
+	}
 }

@@ -5,21 +5,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.shinD.controller.member.MemberLogin;
 import com.shinD.controller.member.MemberSignUp;
+import com.shinD.controller.member.MemberWithdraw;
  
 @WebServlet({"/view/memberView/signup",
 			"/view/memberView/login",
 			"/view/memberView/idDupCheck", 
-			"/view/memberView/classCheck"})
+			"/view/memberView/classCheck",
+			"/view/memberView/withdraw"})
 public class FrontController_EJ extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -42,6 +42,9 @@ public class FrontController_EJ extends HttpServlet {
 			 break;
 		case "/view/memberView/login":
  			controller = new MemberLogin();
+			 break; 
+		case "/view/memberView/withdraw":
+ 			controller = new MemberWithdraw();
 			 break; 
 		default:
 			break;

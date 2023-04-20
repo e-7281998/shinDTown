@@ -108,4 +108,24 @@ public class MemberDAO {
 		}
 		return result;
 	}
+
+	//탈퇴하기
+	public int withdrawUser(String id) {
+		String sql = "delete from users where user_id = ?";
+		
+		conn = MySQLUtil.getConnection();
+		
+		try {
+			pst = conn.prepareStatement(sql);
+			pst.setString(1,id); 
+			
+			result = pst.executeUpdate();  
+		}catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			MySQLUtil.dbDisconnect(rs, pst, conn);
+		}
+		
+		return 0;
+	}
 }
