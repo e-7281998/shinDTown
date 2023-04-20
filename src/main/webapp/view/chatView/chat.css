@@ -1,0 +1,115 @@
+@charset "UTF-8";
+
+.body {
+	display: flex;
+	justify-content: center;
+}
+
+.chats {
+	display: grid;
+	width: 80%;
+	grid-template-rows: 1fr 1fr;
+	grid-template-columns: 0.3fr 2fr 1.5fr 0.3fr;
+	grid-template-areas: ". chatlist chatroom . " ". chatlist chatroom . ";
+	gap: 2%;
+	margin-top : 70px;
+}
+
+.chat_field{
+	border: 3px solid;
+	border-color: #558BCF;
+	border-radius: 20px;
+}
+
+li.chat{
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.chatlist {
+	margin-top : 20%;
+	grid-area: chatlist;
+	width : 550px;
+}
+
+.chatroom {
+	grid-area: chatroom;
+	display: grid;
+	grid-template-rows: 2fr 0.4fr;
+	grid-template-areas: "text" "typing";
+	visibility : hidden;
+	border : 2px solid #558BCF;
+	border-radius: 15px;
+}
+
+.text {
+	width : 500px;
+	height : 400px;
+	grid-area: text;
+	display: grid;
+	grid-template-rows: repeat(6, 1fr);
+	grid-template-columns: 1fr 1fr;
+	grid-template-areas: ". me_1" "other_1 ." ". me_2" "other_2 ."
+	"other_3 ."
+	"other_4 .";
+	
+	padding-left : 15px;
+	padding-right : 15px;
+	margin-top : 10px;
+	margin-bottom : 10px;
+	
+	overflow : scroll;
+	overflow-x: hidden;
+}
+
+.typing {
+	display: flex;
+	grid-area: typing;
+	display : flex;
+	width : 550px;
+	height : 100px;
+}
+
+.me_1 {
+	grid-area: me_1;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.me_2 {
+	grid-area: me_2;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.other_1 {
+	grid-area: other_1;
+}
+
+.other_2 {
+	grid-area: other_2;
+}
+.other_3 {
+	grid-area: other_3;
+}
+.other_4 {
+	grid-area: other_4;
+}
+
+.type_area {
+	width : 90%;
+	border: 3px solid;
+	border-radius: 15px;
+	border-color: #558BCF;
+}
+.send{
+	height: 100%;
+	width: 10%;
+	outline: none;
+	border-radius: 15px;
+	border: 3px solid;
+	border-color: #558BCF;
+	background-color : #558BCF;
+	color : white;
+	font-size: 15px;
+}

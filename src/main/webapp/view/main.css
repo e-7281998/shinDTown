@@ -2,6 +2,9 @@
 
 /* index*/
 
+body{
+	font-family: 'Noto Sans KR', sans-serif;
+}
 .body{
 	display: flex;
 	justify-content : center;
@@ -175,6 +178,9 @@ margin-top : 5px;
 }
 .right{
 	grid-area: board_5_2;
+}
+button{
+	cursor : pointer;
 }
 
 
