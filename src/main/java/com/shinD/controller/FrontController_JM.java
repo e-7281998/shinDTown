@@ -45,6 +45,8 @@ public class FrontController_JM extends HttpServlet {
 			controller = new BoardDelete();
 			break;
 
+	
+
 
 			
 		default:
