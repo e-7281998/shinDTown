@@ -16,7 +16,7 @@
 
 		<div class="board_page">
 			<div class="boards">
-				<c:forEach items="${boardlist }" var = "board" begin="1" end="4" >
+				<c:forEach items="${boardlist}" var = "board" begin="1" end="4" >
 					<fieldset class="board_list" onclick="location.href='BoardDetail.jsp'">
 						<legend>${board.BOARD_NAME }</legend>
 						<c:forEach items="${boardpostlist }" var = "boardpost" varStatus ="status">
@@ -30,10 +30,10 @@
 				</c:forEach>
 			
 				
-				<c:forEach items="${boardtop }" var = "board" varStatus ="status">
+				<c:forEach items="${boardtop}" var = "board" varStatus ="status">
 				<fieldset class="board_list" onclick="location.href='BoardDetail.jsp'">
-					<legend> <c:out value="${board.BOARD_NAME }"/></legend>
-					<c:forEach items="${boardpostlist }" var = "boardpost" varStatus ="status">
+					<legend> <c:out value="${board.BOARD_NAME}"/></legend>
+					<c:forEach items="${boardpostlist}" var = "boardpost" varStatus ="status">
 							<c:if test="${board.BOARD_CODE  == boardpost.BOARD_CODE }">
 								<ul class="board_title">
 									<li>-${boardpost.POST_TITLE }</li>
@@ -56,7 +56,7 @@
 
 				<div class="list">
 					<ul class="lists">
-					<c:forEach items="${boardserch }" var = "boardser" varStatus ="status">
+					<c:forEach items="${boardserch}" var = "boardser" varStatus ="status">
 						<li>${boardser }</li>
 						<hr class="line"/>
 					</c:forEach>	
