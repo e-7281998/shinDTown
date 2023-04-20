@@ -52,7 +52,7 @@ public class MemberLogin implements CommonControllerInterface{
 			session.setAttribute("loginUser", member);
 			session.setAttribute("user_code", member.getUser_code());
 			session.setAttribute("user_name", member.getUser_name());
-			
+			 			
 			String path = request.getContextPath();			
 			return  "redirect:"+path+"/index.jsp";
 		}else {	//로그인 실패

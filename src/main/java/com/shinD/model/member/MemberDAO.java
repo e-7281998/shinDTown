@@ -59,6 +59,8 @@ public class MemberDAO {
 			} 
 		}catch(SQLException e) {
 			e.printStackTrace();
+		}finally {
+			MySQLUtil.dbDisconnect(rs, pst, conn);
 		}
 		
 		return member;
@@ -80,7 +82,50 @@ public class MemberDAO {
 			}
 		}catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			MySQLUtil.dbDisconnect(rs, pst, conn);
 		}
 		return salt;
+	}
+
+	//id 중복 체크
+	public int dupCheck(String id) {
+		String sql = "select count(*) from users where user_id = ?";
+		
+		conn = MySQLUtil.getConnection();
+
+ 		try {
+			pst = conn.prepareStatement(sql);
+			pst.setString(1, id);
+			rs = pst.executeQuery();
+			while(rs.next()) {
+				result = rs.getInt(1);
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			MySQLUtil.dbDisconnect(rs, pst, conn);
+		}
+		return result;
+	}
+
+	//탈퇴하기
+	public int withdrawUser(String id) {
+		String sql = "delete from users where user_id = ?";
+		
+		conn = MySQLUtil.getConnection();
+		
+		try {
+			pst = conn.prepareStatement(sql);
+			pst.setString(1,id); 
+			
+			result = pst.executeUpdate();  
+		}catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			MySQLUtil.dbDisconnect(rs, pst, conn);
+		}
+		
+		return 0;
 	}
 }
