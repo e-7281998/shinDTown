@@ -10,7 +10,9 @@
 	width: 80%;
 	grid-template-rows: 1fr 1fr;
 	grid-template-columns: 0.3fr 2fr 1.5fr 0.3fr;
-	grid-template-areas: ". chatlist chatroom . " ". chatlist chatroom . ";
+	grid-template-areas:
+	 ". chat_able chatroom . " 
+	 ". chatlist chatroom . ";
 	gap: 2%;
 	margin-top : 70px;
 }
@@ -19,6 +21,9 @@
 	border: 3px solid;
 	border-color: #558BCF;
 	border-radius: 20px;
+	height : 250px;
+	overflow : scroll;
+	overflow-x : hidden;
 }
 
 li.chat{
@@ -27,11 +32,21 @@ li.chat{
 	text-overflow: ellipsis;
 }
 .chatlist {
-	margin-top : 20%;
 	grid-area: chatlist;
-	width : 550px;
+	width : 450px;
 }
 
+.chat_able {
+	grid-area: chat_able;
+	margin-top : 10px;
+	width : 450px;
+}
+legend{
+	text-align : center;
+}
+li {
+	margin-bottom : 5px;
+}
 .chatroom {
 	grid-area: chatroom;
 	display: grid;
@@ -101,6 +116,7 @@ li.chat{
 	border: 3px solid;
 	border-radius: 15px;
 	border-color: #558BCF;
+	outline : none;
 }
 .send{
 	height: 100%;
