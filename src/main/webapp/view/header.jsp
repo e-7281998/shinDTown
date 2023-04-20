@@ -2,6 +2,27 @@
 	pageEncoding="UTF-8"%>
 
 <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400&display=swap');
+*{
+font-family: 'Noto Sans KR', sans-serif;
+}
+
+button{
+	cursor : pointer;
+}
+input[type="submit"]{
+	cursor : pointer;
+}
+input[type="button"]{
+	cursor : pointer;
+}
+
+fieldset{
+	cursor : pointer;
+}
+
+
 .header {
 	display: flex;
 	justify-content: center;
@@ -51,7 +72,9 @@ hr {
 		<div class="bar_menu">
 		<a href="/shinDTown/view/memberView/MemberSignUp.jsp"><h2 class="menu">회원가입</h2></a>
 		<a href="/shinDTown/view/memberView/MemberLogin.jsp"><h2 class="menu">로그인</h2></a>
-		<a href="/shinDTown/view/boardView/BoardRead.jsp"><h2 class="menu">게시판</h2></a>
+		<a href="/shinDTown/view/main.jsp"><h2 class="menu">메인</h2></a>
+		<a href="/shinDTown/board/read.do"><h2 class="menu">게시판</h2></a>
+		<a href="/shinDTown/view/chatView/ChatRead.jsp"><h2 class="menu">채팅방</h2></a>
 		</div>
 	</div>
 </div>

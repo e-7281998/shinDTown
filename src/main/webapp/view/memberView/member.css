@@ -1,5 +1,6 @@
 @charset "UTF-8";
 
+
 .body {
 	display: flex;
 	justify-content: center;
@@ -22,7 +23,7 @@
 	grid-template-rows: repeat(6, 1fr);
 	grid-template-columns: 250px 250px 100px;
 	grid-template-areas: "name name ." "id id id_c " "pwd pwd . " "pwd_c pwd_c ."
-		"class verify ." "sub sub .";
+		"class verify certi_fom" "sub sub .";
 		row-gap : 10px;
 }
 
@@ -117,6 +118,13 @@ input::focus {
 .verify {
 	grid-area: verify;
 }
+
+#certi_check{
+	grid-area: certi_fom;
+	background-color: #558BCF;
+	color: white;
+}
+
 
 .submit {
 	grid-area: sub;
