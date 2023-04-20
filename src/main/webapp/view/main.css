@@ -1,187 +1,167 @@
 @charset "UTF-8";
 
 /* index*/
-
-body{
+body {
 	font-family: 'Noto Sans KR', sans-serif;
 }
-.body{
+
+.body {
 	display: flex;
-	justify-content : center;
+	justify-content: center;
 }
 
-.main_script{
-	display : grid;
-	width : 80%;
+.main_script {
+	display: grid;
+	width: 80%;
 	overflow: visible;
 	grid-template-rows: repeat(5, 3fr);
 	grid-template-columns: 50px 2fr 0.8fr 5fr 50px;
-	grid-template-areas: 
-	". script1 btn greet greet"
-	". script2 . greet greet"
-	". . . greet greet"
-	". . . greet greet"
-	". . . greet greet";
+	grid-template-areas: ". script1 btn greet greet"
+		". script2 . greet greet" ". . . greet greet" ". . . greet greet"
+		". . . greet greet";
 }
 
-.script_1{
+.script_1 {
 	grid-area: script1;
-	display : flex;
-}
-.script_2{
-	grid-area: script2;
-	display : flex;
+	display: flex;
 }
 
-.greeting_img{
+.script_2 {
+	grid-area: script2;
+	display: flex;
+}
+
+.greeting_img {
 	grid-area: greet;
 	background-image: url('img/greetingImg.jpg');
-	background-size : contain;
-	background-repeat : no-repeat;
+	background-size: contain;
+	background-repeat: no-repeat;
 }
 
-.btn{
-	grid-area : btn;
-	display : grid;
+.btn {
+	grid-area: btn;
+	display: grid;
 	align-items: end;
 }
-.btn > button{
-	background-color : skyblue;
+
+.btn>button {
+	background-color: skyblue;
 	border: none;
-	padding : 10px 10px;
-	border-radius : 10px;
+	padding: 10px 10px;
+	border-radius: 10px;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
 /* main index */
-.main_page{
-	display : grid;
-	grid-template-rows: 1fr 1fr 0.3fr 1fr;
+.main_page {
+	display: grid;
+	grid-template-rows: 1fr 1fr 0.3fr 2fr;
 	grid-template-columns: 0.3fr 2.5fr 1.5fr 0.3fr;
-	grid-template-areas: 
-	". main_board git . "
-	". main_board calendar . "
-	". more calendar ."
-	". hot_board calendar .";
+	grid-template-areas: ". main_board git . " ". main_board calendar . "
+		". more calendar ." ". hot_board calendar .";
 	gap: 2%;
 }
 
 .board_title {
 	list-style: none;
-	width : 350px;
-	padding-left : 15px;
+	width: 350px;
+	padding-left: 15px;
 }
 
-.board_title > li {
-	width :100%;
+.board_title>li {
+	width: 100%;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
 
 .more_btn {
-	grid-area : more;
+	grid-area: more;
 	justify-self: end;
 }
-.more_btn > button{
-	width : 70px;
-	height : 30px;
+
+.more_btn>button {
+	width: 70px;
+	height: 30px;
 	background-color: #558BCF;
 	color: white;
-	border : none;
-	border-radius : 20px;
+	border: none;
+	border-radius: 20px;
 }
 
 .git {
-	grid-area : git;
+	grid-area: git;
 	border: 2px solid gray;
-	margin-top : 9px;
+	margin-top: 9px;
 }
 
-.calendar{
-grid-area : calendar;
-border: 2px solid;
-margin-top : 5px;
+.calendar {
+	grid-area: calendar;
+	margin-top: 5px;
+	height: 90%;
+	width : 100%;
 }
 
-.main_board{
-	grid-area : main_board;
-	display : grid;
+.main_board {
+	grid-area: main_board;
+	display: grid;
 	grid-template-rows: repeat(2, 1fr);
 	grid-template-columns: repeat(2, 1fr);
-	grid-template-areas: 
-	"board_1 board_2"
-	"board_3 board_4";
+	grid-template-areas: "board_1 board_2" "board_3 board_4";
 	gap: 2%;
 }
 
-
-.board_list_1{
-	grid-area : board_1;
+.board_list_1 {
+	grid-area: board_1;
 	border: 3px solid;
 	border-color: #558BCF;
 	border-radius: 20px;
 }
 
-.board_list_2{
-	grid-area : board_2;
+.board_list_2 {
+	grid-area: board_2;
 	border: 3px solid;
 	border-color: #558BCF;
 	border-radius: 20px;
 }
 
-.board_list_3{
-	grid-area : board_3;
+.board_list_3 {
+	grid-area: board_3;
 	border: 3px solid;
 	border-color: #558BCF;
 	border-radius: 20px;
 }
 
-.board_list_4{
-	grid-area : board_4;
+.board_list_4 {
+	grid-area: board_4;
 	border: 3px solid;
 	border-color: #558BCF;
 	border-radius: 20px;
 }
 
-.hot_board{
+.hot_board {
 	grid-area: hot_board;
-	display : flex;
+	display: flex;
 	border: 3px solid;
 	border-color: #558BCF;
 	border-radius: 20px;
-	
 }
 
-.board_list_5{
-	display : grid;
-	border : none;
+.board_list_5 {
+	display: grid;
+	border: none;
 	grid-template-rows: 1fr;
 	grid-template-columns: repeat(2, 1fr);
-	grid-template-areas: 
-	"board_5_1 board_5_2";
+	grid-template-areas: "board_5_1 board_5_2";
 }
 
-.left{
+.left {
 	grid-area: board_5_1;
 }
-.right{
+
+.right {
 	grid-area: board_5_2;
 }
-button{
-	cursor : pointer;
+
+button {
+	cursor: pointer;
 }
-
-
-
