@@ -11,45 +11,24 @@
 <body class="main">
 	<%@include file="../header.jsp"%>
 	<div class="body">
-		<div class="post">
-
-			<div class="post_selector">
-				<fieldset class="post_selector">
-					<legend>추가항목</legend>
-					<input type="checkbox" id="photo" name="photo" value="photo">
-					<label for="photo">사진</label> <input type="checkbox" id="code"
-						name="code" value="code"> <label for="code">코드</label>
-				</fieldset>
-			</div>
-
-			<form class="posting">
-
-				<div class="post_form">
-					<label>제목</label> <input type="text" name="title" class="title"
-						id="title" />
+		<div class="board_page_2">
+			<form class="posting_form">
+			
+				<div class="new_title">
+					<label class="label_1">게시판명</label> 
+					<input type="text" name="title" class="title" id="title" />
+						<button class="dup_check" onclick="location.href=''">중복확인</button>
 				</div>
 
-				<div class="post_form">
-					<label>내용</label> <input type="text" name="content" class="content" />
+				<div class="new_pre">
+					<label class="label_2">게시판 설명</label> 
+					<input type="text" name="content" class="content" />
 				</div>
 
-				<div class="post_photo" id="form_photo" style="visibility:hidden;">
-					<label>사진</label> <input type="file" name="photo" class="photo"
-						disabled />
+				<div class="board_btn">
+					<input type="submit" value="새 게시판 등록" class="boardbtn">
 				</div>
-
-
-				<div class="post_form" id="form_code" style="display:none;">
-					<label>코드</label>
-					<textarea name="code" class="code"></textarea>
-					<!-- 					<label>코드</label> <input type="text" name="code" class="code" /> -->
-				</div>
-
-				<div class="post_form btn">
-					<input type="submit" value="등록" class="postbtn">
-				</div>
-
-
+				
 			</form>
 
 

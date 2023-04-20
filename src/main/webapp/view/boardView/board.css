@@ -19,8 +19,12 @@
 .boards {
 	grid-area : boards;
 	display : grid;
+	height : 700px;
+	width : 850px;
 	grid-template-columns: repeat(2, 1fr);
 	gap: 2%;
+	overflow: scroll;
+	overflow-x: hidden;
 }
 
 .board_title > li {
@@ -50,6 +54,9 @@ fieldset{
 	padding-left : 15px;
 	cursor : pointer;
 }
+.search_form{
+	display : flex;
+}
 .search{
 	grid-area :search;
 	margin-top : 10px;
@@ -58,7 +65,7 @@ fieldset{
 	outline: none;
 	height : 30px;
 	width : 70%;
-	margin-left : 0;
+	margin-right : 0;
 	border-radius: 20px;
 	border: 3px solid;
 	border-color: #558BCF;
@@ -67,6 +74,7 @@ fieldset{
 .search_btn{
 	width : 20%;
 	height : 30px;
+	margin-left : 5px;
 	background-color: #558BCF;
 	color: white;
 	border : none;
@@ -91,122 +99,122 @@ fieldset{
 }
 .lists{
 	grid-area: lists;
-
+}
+ul.lists{
+	padding-left : 15px;
+	padding-right : 15px;
+	text-align: center;
 }
 .lists > li{
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
-	margin-bottom : 10px;
+	margin-bottom : 15px;
 	margin-top: 0;
-}
-
+	}
+	
 .line{
-	width : 80%;
 	margin-bottom : 10px;
 }
 
-.post{
-	display: grid;
-	
-	grid-template-rows: 0.5fr 5fr;
-	grid-template-columns: 1fr 5fr 0.5fr;
+.board_page_2{
+	display : grid;
+	width : 80%;
+	margin-top : 10%;
+	grid-template-rows: 3fr;
+	grid-template-columns: 0.3fr 1fr 1fr 0.5fr 0.3fr;
+	grid-template-areas:
+	". posting_form posting_form posting_form. "
+	". posting_form posting_form posting_form . "
+	". posting_form posting_form  posting_form . ";
+	gap: 2%;
+	justify-items: center;
+}
+.posting_form{
+	grid-area: posting_form;
+	display : grid;
+	width : 80%;
+	grid-template-rows:  1fr 1fr 1fr;
+	grid-template-columns: 0.5fr 2fr 0.5fr;
 	grid-template-areas: 
-	"post_selector . ."
-	". posting ."
+	"new_title new_title new_title"
+	"new_pre new_pre new_pre"
+	". . board_btn";
+	gap: 2%;
 }
 
-.post_selector{
-	grid-area: post_selector;
-	display : inline;
-}
-
-.posting{
-	grid-area : posting;
+.new_title{
+	grid-area: new_title;
 	display: grid;
-	border: 2px solid  #558BCF;
-	border-radius : 20px;
-	padding: 10px 10px;
-	grid-template-rows: 1fr 4fr 50px 4fr 30px;
-	grid-template-columns: 1fr;
+	grid-template-rows: 1fr;
+	grid-template-columns: 110px 2fr 0.5fr;
 	grid-template-areas: 
-	"title"
-	"content"
-	"photo"
-	"code"
-	"postbtn";
+	"label_1 title dup_check";
+	align-items: center;
+}
+.new_pre{
+	grid-area: new_pre;
+	display: grid;
+	grid-template-rows: 1fr;
+	grid-template-columns: 110px 2fr 0.5fr;
+	grid-template-areas: 
+	"label_2 content dup_check";
+	align-items: center;
+}
+.boardbtn{
+	background-color: #558BCF;
+	color: white;
+	width : 125px;
+}
+.board_btn{
+	grid-area: board_btn;
+	display: flex;
 }
 
-#form_code{
-	height: 100%;
+.label_1{
+	grid-area: label_1;
+}
+.label_2{
+	grid-area: label_2;
 }
 .title{
 	grid-area: title;
-	width : 80%;
-	height : 40px;
 }
-
-#form_photo{
-	margin-top:10px;
-}
-.content{
-	grid-area: content;
-	width : 80%;
-	height : 300px;
-}
-.photo{
-	grid-area: photo;
-}
-.code{
-	display: none;
-	grid-area: code;
-	width : 80%;
-	padding : 10px;
+.dup_check{
+	grid-area: dup_check;
+	margin: 10px;
+	height: 50px;
+	outline: none;
 	border-radius: 20px;
 	border: 3px solid;
 	border-color: #558BCF;
-	font-size : 1.2em;
-	font-weight: bold;
+	background-color: #558BCF;
+	color: white;
+	font-size: 15px;
 }
-.code:focus{
-	outline: none;
-}
-.postbtn{
-	grid-area: postbtn;
-	width : 80px;
-	background-color : #5588CF;
-	color : white;
-}
-
-.post_form{
-	display : flex;
-}
-label{
-	margin-right: 7px;
-	margin-top : 3px;
-}
-
-.post_form.btn{
-	display : flex;
-	justify-content: flex-end;
-    align-items: flex-start;
+.content{
+	grid-area: content;
 	
 }
-.post_form > input{
+
+input {
+	margin: 10px;
+	height: 50px;
 	outline: none;
-	margin-left : 0;
 	border-radius: 20px;
 	border: 3px solid;
 	border-color: #558BCF;
 	font-size: 15px;
-	padding-left : 5px;
 }
-
-
-input[type="file"]::file-selector-button{
+.new_board{
+	grid-area: dup_check;
+	margin: 5px;
+	height: 50px;
+	outline: none;
 	border-radius: 20px;
 	border: 3px solid;
 	border-color: #558BCF;
-	background-color : #5588CF;
-	color : white;
+	background-color: #558BCF;
+	font-size: 15px;
+	color: white;
 }

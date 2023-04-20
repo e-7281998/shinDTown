@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+ <c:set var="path" value="${pageContext.request.contextPath }" scope="application"></c:set>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="board.css" rel="stylesheet" />
+<link href="${path}/view/boardView/board.css" rel="stylesheet" />
 </head>
 <body class="main">
 	<%@include file="../header.jsp"%>
@@ -14,102 +16,57 @@
 
 		<div class="board_page">
 			<div class="boards">
+				<c:forEach items="${boardlist }" var = "board" begin="1" end="4" >
+					<fieldset class="board_list" onclick="location.href='BoardDetail.jsp'">
+						<legend>${board.BOARD_NAME }</legend>
+						<c:forEach items="${boardpostlist }" var = "boardpost" varStatus ="status">
+							<c:if test="${board.BOARD_CODE  == boardpost.BOARD_CODE }">
+								<ul class="board_title">
+									<li>-${boardpost.POST_TITLE }</li>
+								</ul>
+							</c:if>
+						</c:forEach>
+					</fieldset>
+				</c:forEach>
+			
+				
+				<c:forEach items="${boardtop }" var = "board" varStatus ="status">
 				<fieldset class="board_list" onclick="location.href='BoardDetail.jsp'">
-					<legend>맛집게시판</legend>
-					<ul class="board_title">
-						<li>[피자스쿨] 내가 여기서 먹어sdfsf봤는데,,</li>
-						<li>[어사출또] 여기 맛있더라,, 라면 + 초밥123123123</li>
-						<li>[CU] 편의점 꿀팁 알려준다...</li>
-					</ul>
+					<legend> <c:out value="${board.BOARD_NAME }"/></legend>
+					<c:forEach items="${boardpostlist }" var = "boardpost" varStatus ="status">
+							<c:if test="${board.BOARD_CODE  == boardpost.BOARD_CODE }">
+								<ul class="board_title">
+									<li>-${boardpost.POST_TITLE }</li>
+								</ul>
+							</c:if>
+						</c:forEach>
 				</fieldset>
+				</c:forEach>
 
-				<fieldset class="board_list" onclick="location.href='BoardDetail.jsp'">
-					<legend>질문게시판</legend>
-					<ul class="board_title">
-						<li>[피자스쿨] 내가 여기서 먹어봤는데,,</li>
-						<li>[어사출또] 여기 맛있더라,, 라면 + 초밥 추천</li>
-						<li>[CU] 편의점 꿀팁 알려준다...</li>
-					</ul>
-				</fieldset>
-
-				<fieldset class="board_list" onclick="location.href='BoardDetail.jsp'">
-					<legend>취업정보게시판</legend>
-					<ul class="board_title">
-						<li>[피자스쿨] 내가 여기서 먹어봤는데,,</li>
-						<li>[어사출또] 여기 맛있더라,, 라면 + 초밥 추천</li>
-						<li>[CU] 편의점 꿀팁 알려준다...</li>
-					</ul>
-				</fieldset>
-
-				<fieldset class="board_list" onclick="location.href='BoardDetail.jsp'">
-					<legend>면접준비게시판</legend>
-					<ul class="board_title">
-						<li>[피자스쿨] 내가 여기서 먹어봤는데,,</li>
-						<li>[어사출또] 여기 맛있더라,, 라면 + 초밥 추천</li>
-						<li>[CU] 편의점 꿀팁 알려준다...</li>
-					</ul>
-				</fieldset>
-
-				<fieldset class="board_list" onclick="location.href='BoardDetail.jsp'">
-					<legend>맛집게시판</legend>
-					<ul class="board_title">
-						<li>[피자스쿨] 내가 여기서 먹어sdfsf봤는데,,</li>
-						<li>[어사출또] 여기 맛있더라,, 라면 + 초밥123123123</li>
-						<li>[CU] 편의점 꿀팁 알려준다...</li>
-					</ul>
-				</fieldset>
-
-				<fieldset class="board_list" onclick="location.href='BoardDetail.jsp'">
-					<legend>질문게시판</legend>
-					<ul class="board_title">
-						<li>[피자스쿨] 내가 여기서 먹어봤는데,,</li>
-						<li>[어사출또] 여기 맛있더라,, 라면 + 초밥 추천</li>
-						<li>[CU] 편의점 꿀팁 알려준다...</li>
-					</ul>
-				</fieldset>
-
-				<fieldset class="board_list" onclick="location.href='BoardDetail.jsp'">
-					<legend>취업정보게시판</legend>
-					<ul class="board_title">
-						<li>[피자스쿨] 내가 여기서 먹어봤는데,,</li>
-						<li>[어사출또] 여기 맛있더라,, 라면 + 초밥 추천</li>
-						<li>[CU] 편의점 꿀팁 알려준다...</li>
-					</ul>
-				</fieldset>
-
-				<fieldset class="board_list" onclick="location.href='BoardDetail.jsp'">
-					<legend>면접준비게시판</legend>
-					<ul class="board_title">
-						<li>[피자스쿨] 내가 여기서 먹어봤는데,,</li>
-						<li>[어사출또] 여기 맛있더라,, 라면 + 초밥 추천</li>
-						<li>[CU] 편의점 꿀팁 알려준다...</li>
-					</ul>
-				</fieldset>
 			</div>
 
 			<div class="find">
 				<div class="search">
-					<form class="search_form">
+					<form class="search_form"  method="post" action = "/shinDTown/board/read.do">
 						<input type="text" name="search" class="search_title"
-							placeholder="게시판 명을 입력해 주세요 "> <input type="button"
+							placeholder="게시판 이름을 입력해 주세요 "> <input type="button"
 							class="search_btn" value="찾기">
 					</form>
 				</div>
 
 				<div class="list">
 					<ul class="lists">
-						<li>질문 게시판</li>
+					<c:forEach items="${boardserch }" var = "boardser" varStatus ="status">
+						<li>${boardser }</li>
 						<hr class="line"/>
-						<li>맛집 게시판</li>
-						<hr class="line" />
-						<li>면접 게시판</li>
-						<hr class="line"/>
-						<li>취업정보 게시판</li>
-						<hr class="line" />
+					</c:forEach>	
 					</ul>
 				</div>
 
-
+				<div class="create_board">
+					<button class="new_board" onclick="location.href='BoardCreate.jsp'">새
+						게시판 만들기</button>
+				</div>
 			</div>
 		</div>
 	</div>
