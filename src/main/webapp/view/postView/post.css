@@ -32,7 +32,7 @@ fieldset{
 .posting{
 	grid-area : posting;
 	display: grid;
-	border: 2px solid  #558BCF;
+
 	border-radius : 20px;
 	padding: 10px 10px;
 	grid-template-rows: 1fr 4fr 50px 4fr 30px;
