@@ -101,7 +101,7 @@
  			return;			
 		} 
 		//pwd체크
- 		if(!checkNum(pwd) || !checkEng(pwd)){
+ 		if(!(checkNum(pwd) || checkEng(pwd))){
 			return;
 		} 
 		//pwd, pwd_check 확인
