@@ -13,13 +13,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.shinD.controller.member.MemberLogin;
 import com.shinD.controller.member.MemberSignUp;
+import com.shinD.controller.member.MemberUpdate;
 import com.shinD.controller.member.MemberWithdraw;
  
 @WebServlet({"/view/memberView/signup",
 			"/view/memberView/login",
 			"/view/memberView/idDupCheck", 
 			"/view/memberView/classCheck",
-			"/view/memberView/withdraw"})
+			"/view/memberView/withdraw",
+			"/view/memberView/updatePwd"})
 public class FrontController_EJ extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -45,6 +47,9 @@ public class FrontController_EJ extends HttpServlet {
 			 break; 
 		case "/view/memberView/withdraw":
  			controller = new MemberWithdraw();
+			 break; 
+		case "/view/memberView/updatePwd":
+ 			controller = new MemberUpdate();
 			 break; 
 		default:
 			break;

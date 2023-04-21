@@ -19,4 +19,7 @@ public class MemberService {
 	public int withdrawUser(String id) {
 		return dao.withdrawUser(id);		
 	}
+	public int updatePwd(String id, String pwd, String salt) {
+		return dao.updatePwd(id, pwd, salt);
+	}
 }

@@ -128,4 +128,27 @@ public class MemberDAO {
 		
 		return 0;
 	}
+
+	//비밀번호 변경
+	public int updatePwd(String id, String pwd, String salt) {
+		String sql = "update users set user_pwd= ? , user_salt = ? where user_id = ?";
+		
+		conn = MySQLUtil.getConnection();
+		
+		try {
+			pst = conn.prepareStatement(sql);
+			pst.setString(1,pwd); 
+			pst.setString(2,salt); 
+			pst.setString(3,id); 
+			
+			result = pst.executeUpdate(); 
+
+		}catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			MySQLUtil.dbDisconnect(rs, pst, conn);
+		}
+		
+		return result; 
+	}
 }

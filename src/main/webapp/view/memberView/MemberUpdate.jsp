@@ -18,7 +18,7 @@
 				<h3 class="id_t">아이디</h3>
 				<input type="text" name="id" class="id fom" value="${loginUser.user_id}" disabled/>  
 				<h3 class="pwd_t">비밀번호</h3>
-				<input type="text" name="pwd" class="pwd fom"/>  
+				<input type="text" name="pwd" class="pwd fom" minlength="6" maxlength="10" placeholder="6자리 이상 영문이나 숫자"/>  
 				<h3 class="class_t" >반번호</h3>
 				<input type="text" name="class" class="class fom" value="${loginUser.user_class}" disabled/> 
 				<input type="button" class="withdraw" value="탈퇴하기">
@@ -27,6 +27,57 @@
 		</div>
 	</div>
 	<script>
+		
+		$(".edit").on("click", (e) => {
+			e.preventDefault();
+			
+			if(!confirm("비밀번호를 정말 변경하시겠습니까?")){
+				$(".pwd").val("");
+				return;
+			}
+			
+			var pwd = $.trim($(".pwd").val());
+			
+			if(!(checkNum(pwd) || checkEng(pwd))){
+				alert("숫자나 영문 이외는 불가");
+				return;
+			} 
+			
+			$.ajax({
+				url:"updatePwd",
+				data:{"pwd":pwd, "id" : "${loginUser.user_id}"},
+				success:(responseData) => {
+					if(responseData == 1)
+						alert("비밀번호 변경을 완료했습니다.");
+					else
+						alert("비밀번호 변경 실패");
+					$(".pwd").val("").focus();
+
+				},
+				error:(message)=>{
+					console.log(message);
+				}
+			})
+		})
+		
+		//숫자 체크
+		function checkNum(str){
+		    const regExp = /[0-9]/i;
+		    if(regExp.test(str)){
+		        return true;
+		    }else{
+		        return false;
+		    }
+		}
+		//영문 체크
+		function checkEng(str){
+		    const regExp = /[a-zA-Z]/i; // 영어
+		    if(regExp.test(str)){
+		        return true;
+		    }else{
+		        return false;
+		    }
+	}
 	
 		//탈퇴하기
 		$(".withdraw").on("click", (e) => {
