@@ -24,6 +24,7 @@ public class BoardDelete implements CommonControllerInterface {
 			int user_code = Integer.parseInt(request.getParameter("user_code"));
 			
 			int result = bservice.boardDelete(board_name, user_code);//삭제명령
+			//결과값이 1이면 삭제됨
 			if(result>=1) {
 				System.out.println(board_name+":"+user_code+"삭제햇습니다");//테스트하려고 찍어둠
 			}else{
