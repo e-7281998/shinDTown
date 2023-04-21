@@ -7,6 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<img src="https://ghchart.rshah.org/e-7281998">
+	
+	<script>
+		
+	</script>
 </body>
 </html>
