@@ -18,7 +18,7 @@
 				<h3 class="id_t">아이디</h3>
 				<input type="text" name="id" class="id fom" value="${loginUser.user_id}" disabled/>  
 				<h3 class="pwd_t">비밀번호</h3>
-				<input type="text" name="pwd" class="pwd fom" minlength="6" maxlength="10" placeholder="6자리 이상 영문이나 숫자"/>  
+				<input type="password" name="pwd" class="pwd fom" minlength="6" maxlength="10" placeholder="6자리 이상 영문이나 숫자"/>  
 				<h3 class="class_t" >반번호</h3>
 				<input type="text" name="class" class="class fom" value="${loginUser.user_class}" disabled/> 
 				<input type="button" class="withdraw" value="탈퇴하기">

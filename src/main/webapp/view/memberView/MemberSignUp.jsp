@@ -16,8 +16,8 @@
 				<input type="text" name="name" class="name fom" minlength="1" maxlength="5" placeholder="이름은 한글" required />
 				<input type="text" name="id" class="id fom" minlength="4" maxlength="10" placeholder="아이디는 4자리 이상 영문이나 숫자 " required /> 
 				<input type="button" id="id_check" value="중복확인">
-				<input type="text" name="pwd" class="pwd fom" minlength="6" maxlength="10" placeholder="비밀번호는 6자리 이상 영문이나 숫자" required/> 
-				<input type="text" name="pwd_check" class="pwd_check fom" minlength="6" maxlength="10" placeholder="비밀번호 확인" required/> 
+				<input type="password" name="pwd" class="pwd fom" minlength="6" maxlength="10" placeholder="비밀번호는 6자리 이상 영문이나 숫자" required/> 
+				<input type="password" name="pwd_check" class="pwd_check fom" minlength="6" maxlength="10" placeholder="비밀번호 확인" required/> 
 				<select name="class" class="class">
 					<option value="1">1반</option>
 					<option value="2">2반</option>
