@@ -54,7 +54,7 @@ public class MemberLogin implements CommonControllerInterface{
 			session.setAttribute("user_name", member.getUser_name());
 			 			
 			String path = request.getContextPath();			
-			return  "redirect:"+path+"/index.jsp";
+			return  "redirect:"+path+"/view/main.jsp";
 		}else {	//로그인 실패
 			System.out.println("로그인 실패");
 			String path = request.getContextPath();			
