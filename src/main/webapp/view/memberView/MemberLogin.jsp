@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="member.css" rel="stylesheet" />
+<script src="<%=request.getContextPath()%>/jq/jquery-3.6.4.min.js"></script>
 </head>
 <body>
 <%@include file="../header.jsp"%>
@@ -19,5 +20,10 @@
 		</div>
 	</div>
 
+<script>
+	$(() => {
+		$(".id").focus();
+	})
+</script>
 </body>
 </html>
