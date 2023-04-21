@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.shinD.controller.member.MemberLogin;
+import com.shinD.controller.member.MemberLogout;
 import com.shinD.controller.member.MemberSignUp;
 import com.shinD.controller.member.MemberUpdate;
 import com.shinD.controller.member.MemberWithdraw;
@@ -21,7 +22,8 @@ import com.shinD.controller.member.MemberWithdraw;
 			"/view/memberView/idDupCheck", 
 			"/view/memberView/classCheck",
 			"/view/memberView/withdraw",
-			"/view/memberView/updatePwd"})
+			"/view/memberView/updatePwd",
+			"/view/memberView/logout"})
 public class FrontController_EJ extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -50,6 +52,9 @@ public class FrontController_EJ extends HttpServlet {
 			 break; 
 		case "/view/memberView/updatePwd":
  			controller = new MemberUpdate();
+			 break; 
+		case "/view/memberView/logout":
+ 			controller = new MemberLogout();
 			 break; 
 		default:
 			break;

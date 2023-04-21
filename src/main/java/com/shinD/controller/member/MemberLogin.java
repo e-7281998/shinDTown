@@ -45,7 +45,7 @@ public class MemberLogin implements CommonControllerInterface{
 			app.setAttribute("memberList", memberList);
 			
 			for(MemberVO vo:memberList) {
-				//System.out.println(vo);
+				//System.out.println("로그인한 사람들: " +vo);
 			}
 			
 			HttpSession session = request.getSession();

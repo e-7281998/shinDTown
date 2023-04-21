@@ -94,27 +94,8 @@ background: none;
 		<a href="/shinDTown/board/read.do"><h2 class="menu">게시판</h2></a>
 		<a href="/shinDTown/view/chatView/ChatRead.jsp"><h2 class="menu">채팅방</h2></a>
 		<a href="/shinDTown/view/memberView/MemberUpdate.jsp"><h2 class="menu">마이페이지</h2></a>
-		<a id="logout"><h2 class="menu">로그아웃</h2></a>
+		<a id="logout" href="/shinDTown/view/memberView/logout"><h2 class="menu">로그아웃</h2></a>
 		</c:if>
 		</div>
 	</div>
 </div>
-<script>
-$(function(){
-	$("#logout").on("click", function(){
-		$.ajax({
-			url : "",
-			success : function(responseData){
-				location.href ="/shinDTown/view/memberView/MemberLogin.jsp";
-			},
-			error : function(msg){
-				console.log("로그아웃 실패/");
-			}
-			
-		})
-	})
-})
-</script>
-
-<hr />
-
