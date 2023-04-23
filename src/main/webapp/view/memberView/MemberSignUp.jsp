@@ -93,16 +93,19 @@
 		var userclass = $(".class").val(); 		
 		 
 		//name 체크
- 		if(!checkKor(name) ||checkKor2(name) || checkNum(name) || checkEng(name)){
+  		if(!checkKor(name) || name.legnth >5 || checkSpc(name) || checkKor2(name)){
+ 			alert('이름은 5자리 이하 한글만 가능합니다.');
  			return;
 		} 
 		//id 체크
- 		if(checkKor(id) || checkKor2(id)){
+  		if(!(checkNum(id) || checkEng(id)) || checkSpc(id) || id.length < 4 || id.length > 10){
+ 			alert('아이디는 4~10자리 영문이나 숫자만 가능합니다.');
  			return;			
 		} 
 		//pwd체크
- 		if(!(checkNum(pwd) || checkEng(pwd))){
-			return;
+ 		if(!(checkNum(pwd) || checkEng(pwd)) || checkSpc(pwd) || pwd.length <6 || pwd.length > 10){
+ 			alert('비밀번호는 6~10자리 이하 영문이나 숫자만 가능합니다.');
+ 			return;
 		} 
 		//pwd, pwd_check 확인
 		if(!(pwd == pwdchek)){
@@ -174,6 +177,15 @@
 	    }else{
 	        return false;
 	    }
+	}
+	//특수문자 체크
+	function checkSpc(str){
+		const regExp =  /[~!@#$%^&*()_+|<>?:{}-]/i;
+		 if(regExp.test(str)){
+		        return true;
+		    }else{
+		        return false;
+		    }
 	}
 	 
 		

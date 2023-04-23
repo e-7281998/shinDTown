@@ -38,9 +38,9 @@
 			
 			var pwd = $.trim($(".pwd").val());
 			
-			if(!(checkNum(pwd) || checkEng(pwd))){
-				alert("숫자나 영문 이외는 불가");
-				return;
+			if(!(checkNum(pwd) || checkEng(pwd)) || checkSpc(pwd) || pwd.length <6 || pwd.length > 10){
+	 			alert('비밀번호는 6~10자리 이하 영문이나 숫자만 가능합니다.');
+	 			return;
 			} 
 			
 			$.ajax({
@@ -77,7 +77,16 @@
 		    }else{
 		        return false;
 		    }
-	}
+		}
+		//특수문자 체크
+		function checkSpc(str){
+			const regExp =  /[~!@#$%^&*()_+|<>?:{}-]/i;
+			 if(regExp.test(str)){
+			        return true;
+			    }else{
+			        return false;
+			    }
+		}
 	
 		//탈퇴하기
 		$(".withdraw").on("click", (e) => {
