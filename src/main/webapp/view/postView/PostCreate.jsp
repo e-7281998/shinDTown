@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+ <c:set var="path" value="${pageContext.request.contextPath }" scope="application"></c:set>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="post.css" rel="stylesheet" />
-<script src="../../jq/jquery-3.6.4.min.js"></script>
+<link href="${path}/view/postView/post.css" rel="stylesheet" />
+<script src="${path}/jq/jquery-3.6.4.min.js"></script>
 </head>
 <body class="main">
 	<%@include file="../header.jsp"%>
@@ -22,7 +24,7 @@
 				</fieldset>
 			</div>
 
-			<form class="posting">
+			<form class="posting" method = "POST"action = "/shinDTown/post/create.jm">
 
 				<div class="post_form">
 					<label>제목</label> <input type="text" name="title" class="title"

@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.shinD.controller.CommonControllerInterface;
+import com.shinD.model.board.BoardPostVO;
+import com.shinD.model.board.BoardVO;
 
 public class BoardRead implements CommonControllerInterface {
 
@@ -16,7 +18,7 @@ public class BoardRead implements CommonControllerInterface {
 		HttpServletRequest request = (HttpServletRequest) data.get("request");//입력받은 값 가져오기
 		request.setCharacterEncoding("utf-8");//인코딩
 		String method = (String)data.get("method");
-		String page = "";
+		
 		BoardService bservise = new  BoardService();
 		
 		if(method.equals("GET")) {

@@ -1,55 +1,55 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+ <c:set var="path" value="${pageContext.request.contextPath }" scope="application"></c:set>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="boardDetail.css" rel="stylesheet" />
-<script src="../../jq/jquery-3.6.4.min.js"></script>
+<link href="${path}/view/boardView/boardDetail.css" rel="stylesheet" />
+<script src="${path}/jq/jquery-3.6.4.min.js"></script>
 </head>
 <body class="main">
 	<%@include file="../header.jsp"%>
 	<div class="body">
 		<div class="board_detail">
 			<div class="board_title">
-				<h1>질문게시판</h1>
+				<h1>${board_name }</h1>
 			</div>
 			<div class="board_list">
 				<ul class="post_title">
-					<li value="1" id="1">[피자스쿨] 내가 여기서 먹어sdfsf봤는데,, [좋아요:<p class="like">1</p>] [댓글:<p class="com_count">1</p>]</li>
-					<li>[어사출또] 여기 맛있더라,, 라면 + 초밥123123asdaasdasdasdasdasdadasdasdasdas124554543</li>
-					<li>[CU] 편의점 꿀팁 알려준다...</li>
-					<li>[피자스쿨] 내가 여기서 먹어sdfsf봤는데,,</li>
-					<li>[어사출또] 여기 맛있더라,, 라면 + 초밥123123123</li>
-					<li>[CU] 편의점 꿀팁 알려준다...</li>
-					<li>[피자스쿨] 내가 여기서 먹어sdfsf봤는데,,</li>
-					<li>[어사출또] 여기 맛있더라,, 라면 + 초밥123123123</li>
-					<li>[CU] 편의점 꿀팁 알려준다...</li>
-				</ul>
+				<c:forEach items="${postlist }" var="post" varStatus ="status">
+				    
+					<li id="${status.count}" value="${status.count}"> <span>${post.POST_TITLE }</span> [좋아요:<p class="like">${post.POST_LIKE }</p>] [댓글:<p class="com_count">코맨트 갯수 가져와서 붙이기</p>]</li>
+					<input type="hidden" id="${status.count}create" value="${post.POST_CREATE }">
+					<input type="hidden" id="${status.count}content" value="${post.POST_CONTENT }">
+					<input type="hidden" id="${status.count}like" value="${post.POST_LIKE }">
+				</c:forEach>
+					</ul>
 				<div class="posting">
 					<button class="posting_btn"
-						onclick="location.href='../postView/PostCreate.jsp';">글쓰기</button>
+						onclick="location.href='/shinDTown/post/create.jm?board_name=${BOARD_NAME}';">글쓰기</button>
 				</div>
 			</div>
 
-			<div class="post_detail" id="post_detail">
+			<div class="post_detail" id="post_detail" name ="post_detail" value="1">
 				<div class="post">
 
 					<div class="title">
-						<h3>제목 : 배불러요</h3>
+						<h3>제목 : </h3>
 					</div>
 					
-					<div class="date">
-						<h3>2023/04/19</h3>
+					<div class="date" id ="date">
+						<h3>날짜: </h3>
 					</div>
 
 					<div class="content">
-						<p>오늘 점심으로 고기를 먹으러 갔었는데 너무 배부르게 잘 먹구 나왔습니다잇~</p>
+						<p>내용:</p>
 					</div>
 					
 					<div class="like">
-						<p>좋아요 : 2</p>
+						<p>좋아유:</p>
 					</div>
 
 				</div>
@@ -109,11 +109,22 @@
 	<script>
 		$(document).ready(function() {
 			$("li").click(function() {
-				console.log($(this).val());
-				$("#post_detail").css("visibility", "visible");
-
+				var title= $(this).find("span").text();
+				var date = "#"+$(this).val()+"create";
+				var content = "#"+$(this).val()+"content";
+				var like = "#"+$(this).val()+"like";
+				
+				console.log($(date).val());
+				
+				$("#post_detail .title h3 ").text(title);
+				$("#post_detail .date h3 ").text($(date).val());
+				$("#post_detail .content p ").text($(content).val());
+				$("#post_detail .like p ").text($(like).val());
+				$("#post_detail").css("visibility", "visible"); 
 			});
 		});
+		
+		
 	</script>
 	
 </body>
