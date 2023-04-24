@@ -11,8 +11,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.shinD.controller.message.MessageToConnectMemberController;
+import com.shinD.controller.message.ReadConnectRoomController;
+import com.shinD.controller.message.SelectChatRoomController;
+import com.shinD.controller.message.chatController_backU;
  
-@WebServlet("/2")
+
+
+@WebServlet("*.jk")
 public class FrontController_JK extends HttpServlet {
 	private static final long serialVersionUID = 1L;
  
@@ -24,16 +31,32 @@ public class FrontController_JK extends HttpServlet {
 		data.put("method", request.getMethod());
 		data.put("request", request);
 		
-		/*
+		
+		
+		//해야할것: session에 loginUser가 있기떄문에 저장해야함.
 		switch (path) { 
-		case "/site-result/adminPicAjax.do":
- 			controller = new AdminPicAjaxController();
+		//chat룸으로 이동
+		case "/view/chatView/chat.jk":
+ 			controller = new chatController_backU();
+			 break;
+			 
+		case "/view/chatView/selectChatRoom.jk":
+ 			controller = new SelectChatRoomController();
 			 break;
 		 
+		case "/view/chatView/MessageToConnectMember.jk":
+ 			controller = new MessageToConnectMemberController();
+			 break;
+		
+		case "/view/chatView/ReadConnectRoomController.jk":
+ 			controller = new ReadConnectRoomController();
+			 break;
+			 
+			 
 		default:
 			break;
 		}
-		*/
+		
 		 
 		String page = null;
 		try {
