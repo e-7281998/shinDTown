@@ -29,7 +29,7 @@
 					</ul>
 				<div class="posting">
 					<button class="posting_btn"
-						onclick="location.href='/shinDTown/post/create.jm?board_name=${BOARD_NAME}';">글쓰기</button>
+						onclick="location.href='/shinDTown/post/create.jm?board_name=${board_name}';">글쓰기</button>
 				</div>
 			</div>
 

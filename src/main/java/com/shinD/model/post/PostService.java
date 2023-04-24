@@ -13,4 +13,8 @@ public class PostService {
 		public PostVO PostDetail(int post_code) {
 			return dao.PostDetail(post_code);
 		}
+		//게시글 모든 정보받아받아 게시글 생성
+		public int PostCreate(String board_name,int user_code,String post_title,String post_content,String post_image, String post_source) {
+			return dao.PostCreate(board_name, user_code, post_title, post_content, post_image, post_source);
+		}
 }

@@ -16,8 +16,57 @@ public class PostDAO {
 	Statement st;
 	PreparedStatement pst;
 	ResultSet rs;
+	
 
 	// 게시글 생성
+	//게시판 모든 정보받아 게시글 생성
+	public int PostCreate(String board_name,int user_code,String post_title,String post_content,String post_image, String post_source) {
+		int result = 0;
+		String sql1="select * from boards where board_name='"+board_name+"'";//보드 이름으로 코드를 받아서
+		String sql2="insert into POSTS(BOARD_CODE,USER_CODE,POST_TITLE,POST_CONTENT,POST_IMAGE,POST_SOURCE) values(?,?,?,?,?,?)";//게시판 생성
+		conn = MySQLUtil.getConnection();
+		int bcode=0;
+		
+		try {
+			st = conn.createStatement();
+			rs = st.executeQuery(sql1);
+			while(rs.next()) {
+			System.out.println(rs.getInt("BOARD_CODE"));
+			bcode = rs.getInt("BOARD_CODE");//보드 코드 뽑아오기
+			}
+			MySQLUtil.dbDisconnect(rs, st, conn);
+			
+			conn = MySQLUtil.getConnection();
+			pst = conn.prepareStatement(sql2);
+			pst.setInt(1, bcode);
+			pst.setInt(2, user_code);
+			pst.setString(3, post_title);
+			pst.setString(4, post_content);
+			//이미지랑 코드 둘다 없으면
+			if(post_image==(null) && post_source.equals("")) {
+				pst.setString(5, null);
+				pst.setString(6, null);
+			}else if(post_image==null) {//이미지 없으면
+				pst.setString(5, null);
+				pst.setString(6, post_source);
+			}else if(post_source.equals("")) {//코드 없으면
+				pst.setString(5, post_image);
+				pst.setString(6, null);
+			}else {//전부 존재하면
+			pst.setString(5, post_image);
+			pst.setString(6, post_source);
+			}
+			result = pst.executeUpdate();//게시판 생성
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			MySQLUtil.dbDisconnect(null, pst, conn);
+		}
+		
+		return result;
+	}
+	
 	// 제목+내용 게시글
 	public int SimplePostCreate(PostVO post) {
 		int result = 0;

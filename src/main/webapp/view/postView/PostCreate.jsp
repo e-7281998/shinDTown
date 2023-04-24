@@ -24,29 +24,29 @@
 				</fieldset>
 			</div>
 
-			<form class="posting" method = "POST"action = "/shinDTown/post/create.jm">
-
+			<form class="posting" method = "POST" action = "/shinDTown/post/create.jm">
+				<input type = "hidden" id="board_name" name="board_name" value="${board_name }">
 				<div class="post_form">
-					<label>제목</label> <input type="text" name="title" class="title"
+					<label>제목</label> <input type="text" name="post_title" class="title"
 						id="title" />
 				</div>
 
 				<div class="post_form">
-					<label>내용</label> <input type="text" name="content" class="content" />
+					<label>내용</label> <input type="text" name="post_content" class="content" />
 				</div>
 
 				<div class="post_photo" id="form_photo" style="visibility:hidden;">
-					<label>사진</label> <input type="file" name="photo" class="photo"
+					<label>사진</label> <input type="file" name="post_image" class="photo"
 						disabled />
 				</div>
 
 
 				<div class="post_form" id="form_code" style="display:none;">
 					<label>코드</label>
-					<textarea name="code" class="code"></textarea>
+					<textarea name="post_source" class="code"></textarea>
 					<!-- 					<label>코드</label> <input type="text" name="code" class="code" /> -->
 				</div>
-
+			
 				<div class="post_form btn">
 					<input type="submit" value="등록" class="postbtn">
 				</div>
