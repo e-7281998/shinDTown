@@ -17,6 +17,7 @@ import com.shinD.controller.board.BoardDelete;
 import com.shinD.controller.board.BoardDetail;
 import com.shinD.controller.board.BoardDupCheck;
 import com.shinD.controller.board.BoardRead;
+import com.shinD.controller.comment.CommentCreate;
 import com.shinD.controller.post.PostCreate;
 
 
@@ -63,6 +64,11 @@ public class FrontController_JM extends HttpServlet {
 		// 게시글 생성
 		case "/post/create.jm":
 			controller = new PostCreate();
+			break;
+			
+		// 댓글 생성
+		case "/comment/create.jm":
+			controller = new CommentCreate();
 			break;
 
 		default:

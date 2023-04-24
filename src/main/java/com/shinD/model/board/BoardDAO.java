@@ -52,7 +52,6 @@ public class BoardDAO {
 
 			while (rs.next()) {// 값이 없을때까지 읽음
 				BoardVO board = makeBoard(rs);// 보드를 만들어주는 함수에 다녀와서 보드생성
-				System.out.println(board);// 테스트하려고 붙여놓음 지워도댐
 				boardlist.add(board);// 리스트에 보드 추가
 			}
 		} catch (SQLException e) {
@@ -86,7 +85,6 @@ public class BoardDAO {
 
 			while (rs.next()) {// 값이 없을때까지 읽음
 				BoardPostVO board = makeBoardPost(rs);// 보드를 만들어주는 함수에 다녀와서 보드생성
-				System.out.println(board);// 테스트하려고 붙여놓음 지워도댐
 				boardpostlist.add(board);// 리스트에 보드 추가
 			}
 		} catch (SQLException e) {
@@ -133,7 +131,6 @@ public class BoardDAO {
 
 			while (rs.next()) {// 값이 없을때까지 읽음
 				BoardVO board = makeBoard(rs);// 보드를 만들어주는 함수에 다녀와서 보드생성
-				System.out.println(board);// 테스트하려고 붙여놓음 지워도댐
 				boardtop.add(board);// 리스트에 보드 추가
 			}
 		} catch (SQLException e) {
