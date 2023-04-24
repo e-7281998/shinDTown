@@ -41,4 +41,41 @@ public class CommentDAO {
 		return result;
 	}
 	
+	//댓글
+	public List<CommentVO> ComList(int post_code){
+		List<CommentVO> comlist = new ArrayList<>();
+		String sql = "select * from comments where post_code = ?";
+		conn = MySQLUtil.getConnection();
+		
+		try {
+			pst = conn.prepareStatement(sql);
+			pst.setInt(1, post_code);
+			rs = pst.executeQuery();
+			
+			while(rs.next()) {
+				CommentVO com = makeCom(rs);
+				comlist.add(com);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			MySQLUtil.dbDisconnect(null, pst, conn);
+		}
+	
+		
+		return comlist;
+	}
+
+	private CommentVO makeCom(ResultSet rs2) throws SQLException {
+		CommentVO com = new CommentVO();
+		com.setCOM_CODE(rs.getInt("COM_CODE"));
+		com.setPOST_CODE(rs.getInt("POST_CODE"));
+		com.setUSER_CODE(rs.getInt("USER_CODE"));
+		com.setCOM_COMMENT(rs.getString("COM_COMMENT"));
+		com.setCOM_CREATE(rs.getDate("COM_CREATE"));
+
+		return com;
+	}
+	
 }

@@ -9,6 +9,7 @@ import com.shinD.controller.CommonControllerInterface;
 import com.shinD.model.board.BoardPostVO;
 import com.shinD.model.board.BoardService;
 import com.shinD.model.board.BoardVO;
+import com.shinD.model.post.PostCommentVO;
 import com.shinD.model.post.PostService;
 import com.shinD.model.post.PostVO;
 
@@ -31,11 +32,11 @@ public class BoardDetail implements CommonControllerInterface {
 	
 			int bcode = bservise.boardSerchCode(board_name);//보드 이름을 받아서 검색
 			List<PostVO>postlist = pservice.PostSelect(bcode);//게시글 리스트를 보드번호를 받아서 뽑기
-			
+			List<PostCommentVO>pclist = pservice.PostComSelect(bcode);//보드번호 받아서 게시글 + 댓글리스트
 			
 			request.setAttribute("board_name", board_name);//보드이름 보내주기
-			//request.setAttribute("boardlist", boardlist);//보드목록 값 리퀘스트에넣기
-			request.setAttribute("postlist", postlist);//보드목록 값 리퀘스트에넣기
+			request.setAttribute("postlist", postlist);//게시글목록 값 리퀘스트에넣기
+			request.setAttribute("pclist", pclist);//게시글+댓글목록 값 리퀘스트에넣기
 			}else {
 				
 			}
