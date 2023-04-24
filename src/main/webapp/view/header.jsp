@@ -34,11 +34,11 @@ fieldset{
 .container {
 	display: grid;
 	width: 80%;
-	grid-template-rows: 1fr;
+	grid-template-rows: 0.8fr;
 	grid-template-columns: 0.3fr 1fr 4fr 500px 0.3fr;
 	grid-template-areas: ". logo . bar_menu .";
 	place-items : center center;
-	padding-top : 10px;
+	padding-top : 5px;
 }
 
 .logo {
@@ -59,13 +59,14 @@ a{
 text-decoration: none;
 }
 
-hr {
-	margin: 0px 0px 40px 0px;
-}
 a{
  text-decoration: none;
  color : black;
  cursor : pointer;
+ }
+ 
+ hr{
+ 	width: 90%;
  }
 
 #logout{
@@ -74,7 +75,6 @@ background: none;
 }
 </style>
 
-<!-- 세션에 로그인 한 사용자를 받아와서 존재할 경우 -> (게시판 보러가기, 쪽지확인, 내정보 확인하기로 가기!) -->
 
 <div class="header"> 
 	<div class="container">
@@ -99,3 +99,4 @@ background: none;
 		</div>
 	</div>
 </div>
+<hr/>

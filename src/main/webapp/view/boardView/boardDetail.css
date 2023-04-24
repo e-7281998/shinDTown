@@ -11,7 +11,7 @@
 	grid-template-rows: 0.3fr 1fr 1fr;
 	grid-template-columns: 0.3fr 2fr 2fr 0.3fr;
 	grid-template-areas: 
-	". board_title . . " 
+	". board_title post_detail . " 
 	". board_list post_detail . "
 	". board_list post_detail . ";
 	gap: 2%;
@@ -35,6 +35,7 @@
 .post_detail {
 	grid-area: post_detail;
 	visibility: hidden;
+	margin-top : 40px;
 	display: grid;
 	grid-template-rows: 300px 60px 200px;
 	grid-template-columns: 550px;
@@ -48,6 +49,10 @@
 	margin-left : 0;
 	overflow: scroll;
 	overflow-x: hidden;
+	padding : 15px;
+	margin : 10px;
+	box-shadow: 0 0 4px #558BCF;
+	border-radius : 20px;
 }
 ul {
 	padding-left : 0;
@@ -87,10 +92,11 @@ li{
 
 .post {
 	grid-area: post;
-	border: 2px solid gray;
 	border-radius: 20px;
 	margin-left : 10px;
-	
+	border : 2px solid #558BCF;
+	overflow: scroll;
+	overflow-x: hidden;
 	display : grid;
 	grid-template-rows: 1fr 1fr 1fr;
 	grid-template-columns: 1fr 0.5fr;
@@ -117,11 +123,14 @@ li{
 
 .comment {
 	grid-area: comment;
+	margin-top : 5px;
+	margin-left : 5px;
 }
 
 .comment_list {
 	grid-area: comment_list;
-	margin-left: 15px;
+	margin-left: 20px;
+	margin-top: 15px;
 	overflow: scroll;
 	overflow-x: hidden;
 }
@@ -155,7 +164,7 @@ input[type="submit"] {
 .comms {
 	display: grid;
 	grid-template-rows: 1fr;
-	grid-template-columns: 3fr 0.5fr 0.5fr;
+	grid-template-columns: 1.5fr 0.3fr 0.3fr;
 	grid-template-areas: "com good points";
 	align-items: center
 }
@@ -178,11 +187,12 @@ input[type="submit"] {
 	background-color : #558BCF;
 	color : white;
 	font-size: 15px;
-	margin-right: 100px;
+	margin-right: 20px;
 }
 
 .points {
 	grid-area: points;
+	float : left;
 }
 
 .line{

@@ -54,10 +54,13 @@ body {
 /* main index */
 .main_page {
 	display: grid;
-	grid-template-rows: 1fr 1fr 0.3fr 2fr;
+	grid-template-rows: 1fr 1fr 0.3fr 1.8fr;
 	grid-template-columns: 0.3fr 2.5fr 1.5fr 0.3fr;
-	grid-template-areas: ". main_board git . " ". main_board calendar . "
-		". more calendar ." ". hot_board calendar .";
+	grid-template-areas:
+	 ". main_board git . " 
+	 ". main_board calendar . "
+	". more calendar ." 
+	". hot_board calendar .";
 	gap: 2%;
 }
 
@@ -96,9 +99,6 @@ body {
 
 .calendar {
 	grid-area: calendar;
-	margin-top: 5px;
-	height: 500px;
-	width : 100%;
 }
 
 .main_board {
