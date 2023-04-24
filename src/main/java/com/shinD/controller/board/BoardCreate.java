@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.shinD.controller.CommonControllerInterface;
+import com.shinD.model.board.BoardService;
 import com.shinD.model.board.BoardVO;
 
 

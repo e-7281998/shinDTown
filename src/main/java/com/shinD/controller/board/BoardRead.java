@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import com.shinD.controller.CommonControllerInterface;
 import com.shinD.model.board.BoardPostVO;
+import com.shinD.model.board.BoardService;
 import com.shinD.model.board.BoardVO;
 
 public class BoardRead implements CommonControllerInterface {
