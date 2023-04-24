@@ -1,16 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<c:set var="path" value="${pageContext.request.contextPath }"
+	scope="application"></c:set>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8" />
 <title>Insert title here</title>
-<link href="main.css" rel="stylesheet" />
 
 <script
 	src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.5/index.global.min.js'></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 <script src="../jq/jquery-3.6.4.min.js"></script>
-
+<link href="${path}/view/main.css" rel="stylesheet" />
 </head>
 <body class="main">
 	<%@include file="header.jsp"%>
@@ -77,49 +82,58 @@
 
 
 			<div class="calendar">
+
 				<div class="calendar" id="calendar"></div>
 
-				<div class="modal fade" id="calendarModal" tabindex="-1"
-					role="dialog" aria-labelledby="exampleModalLabel"
-					aria-hidden="true">
-					<div class="modal-dialog" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title" id="exampleModalLabel">일정을 입력하세요.</h5>
-								<button type="button" class="close" data-dismiss="modal"
-									aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
-							<div class="modal-body">
-								<div class="form-group">
-
-									<label for="taskId" class="col-form-label">일정 제목</label> <input
-										type="text" class="form-control" id="calendar_title"
-										name="calendar_title"> <label for="taskId"
-										class="col-form-label">일정 내용</label> <input type="text"
-										class="form-control" id="calendar_content"
-										name="calendar_content"> <label for="taskId"
-										class="col-form-label">시작 날짜</label> <input type="date"
-										class="form-control" id="calendar_start_date"
-										name="calendar_start_date"> <label for="taskId"
-										class="col-form-label">종료 날짜</label> <input type="date"
-										class="form-control" id="calendar_end_date"
-										name="calendar_end_date">
+				<div id="modal" class="modal">
+					<div class="modalcontent">
+						<div class="modal_header">
+							<p id="modal_title">일정을 입력하세요.</p>
+							<button type="button" class="btn btn-secondary"
+								id="closeCalendar">닫기</button>
+						</div>
+						<div class="modal_body">
+							<label class="title">일정 제목</label> 
+							<input type="text"
+								value="${plan.plan_title}" class="form-control" id="plan_title"
+								name="plan_title"> 
+								<label class="content">일정 내용</label>
+							<input type="text" class="form-control" id="plan_content"
+								name="plan_content"> 
+								<label class="start_date"
+								class="col-form-label">시작 날짜</label> 
+								<input type="date"
+								class="form-control" id="start_date" name="start_date">
+							<label class="end_date" class="col-form-label">종료 날짜</label> 
+							<input
+								type="date" class="form-control" id="end_date" name="end_date">
+								
+								<label id="color_choice">색상</label> 
+								
+								<div class="color_choice">
+								
+								<input type="button" id="blue" class="color" value="#BFC8D7" onclick="color_choice(blue)"/>					
+								<input type="button" id="yellow" class="color" value="#EADB80" onfocus="color_choice(yellow)"/> 
+								<input type="button" id="green" class="color" value="#A2B59F" onfocus="color_choice(green)"/> 
+								<input type="button" id="pink" class="color" value="#F1BCAE" onfocus="color_choice(pink)"/> 
+								<input type="button" id="orange" class="color" value="#F6B99D" onfocus="color_choice(orange)"/>
+								
 								</div>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-warning" id="addCalendar">추가</button>
-								<button type="button" class="btn btn-secondary"
-									data-dismiss="modal" id="sprintSettingModalClose">취소</button>
-							</div>
+								
+						</div>
 
+						<div class="modal_footer">
+							<div class="add">
+								<button type="button" class="btn btn-warning" id="addCalendar">추가</button>
+							</div>
+							<button type="button" class="btn btn-secondary"
+								id="updateCalendar">수정</button>
+							<button type="button" class="btn btn-secondary"
+								id="deleteCalendar">삭제</button>
 						</div>
 					</div>
+					<div class="modal_layer"></div>
 				</div>
-
-
-
 			</div>
 
 
@@ -151,68 +165,295 @@
 	</div>
 
 	<script>
-	
-	$(document).ready(function(){
-		
-	});
-		document.addEventListener('DOMContentLoaded', function() {
-			var calendarEl = document.getElementById('calendar');
-			var calendar = new FullCalendar.Calendar(calendarEl, {
-				timeZone : 'UTC',
-				initialView : 'dayGridMonth',
-				events : [ {
-					title : '해피해피',
-					start : '2023-04-19',
-					end : '2023-04-22'
-				} ],
-				headerToolbar : {
-					center : 'addEventButton'
-				},
-				customButtons : {
-					addEventButton : {
-						text : "일정 추가",
-						click : function() {
-							$("#calendarModal").modal("show");
-							$("#addCalendar").on(
-									"click",
-									function() {
-										var title = $("#calendar_title").val();
-										var content = $("#calendar_content")
-												.val();
-										var start_date = $(
-												"#calendar_start_date").val();
-										var end_date = $("#calendar_end_date")
-												.val();
 
-										if (title == null || title == "") {
-											alert("제목을 입력하세요")
-										} else if (content == null
-												|| content == "") {
-											alert("내용을 입력하세요.");
-										} else if (start_date == ""
-												|| end_date == "") {
-											alert("날짜를 입력하세요.");
-										} else if (new Date(end_date)
-												- new Date(start_date) < 0) {
-											alert("종료일이 시작일보다 먼저입니다.");
-										} else {
-											var obj = {
-												"title" : title,
-												"content" : content,
-												"start" : start_date,
-												"end" : end_date
+		function color_choice(color_code){
+			const color_f = $(color_code).val();
+		}
+		
+		function editCalendar() {
+			var plan_title = $("#plan_title").val();
+			var plan_content = $("#plan_content").val();
+			var start_date = $("#start_date").val();
+			var end_date = $("#end_date").val();
+			var color = color_f;
+
+			if (plan_title == null || plan_title == "") {
+				alert("제목을 입력해주세요");
+			} else if (plan_content == null || plan_content == "") {
+				alert("내용을 입력해주세요.");
+			} else if (start_date == "" || end_date == "") {
+				alert("날짜를 입력해주세요.");
+			} else if (moment(end_date).isBefore(start_date)) {
+				alert("종료일이 시작일보다 이전입니다.");
+			} else {
+
+				var obj = {
+					"plan_title" : plan_title,
+					"plan_content" : plan_content,
+					"start_date" : start_date,
+					"end_date" : end_date,
+					"color" : color,
+					"id" : "${loginUser.user_id}"
+				}
+
+			}
+			return obj;
+		}
+
+		document
+				.addEventListener(
+						'DOMContentLoaded',
+						function() {
+
+							var calendarEl = document
+									.getElementById('calendar');
+
+							var calendar = new FullCalendar.Calendar(
+									calendarEl,
+									{
+										timeZone : 'UTC',
+										initialView : 'dayGridMonth',
+										locale : 'ko',
+
+										headerToolbar : {
+											center : 'addEventButton'
+										},
+
+										eventDataTransform : function(event) {
+											// 일정출력시 하루 덜 나오는 문제 해결을 위해 date 다듬는 함수
+											if (event.end != event.start) {
+												var end_date = event.end;
+												event.end = moment(end_date)
+														.add(1, 'days')
+														.format(
+																moment.HTML5_FMT.DATE);
 											}
-											console.log(obj);
-										}
+											console.log(event);
+											return event;
+										},
+
+										events : function(info,
+												successCallback,
+												failureCallback) {
+											// 일정 가져오는 코드
+											if (("${loginUser.user_id}").length > 0) {
+												$
+														.ajax({
+															method : "GET",
+															url : "${path}/view/calendarView/ReadPlan",
+															data : {
+																"id" : "${loginUser.user_id}"
+															},
+															success : function(
+																	responseData) {
+																var eventList = [];
+																var events = eval("("
+																		+ responseData
+																		+ ")");
+																if (events != null) {
+																	$
+																			.each(
+																					events.plans,
+																					function(
+																							index,
+																							element) {
+																						eventList
+																								.push({
+																									id : element.plan_code,
+																									title : element.plan_title,
+																									start : element.start_date,
+																									end : element.end_date,
+																									color : element.color
+																								});
+																					});
+
+																}
+																successCallback(eventList);
+															},
+															error : function() {
+																console
+																		.log("error!");
+															}
+														});
+											}
+										},
+										eventClick : function(data) {
+											// 이벤트 클릭시 불러지는 detail보기 함수
+											var plan_code = data.event._def.publicId;
+											console.log(plan_code);
+
+											$(".add").hide();
+											$("#updateCalendar").show();
+											$("#deleteCalendar").show();
+
+											$
+													.ajax({
+														method : "GET",
+														data : {
+															"id" : "${loginUser.user_id}"
+														},
+														url : "${path}/view/calendarView/DetailPlan?plan_code="
+																+ plan_code,
+														success : function(
+																responseData) {
+															var plan = eval("("
+																	+ responseData
+																	+ ")");
+															$("#plan_title")
+																	.val(
+																			plan.plan_title);
+															$("#plan_content")
+																	.val(
+																			plan.plan_content);
+															$("#start_date")
+																	.val(
+																			plan.start_date);
+															$("#end_date")
+																	.val(
+																			plan.end_date);
+
+															//다시
+															$("#color").val(
+																	plan.color);
+															//값을 가져오고 modal에 출력!
+															$("#modal")
+																	.fadeIn();
+														},
+														error : function() {
+															console
+																	.log("error");
+														}
+													});
+
+											$("#updateCalendar")
+													.on(
+															"click",
+															function() {
+																console
+																		.log("list: "
+																				+ plan_code);
+																var obj = editCalendar();
+																if (plan_code == undefined) {
+																	console
+																			.log("pass");
+																	//이전에 누른 값이 합쳐져서 변경되고 있어서 처리
+																} else {
+																	$
+																			.ajax({
+																				method : "POST",
+																				url : "${path}/view/calendarView/DetailPlan?plan_code="
+																						+ plan_code,
+																				data : obj,
+																				success : function(
+																						responseData) {
+																					alert("내용이 수정되었습니다.");
+																					location
+																							.reload();
+																				},
+																				error : function() {
+																					console
+																							.log("error");
+																				}
+																			});
+
+																}
+															});
+
+											$("#closeCalendar").click(
+													function() {
+
+														$("#modal").fadeOut();
+														$("#plan_title")
+																.val("");
+														$("#plan_content").val(
+																"");
+														$("#start_date")
+																.val("");
+														$("#end_date").val("");
+														//다시
+
+														$("#color").val("");
+														plan_code = undefined;
+
+													});
+
+											$("#deleteCalendar")
+													.on(
+															"click",
+															function() {
+																if (plan_code != undefined) {
+																	$
+																			.ajax({
+																				data : {
+																					"id" : "${loginUser.user_id}"
+																				},
+																				url : "${path}/view/calendarView/DeletePlan?plan_code="
+																						+ plan_code,
+																				success : function(
+																						responseData) {
+																					alert("삭제 되었습니다.");
+																					location
+																							.reload();
+																				}
+																			});
+																}
+															});
+											/* 
+											console.log(data.event.title);
+											console.log(data.event.start);
+											console.log(data.event.end); */
+
+										},
+										customButtons : {
+											addEventButton : {
+												text : "일정 추가",
+												click : function() {
+													$(".add").show();
+													$("#updateCalendar").hide();
+													$("#deleteCalendar").hide();
+
+													$("#modal").fadeIn();
+													$("#closeCalendar")
+															.click(
+																	function() {
+																		$(
+																				"#modal")
+																				.fadeOut();
+																	});
+													$("#addCalendar")
+															.on(
+																	"click",
+																	function() {
+																		var obj = editCalendar();
+																		$
+																				.ajax({
+																					method : "POST",
+																					url : "${path}/view/calendarView/CreatePlan",
+																					data : obj,
+																					success : function(
+																							responseData) {
+																						alert("일정이 등록되었습니다");
+																						location
+																								.reload();
+																					},
+																					error : function() {
+																						console
+																								.log("error");
+																					}
+																				});
+
+																	});
+												}
+											}
+										},
+										editable : true,
+										displayEventTime : true,
+										selectable : true,
+										dayMaxEvents : true,
+
 									});
-						}
-					}
-				},
-				editable : true,
-				displayEventTime : false
-			});
-			calendar.render();
-		});
+							calendar.render();
+						});
 	</script>
 
 </body>

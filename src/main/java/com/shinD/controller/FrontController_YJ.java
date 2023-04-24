@@ -11,8 +11,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.shinD.controller.plan.CreatePlan;
+import com.shinD.controller.plan.DeletePlan;
+import com.shinD.controller.plan.DetailPlan;
+import com.shinD.controller.plan.ReadPlan;
  
-@WebServlet("/view/calendarView/CalendarRead.do")
+@WebServlet({"/view/calendarView/ReadPlan", "/view/calendarView/CreatePlan", 
+	"/view/calendarView/DetailPlan", "/view/calendarView/DeletePlan"})
 public class FrontController_YJ extends HttpServlet {
 	private static final long serialVersionUID = 1L;
  
@@ -23,19 +29,29 @@ public class FrontController_YJ extends HttpServlet {
 		Map<String, Object> data = new HashMap<>();
 		data.put("method", request.getMethod());
 		data.put("request", request);
+		data.put("response", response);
 		
-		/*
-		switch (path) { 
-		case "/site-result/adminPicAjax.do":
- 			controller = new AdminPicAjaxController();
-			 break;
-		 
-		default:
+		switch (path) {
+		case "/view/calendarView/ReadPlan": {
+			controller = new ReadPlan();
 			break;
 		}
-		*/
+		case "/view/calendarView/CreatePlan": {
+			controller = new CreatePlan();
+			break;
+		}
+		case "/view/calendarView/DetailPlan" : {
+			controller  = new DetailPlan();
+			break;
+		}
+		case "/view/calendarView/DeletePlan" : {
+			controller = new DeletePlan();
+		}
+		}
+	
+		
 		 
-		String page = null;
+		String page = "";
 		try {
 			page = controller.execute(data);
 		} catch (Exception e) {
@@ -44,7 +60,7 @@ public class FrontController_YJ extends HttpServlet {
 		
 		if(page.indexOf("redirect:") >= 0) {
  			response.sendRedirect(page.substring(9));
-		}else if(page.indexOf("responseBody") >= 0){
+		}else if(page.indexOf("responseBody:") >= 0){
  			response.getWriter().append(page.substring(13));
 		}else if(page.indexOf("download") >= 0){ 
 		}else { 
@@ -56,5 +72,4 @@ public class FrontController_YJ extends HttpServlet {
 		
 		
 	}
-
 }
