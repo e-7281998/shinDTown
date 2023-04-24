@@ -93,33 +93,32 @@
 								id="closeCalendar">닫기</button>
 						</div>
 						<div class="modal_body">
-							<label class="title">일정 제목</label> 
-							<input type="text"
+							<label class="title">일정 제목</label> <input type="text"
 								value="${plan.plan_title}" class="form-control" id="plan_title"
-								name="plan_title"> 
-								<label class="content">일정 내용</label>
+								name="plan_title"> <label class="content">일정 내용</label>
 							<input type="text" class="form-control" id="plan_content"
-								name="plan_content"> 
-								<label class="start_date"
-								class="col-form-label">시작 날짜</label> 
-								<input type="date"
+								name="plan_content"> <label class="start_date"
+								class="col-form-label">시작 날짜</label> <input type="date"
 								class="form-control" id="start_date" name="start_date">
-							<label class="end_date" class="col-form-label">종료 날짜</label> 
-							<input
+							<label class="end_date" class="col-form-label">종료 날짜</label> <input
 								type="date" class="form-control" id="end_date" name="end_date">
-								
-								<label id="color_choice">색상</label> 
-								
-								<div class="color_choice">
-								
-								<input type="button" id="blue" class="color" value="#BFC8D7" onclick="color_choice(blue)"/>					
-								<input type="button" id="yellow" class="color" value="#EADB80" onfocus="color_choice(yellow)"/> 
-								<input type="button" id="green" class="color" value="#A2B59F" onfocus="color_choice(green)"/> 
-								<input type="button" id="pink" class="color" value="#F1BCAE" onfocus="color_choice(pink)"/> 
-								<input type="button" id="orange" class="color" value="#F6B99D" onfocus="color_choice(orange)"/>
-								
-								</div>
-								
+
+							<label id="color_choice">색상</label>
+
+							<div class="color_choice">
+
+								<input type="button" id="blue" class="color" value="#BFC8D7"
+									onclick="color_choice(blue)" /> <input type="button"
+									id="yellow" class="color" value="#EADB80"
+									onfocus="color_choice(yellow)" /> <input type="button"
+									id="green" class="color" value="#A2B59F"
+									onfocus="color_choice(green)" /> <input type="button" id="pink"
+									class="color" value="#F1BCAE" onfocus="color_choice(pink)" /> <input
+									type="button" id="orange" class="color" value="#F6B99D"
+									onfocus="color_choice(orange)" />
+
+							</div>
+
 						</div>
 
 						<div class="modal_footer">
@@ -165,11 +164,20 @@
 	</div>
 
 	<script>
-
-		function color_choice(color_code){
-			const color_f = $(color_code).val();
+		var color_f;
+		function color_choice(color_code) {
+			$("#blue").css("border", "none");
+			$("#pink").css("border", "none");
+			$("#orange").css("border", "none");
+			$("#yellow").css("border", "none");
+			$("#green").css("border", "none");
+			
+			color_f = $(color_code).val();
+			
+			$(color_code).css("border", "3px solid #558BCF");
+			console.log(color_f);
 		}
-		
+
 		function editCalendar() {
 			var plan_title = $("#plan_title").val();
 			var plan_content = $("#plan_content").val();
@@ -179,12 +187,20 @@
 
 			if (plan_title == null || plan_title == "") {
 				alert("제목을 입력해주세요");
+				return;
+
 			} else if (plan_content == null || plan_content == "") {
 				alert("내용을 입력해주세요.");
+				return;
+
 			} else if (start_date == "" || end_date == "") {
 				alert("날짜를 입력해주세요.");
+				return;
+
 			} else if (moment(end_date).isBefore(start_date)) {
 				alert("종료일이 시작일보다 이전입니다.");
+				return;
+
 			} else {
 
 				var obj = {
@@ -257,6 +273,8 @@
 																					function(
 																							index,
 																							element) {
+																						console
+																								.log(element);
 																						eventList
 																								.push({
 																									id : element.plan_code,
@@ -311,10 +329,33 @@
 															$("#end_date")
 																	.val(
 																			plan.end_date);
+															
+															switch(plan.color){
+															case "#BFC8D7":{
+																$("#blue").css("border", "2px solid #558BCF");
+																break;
+															} 
+															case "#F8DAE2":{
+																$("#pink").css("border", "2px solid #558BCF");
+																break;
+															} 
+															case "#F6B99D":{
+																$("#orange").css("border", "2px solid #558BCF");
+																break;
+															} 
+															case "#EADB80":{
+																$("#yellow").css("border", "2px solid #558BCF");
+																break;
+															} 
+															case "#A2B59F":{
+																$("#green").css("border", "2px solid #558BCF");
+																break;
+															} 
+																
+															}
 
 															//다시
-															$("#color").val(
-																	plan.color);
+															$("#color").val(plan.color);
 															//값을 가져오고 modal에 출력!
 															$("#modal")
 																	.fadeIn();
@@ -398,52 +439,24 @@
 																			});
 																}
 															});
-											/* 
-											console.log(data.event.title);
-											console.log(data.event.start);
-											console.log(data.event.end); */
 
 										},
 										customButtons : {
 											addEventButton : {
 												text : "일정 추가",
-												click : function() {
+												click : function(e) {
+
+													e.stopPropagation();
+													console.log("addEvent");
+
 													$(".add").show();
 													$("#updateCalendar").hide();
 													$("#deleteCalendar").hide();
 
 													$("#modal").fadeIn();
-													$("#closeCalendar")
-															.click(
-																	function() {
-																		$(
-																				"#modal")
-																				.fadeOut();
-																	});
-													$("#addCalendar")
-															.on(
-																	"click",
-																	function() {
-																		var obj = editCalendar();
-																		$
-																				.ajax({
-																					method : "POST",
-																					url : "${path}/view/calendarView/CreatePlan",
-																					data : obj,
-																					success : function(
-																							responseData) {
-																						alert("일정이 등록되었습니다");
-																						location
-																								.reload();
-																					},
-																					error : function() {
-																						console
-																								.log("error");
-																					}
-																				});
 
-																	});
 												}
+
 											}
 										},
 										editable : true,
@@ -454,6 +467,35 @@
 									});
 							calendar.render();
 						});
+		//
+		$("#addCalendar").on("click", function(e) {
+			e.stopPropagation();
+			console.log("addcalendar");
+			console.dir(e);
+			alert("add");
+			var obj = editCalendar();
+			$.ajax({
+				method : "POST",
+				url : "${path}/view/calendarView/CreatePlan",
+				data : obj,
+				success : function(responseData) {
+					alert("일정이 등록되었습니다");
+					location.reload();
+				},
+				error : function() {
+					console.log("error");
+				}
+			});
+
+		});
+		$("#closeCalendar")
+		.click(
+				function() {
+					console.log("close");
+					$("#modal").fadeOut();
+					
+				});
+
 	</script>
 
 </body>
