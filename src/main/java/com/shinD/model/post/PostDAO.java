@@ -67,105 +67,6 @@ public class PostDAO {
 		return result;
 	}
 	
-	// 제목+내용 게시글
-	public int SimplePostCreate(PostVO post) {
-		int result = 0;
-		String sql = "insert into POSTS(BOARD_CODE,USER_CODE,POST_TITLE,POST_CONTENT) values(?,?,?,?)";
-		conn = MySQLUtil.getConnection();
-
-		try {
-			pst = conn.prepareStatement(sql);
-			pst.setInt(1, post.getPOST_CODE());
-			pst.setInt(2, post.getUSER_CODE());
-			pst.setString(3, post.getPOST_TITLE());
-			pst.setString(4, post.getPOST_CONTENT());
-
-			result = pst.executeUpdate();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			MySQLUtil.dbDisconnect(null, pst, conn);
-		}
-
-		return result;
-	}
-
-	// 제목+내용+이미지 게시글
-	public int ImagePostCreate(PostVO post) {
-		int result = 0;
-		String sql = "insert into POSTS(BOARD_CODE,USER_CODE,POST_TITLE,POST_CONTENT,POST_IMAGE) values(?,?,?,?,?)";
-		conn = MySQLUtil.getConnection();
-
-		try {
-			pst = conn.prepareStatement(sql);
-			pst.setInt(1, post.getPOST_CODE());
-			pst.setInt(2, post.getUSER_CODE());
-			pst.setString(3, post.getPOST_TITLE());
-			pst.setString(4, post.getPOST_CONTENT());
-			pst.setString(5, post.getPOST_IMAGE());
-
-			result = pst.executeUpdate();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			MySQLUtil.dbDisconnect(null, pst, conn);
-		}
-
-		return result;
-	}
-
-	// 제목+내용+소스코드 게시물
-	public int SourcePostCreate(PostVO post) {
-		int result = 0;
-		String sql = "insert into POSTS(BOARD_CODE,USER_CODE,POST_TITLE,POST_CONTENT,POST_SOURCE) values(?,?,?,?,?)";
-		conn = MySQLUtil.getConnection();
-
-		try {
-			pst = conn.prepareStatement(sql);
-			pst.setInt(1, post.getPOST_CODE());
-			pst.setInt(2, post.getUSER_CODE());
-			pst.setString(3, post.getPOST_TITLE());
-			pst.setString(4, post.getPOST_CONTENT());
-			pst.setString(5, post.getPOST_SOURCE());
-
-			result = pst.executeUpdate();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			MySQLUtil.dbDisconnect(null, pst, conn);
-		}
-
-		return result;
-	}
-
-	// 제목+내용+이미지+소스코드 게시물
-	public int AllPostCreate(PostVO post) {
-		int result = 0;
-		String sql = "insert into POSTS(BOARD_CODE,USER_CODE,POST_TITLE,POST_CONTENT,POST_IMAGE,POST_SOURCE) values(?,?,?,?,?,?)";
-		conn = MySQLUtil.getConnection();
-
-		try {
-			pst = conn.prepareStatement(sql);
-			pst.setInt(1, post.getPOST_CODE());
-			pst.setInt(2, post.getUSER_CODE());
-			pst.setString(3, post.getPOST_TITLE());
-			pst.setString(4, post.getPOST_CONTENT());
-			pst.setString(5, post.getPOST_IMAGE());
-			pst.setString(6, post.getPOST_SOURCE());
-
-			result = pst.executeUpdate();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			MySQLUtil.dbDisconnect(null, pst, conn);
-		}
-
-		return result;
-	}
 
 	// 게시글 목록(게시판 번호로 검색)
 	public List<PostVO> PostSelect(int board_code) {
@@ -180,7 +81,6 @@ public class PostDAO {
 
 			while (rs.next()) {
 				PostVO post = makepost(rs);
-				System.out.println(post);
 				postlist.add(post);
 			}
 		} catch (SQLException e) {
@@ -239,4 +139,7 @@ public class PostDAO {
 
 		return postdetail;
 	}
+//	public int PostCode() {
+//		return post_code
+//	}
 }

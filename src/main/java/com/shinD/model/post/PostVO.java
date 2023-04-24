@@ -21,6 +21,5 @@ public class PostVO {
 	private String POST_CONTENT;
 	private String POST_IMAGE;
 	private String POST_SOURCE;
-	private int POST_LIKE;
 	private Date POST_CREATE;
 }

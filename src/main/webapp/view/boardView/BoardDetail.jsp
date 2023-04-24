@@ -21,15 +21,16 @@
 				<ul class="post_title">
 				<c:forEach items="${postlist }" var="post" varStatus ="status">
 				    
-					<li id="${status.count}" value="${status.count}"> <span>${post.POST_TITLE }</span> [좋아요:<p class="like">${post.POST_LIKE }</p>] [댓글:<p class="com_count">코맨트 갯수 가져와서 붙이기</p>]</li>
+					<li id="${status.count}" value="${status.count}"> <span>${post.POST_TITLE }</span> [좋아요:<p class="like"></p>] [댓글:<p class="com_count">코맨트 갯수 가져와서 붙이기</p>]</li>
 					<input type="hidden" id="${status.count}create" value="${post.POST_CREATE }">
 					<input type="hidden" id="${status.count}content" value="${post.POST_CONTENT }">
-					<input type="hidden" id="${status.count}like" value="${post.POST_LIKE }">
+					<input type="hidden" id="${status.count}code" value="${post.POST_CODE }">
+					<%-- <input type="hidden" id="${status.count}like" value="${post.POST_LIKE }"> --%>
 				</c:forEach>
 					</ul>
 				<div class="posting">
 					<button class="posting_btn"
-						onclick="location.href='/shinDTown/post/create.jm?board_name=${board_name}';">글쓰기</button>
+						onclick="location.href='/shinDTown/post/create.jm?board_name=${board_name}'">글쓰기</button>
 				</div>
 			</div>
 
@@ -55,8 +56,9 @@
 				</div>
 
 				<div class="comment">
-					<form class="create_comment">
-						<input type="text" class="comment" name="comment"> <input
+					<form class="create_comment" method="POST" action="/shinDTown/comment/create.jm">
+						<input type="hidden" id="post_code" name="post_code">
+						<input type="text" class="comment" name="com_comment" > <input
 							type="submit" value="등록">
 					</form>
 				</div>
@@ -113,13 +115,15 @@
 				var date = "#"+$(this).val()+"create";
 				var content = "#"+$(this).val()+"content";
 				var like = "#"+$(this).val()+"like";
+				var code = "#"+$(this).val()+"code";
 				
-				console.log($(date).val());
+				console.log($(code).val());
 				
 				$("#post_detail .title h3 ").text(title);
 				$("#post_detail .date h3 ").text($(date).val());
 				$("#post_detail .content p ").text($(content).val());
 				$("#post_detail .like p ").text($(like).val());
+				$("#post_code").val($(code).val());
 				$("#post_detail").css("visibility", "visible"); 
 			});
 		});

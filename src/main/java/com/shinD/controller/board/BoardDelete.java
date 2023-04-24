@@ -5,6 +5,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import com.shinD.controller.CommonControllerInterface;
+import com.shinD.model.board.BoardService;
 
 public class BoardDelete implements CommonControllerInterface {
 
