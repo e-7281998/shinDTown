@@ -14,7 +14,6 @@ import lombok.ToString;
 public class ChatroomVO {
 	private int chat_code;
 	private int friend_code;
-	
 	private String friend_name;
 	
 }

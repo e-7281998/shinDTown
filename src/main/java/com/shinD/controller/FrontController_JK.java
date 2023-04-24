@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 import com.shinD.controller.message.MessageToConnectMemberController;
 import com.shinD.controller.message.ReadConnectRoomController;
 import com.shinD.controller.message.SelectChatRoomController;
-import com.shinD.controller.message.chatController_backU;
+import com.shinD.controller.message.InsertMessageController;
  
 
 
@@ -30,29 +30,51 @@ public class FrontController_JK extends HttpServlet {
 		Map<String, Object> data = new HashMap<>();
 		data.put("method", request.getMethod());
 		data.put("request", request);
+		data.put("response", response);
 		
 		
 		
 		//해야할것: session에 loginUser가 있기떄문에 저장해야함.
 		switch (path) { 
-		//chat룸으로 이동
-		case "/view/chatView/chat.jk":
- 			controller = new chatController_backU();
-			 break;
-			 
+		
+		// 내가 속한 채팅방목록
 		case "/view/chatView/selectChatRoom.jk":
- 			controller = new SelectChatRoomController();
+			controller = new SelectChatRoomController();
+			break;
+		
+		//chat보내기
+		case "/view/chatView/insertMessage.jk":
+ 			controller = new InsertMessageController();
 			 break;
-		 
-		case "/view/chatView/MessageToConnectMember.jk":
+		
+		// 지금 접속한 유저와의 채팅방 ->리턴값 :접속한 채팅방
+		case "/view/chatView/messageToConnectMember.jk":
  			controller = new MessageToConnectMemberController();
 			 break;
 		
-		case "/view/chatView/ReadConnectRoomController.jk":
+		//나와 상대가 접속한 채팅방의 데이터→접속하지 않아도 채팅 내용 확인 가능	 
+		case "/view/chatView/readConnectRoom.jk":
  			controller = new ReadConnectRoomController();
 			 break;
-			 
-			 
+		
+		//메시지 받기
+		case "/view/chatView/selectReceiveMessage.jk":
+ 			controller = new SelectReceiveMessageController();
+ 			break;
+ 			
+		//읽지 않은 메시지
+		case "/view/chatView/selectNotReadMessage.jk":
+ 			controller = new SelectNotReadMessageController();
+			 break;	 
+		
+		//특정 메시지 읽기
+		case "/view/chatView/selectReadOneMessage.jk":
+ 			controller = new SelectReadOneMessageController();
+			 break;	 
+//		//접속중인 사람 목록 보기
+//		case "/view/chatView/messageToConnectMember.jk":
+// 			controller = new MessageToConnectMemberController();
+//			 break;	 
 		default:
 			break;
 		}
@@ -67,8 +89,10 @@ public class FrontController_JK extends HttpServlet {
 		
 		if(page.indexOf("redirect:") >= 0) {
  			response.sendRedirect(page.substring(9));
+ 			
 		}else if(page.indexOf("responseBody") >= 0){
  			response.getWriter().append(page.substring(13));
+ 			
 		}else if(page.indexOf("download") >= 0){ 
 		}else { 
 			RequestDispatcher rd;

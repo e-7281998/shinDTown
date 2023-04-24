@@ -26,11 +26,10 @@ public class SelectChatRoomController implements CommonControllerInterface{
 	
 		List<ChatroomVO> chatRoomlist = mService.selectChatRoom(user_code);
 		
-		request.setAttribute("chatRoomList", chatRoomlist);//보드리스트 값 리퀘스트에넣기
-	
-		
+		request.setAttribute("chatRoomList", chatRoomlist);//보드리스.>>>>");
 		//포워드로 보내기 why? request값을 넘겨줘야하기 때문에
-		return "/view/chatView/ChatRead.jsp";
+		return "/view/chatView/websocket.jsp";
+		
 	}
 	
 }

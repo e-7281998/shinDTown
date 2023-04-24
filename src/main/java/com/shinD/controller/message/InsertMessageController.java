@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.shinD.controller.CommonControllerInterface;
 import com.shinD.model.message.MessageService;
 
-public class chatController_backU implements CommonControllerInterface{
+public class InsertMessageController implements CommonControllerInterface{
 
 	@Override
 	public String execute(Map<String, Object> data) throws Exception {
@@ -26,8 +26,9 @@ public class chatController_backU implements CommonControllerInterface{
 		System.out.println("22222222 makeMessage가 안만들어짐");
 		MessageService service = new MessageService();
 		int result = service.insertMessage(message);
-
-		return page;
+		
+		
+		return "responseBody:page";
 		
 	}
 	
@@ -36,10 +37,11 @@ public class chatController_backU implements CommonControllerInterface{
 	
 	private MessageVO makeMessage(HttpServletRequest request) throws UnsupportedEncodingException {
 		request.setCharacterEncoding("utf-8");
-		int message_code = Integer.parseInt(request.getParameter("message_code"));
+		//int message_code = Integer.parseInt(request.getParameter("message_code"));
 		int chat_code = Integer.parseInt(request.getParameter("chat_code"));
 		int sender=Integer.parseInt(request.getParameter("sender"));
 		String message_data=request.getParameter("message_data");
+		System.out.println("insertMessageComntroller");
 		
 		MessageVO mem = new MessageVO();
 		//mem.setMessage_code(message_code); 자동생성

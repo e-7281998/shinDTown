@@ -21,7 +21,7 @@
 				<fieldset class="chat_field">
 					<legend>접속중인 사람</legend>
 					<ul>
-						<li class="chat" value="1">전은정</li>
+						<li class="chat" value="1">전은정</li><!-- session값 가져오기 -->
 						<li class="chat" value="2">양유진</li>
 						<li class="chat" value="3">유지만</li>
 						<li class="chat" value="4">이진경</li>
@@ -53,7 +53,7 @@
 
 			</div>
 
-			<div class="chatroom" id="chatroom">
+			<div class="chatroom" id="chatroom" >
 
 				<div class="text">
 
