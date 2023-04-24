@@ -43,8 +43,8 @@ public class MemberDAO {
 	}
 	
 	//개인 캘린더 생성 
-	public void createCalendar(String userId){
-		String tableName = userId+"_plan";
+	public void createCalendar(String id){
+		String tableName = id+"_plan";
 		String sql = "CREATE TABLE "+tableName+"(`PLAN_CODE` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,`PLAN_TITLE` VARCHAR(45) NOT NULL,`PLAN_CONTENT` VARCHAR(45) NOT NULL, `START_DATE` DATE NOT NULL, `END_DATE` DATE NOT NULL )";
 		conn = MySQLUtil.getConnection();
 				
@@ -140,6 +140,10 @@ public class MemberDAO {
 			pst.setString(1,id); 
 			
 			result = pst.executeUpdate();  
+			
+			if(result == 1)	//탈퇴 성공하면 캘린더 삭제하기
+				dropCalendar(id);
+			
 		}catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -147,6 +151,23 @@ public class MemberDAO {
 		}
 		
 		return 0;
+	}
+	
+	//개인 캘린더 삭제하기
+	public void dropCalendar(String id){
+		String tableName = id+"_plan";
+		String sql = "drop table "+tableName;
+		conn = MySQLUtil.getConnection();
+				
+		try {
+			st = conn.createStatement();
+			st.execute(sql);
+			 
+		}catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			MySQLUtil.dbDisconnect(rs, pst, conn);
+		}
 	}
 
 	//비밀번호 변경
