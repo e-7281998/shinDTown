@@ -1,12 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<c:set var="path" value="${pageContext.request.contextPath}" scope="application"/>
+	
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="chat.css" rel="stylesheet" />
-<script src="../../jq/jquery-3.6.4.min.js"></script>
+<link href="${path }/view/chatView/chat.css" rel="stylesheet" />
+<script src="${path }/jq/jquery-3.6.4.min.js"></script>
 </head>
 <body>
 	<%@include file="../header.jsp"%>
@@ -34,12 +38,16 @@
 			</div>
 			<div class="chatlist">
 				<fieldset class="chat_field">
+			
 					<legend>채팅방 목록</legend>
 					<ul>
-						<li class="chat" value="1">전은정</li>
+						<c:forEach items="${chatRoomList}" var="chatroom" >
+							<li class="chat" value="1" >${chatroom.friend_name} </li>
+						</c:forEach>
+						<!-- <li class="chat" value="1">전은정</li>
 						<li class="chat" value="2">양유진</li>
 						<li class="chat" value="3">유지만</li>
-						<li class="chat" value="4">이진경</li>
+						<li class="chat" value="4">이진경</li> -->
 					</ul>
 				</fieldset>
 
