@@ -97,7 +97,7 @@ body {
 .calendar {
 	grid-area: calendar;
 	margin-top: 5px;
-	height: 90%;
+	height: 500px;
 	width : 100%;
 }
 
@@ -144,6 +144,7 @@ body {
 	border: 3px solid;
 	border-color: #558BCF;
 	border-radius: 20px;
+	height : fit-content;
 }
 
 .board_list_5 {
@@ -164,4 +165,206 @@ body {
 
 button {
 	cursor: pointer;
+}
+
+/*modal*/
+.modal{
+	display :none;
+	position: relative;
+	width : 100%;
+	height : 100%;
+	z-index : 1; 
+}
+
+#modal button {
+	display: inline-block;
+	width : 100px; 
+}
+#modal .modalcontent{
+	width : 400px;
+	margin:-450px auto;
+	padding : 20px 10px;
+	background: #fff;
+	border: 2px solid #666;
+	height : fit-content;
+}
+
+#modal .modal_layer {
+  position:fixed;
+  top:0;
+  left:0;
+  width: 100%;
+  height:100%;
+  background:rgba(0, 0, 0, 0.5);
+  z-index:-1;
+}
+
+.modalcontent{
+	display : grid;
+	grid-template-rows: 1fr 2fr 1fr;
+	grid-template-areas: 
+	" modal_header"
+	" modal_body"
+	" modal_footer";
+	
+	border: 3px solid;
+	border-color: #558BCF;
+	border-radius: 20px;
+	
+	gap: 2%;
+	
+} 
+.modal_header{
+	grid-area: modal_header;
+	
+	display : grid;
+	grid-template-columns : 1fr 1fr;
+	grid-template-areas: 
+	" modal_title  closeCalendar";
+	
+	align-items : center;
+	justify-items: end;
+}
+#closeCalendar{
+	grid-area: closeCalendar;
+	height : fit-content;
+	background-color: #558BCF;
+	border: 3px solid;
+	border-color: #558BCF;
+	border-radius: 10px;
+	color : white;
+	margin-right : 10px;
+	
+}
+#modal_title{
+	grid-area: modal_title;
+	font-size : 20px;
+}
+
+.modal_body{
+	grid-area: modal_body;
+	display : grid;
+	
+	grid-template-rows : repeat(5, 1fr);
+	grid-template-columns : 1fr 4fr;
+	
+	grid-template-areas: 
+	"title  calendar_title "
+	"content calendar_content "
+	"start_date calendar_start_date "
+	"c_choice color_choice"
+	"end_date calendar_end_date";
+	
+	align-items : center;
+	justify-items: center;
+}
+.form-control{
+	border: 3px solid;
+	border-color: #558BCF;
+	border-radius: 10px;
+	margin-bottom : 2px;
+	
+	height : 30px;
+	width : 300px;
+}
+.modal_footer{
+	grid-area: modal_footer;
+	display : grid;
+	grid-template-columns :  1fr 1fr 1fr;
+	grid-template-areas: 
+	" . deleteCalendar updateCalendar";
+	height : fit-content;
+}
+.btn{
+	border: 3px solid;
+	border-color: #558BCF;
+	border-radius: 10px;
+	background-color: #558BCF;
+	color : white;
+}
+
+.title{
+	grid-area: title;
+}
+.content{
+	grid-area: content;
+}
+.start_date{
+	grid-area: start_date;
+}
+.end_date{
+	grid-area: end_date;
+}
+#color_choice{
+	grid-area: c_choice;
+}
+#plan_title{
+	grid-area: calendar_title;
+}
+#plan_content{
+	grid-area: calendar_content;
+}
+
+#start_date{
+	grid-area: calendar_start_date;
+}
+
+#end_date{
+	grid-area: calendar_end_date;
+}
+.color_choice{
+	grid-area: color_choice;
+}
+.color {
+	width : 30px;
+	height : 30px;
+	border : none;
+	border-radius : 30px;
+	margin-right : 10px;
+	margin-left : 10px;
+	cursor : pointer;
+	color : transparent;
+}
+.color:focus{
+	border: 3px solid #558BCF;
+}
+
+#blue{
+	background-color : #BFC8D7;
+	color : transparent;
+}
+
+#pink{
+	background-color : #F1BCAE;
+}
+#orange{
+	background-color : #F6B99D;
+}
+
+#yellow{
+	background-color : #EADB80;
+}
+
+#green{
+	background-color : #A2B59F;
+}
+
+.add{
+	grid-area:add;
+}
+#addCalendar{
+	grid-area: addCalendar;
+	margin-left : 3px;
+	margin-right: 10px;
+	
+}
+#updateCalendar{
+	grid-area: updateCalendar;
+	margin-left : 3px;
+	margin-right: 3px;
+}
+#deleteCalendar{
+	grid-area: deleteCalendar;
+	margin-left : 3px;
+	margin-right: 3px;
 }
