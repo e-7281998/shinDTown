@@ -15,7 +15,6 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import com.shinD.controller.CommonControllerInterface;
-import com.shinD.controller.board.BoardService;
 import com.shinD.model.post.PostService;
 import com.shinD.model.post.PostVO;
 
@@ -25,7 +24,7 @@ public class PostCreate implements CommonControllerInterface {
 	public String execute(Map<String, Object> data) throws Exception {
 		HttpServletRequest request = (HttpServletRequest) data.get("request");
 		request.setCharacterEncoding("utf-8");//인코딩
-		String page = "../view/postView/PostCreate.jsp";
+		String page="../view/postView/PostCreate.jsp";
 		String method = (String)data.get("method");
 		PostService pservice = new PostService();
 		String board_name= request.getParameter("board_name");//보드이름저장

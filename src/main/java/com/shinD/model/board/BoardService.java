@@ -1,4 +1,4 @@
-package com.shinD.controller.board;
+package com.shinD.model.board;
 
 import java.util.List;
 
