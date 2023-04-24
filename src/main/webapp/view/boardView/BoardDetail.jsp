@@ -9,6 +9,7 @@
 <title>Insert title here</title>
 <link href="${path}/view/boardView/boardDetail.css" rel="stylesheet" />
 <script src="${path}/jq/jquery-3.6.4.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body class="main">
 	<%@include file="../header.jsp"%>
@@ -63,48 +64,8 @@
 					</form>
 				</div>
 
-				<div class="comment_list">
-
-					<div class="comms">
-						<div class="comm">
-							<p>저도 고기 먹었는디..</p>
-						</div>
-						<button class="good">공감</button>
-						<p class="points">1</p>
-					</div>
-					<hr class="line"/>
-					
-					<div class="comms">
-						<div class="comm">
-							<p>저도 고기 먹었는디..</p>
-						</div>
-						<button class="good">공감</button>
-						<p class="points">1</p>
-					</div>
-					<hr class="line"/>
-					
-					
-					<div class="comms">
-						<div class="comm">
-							<p>저도 고기 먹었는디..</p>
-						</div>
-						<button class="good">공감</button>
-						<p class="points">1</p>
-					</div>
-					<hr class="line" />
-					
-					<div class="comms">
-						<div class="comm">
-							<p>저도 고기 먹었는디..</p>
-						</div>
-						<button class="good">공감</button>
-						<p class="points">1</p>
-					</div>
-					<hr class="line" />
-				
-
+				<div class="comment_list" id = "comments">
 				</div>
-			</div>
 		</div>
 	</div>
 	
@@ -129,6 +90,48 @@
 		});
 		
 		
+	</script>
+	<script>
+$(function(){
+		$("li").on("click",function(){
+			//page이동 없이 서버에 요청보내고 응답받기 :ajax
+		$.ajax({
+			url:"/shinDTown/comment/list.jm",
+			data:{"post_code":$("#"+$(this).val()+"code").val()},
+		
+			success:function(data){
+				$("#comments").html("");
+				var responseData = eval("(" + data + ")");
+				
+// 				<div class='comment_list'>
+// 				<div class='comms'>
+// 					<div class='comm' id="comm">
+// 						<p id="pppp"></p>
+// 					</div>
+// 				<button class='good'>공감</button>
+// 				<p class='points'></p>
+// 				</div>
+// 			<hr class='line'/>
+// 			</div>
+				$.each(responseData.comlist, function(index,item){
+ 					var head = "<div class='comment_list'><div class='comms'><div class='comm'>";
+ 	 				var foot = "</div><button class='good'>공감</button><p class='points'></p></div><hr class='line'/></div>";
+	 					
+					$("#comments").append(head + 
+ 					"<p>"+item.COM_COMMENT+"</p>" +
+ 					foot);
+				})
+				
+					
+				
+			},
+			error:function(message){
+				
+				console.log(message);
+			}
+		});
+		})
+	});
 	</script>
 	
 </body>

@@ -18,6 +18,7 @@ import com.shinD.controller.board.BoardDetail;
 import com.shinD.controller.board.BoardDupCheck;
 import com.shinD.controller.board.BoardRead;
 import com.shinD.controller.comment.CommentCreate;
+import com.shinD.controller.comment.CommentList;
 import com.shinD.controller.post.PostCreate;
 
 
@@ -33,6 +34,7 @@ public class FrontController_JM extends HttpServlet {
 		Map<String, Object> data = new HashMap<>();
 		data.put("method", request.getMethod());
 		data.put("request", request);
+		data.put("response", response);
 
 		System.out.println(path);
 		switch (path) {
@@ -71,6 +73,13 @@ public class FrontController_JM extends HttpServlet {
 			controller = new CommentCreate();
 			break;
 
+		// 댓글 생성
+		case "/comment/list.jm":
+			System.out.println("------------");
+			controller = new CommentList();
+			break;
+
+			
 		default:
 			break;
 		}
