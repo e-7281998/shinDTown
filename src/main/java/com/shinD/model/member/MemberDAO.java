@@ -30,6 +30,9 @@ public class MemberDAO {
 			
 			result = pst.executeUpdate(); 
 			
+			if(result == 1)	//회원가입 성공시 캘린더 생성
+				createCalendar(userId);
+			
 		}catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -37,6 +40,23 @@ public class MemberDAO {
 		}
 		
 		return result;
+	}
+	
+	//개인 캘린더 생성 
+	public void createCalendar(String userId){
+		String tableName = userId+"_plan";
+		String sql = "CREATE TABLE "+tableName+"(`PLAN_CODE` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,`PLAN_TITLE` VARCHAR(45) NOT NULL,`PLAN_CONTENT` VARCHAR(45) NOT NULL, `START_DATE` DATE NOT NULL, `END_DATE` DATE NOT NULL )";
+		conn = MySQLUtil.getConnection();
+				
+		try {
+			st = conn.createStatement();
+			st.execute(sql);
+			 
+		}catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			MySQLUtil.dbDisconnect(rs, pst, conn);
+		}
 	}
 	
 	//로그인 - member 정보 얻기
