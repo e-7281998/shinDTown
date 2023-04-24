@@ -252,8 +252,8 @@ button {
 	"title  calendar_title "
 	"content calendar_content "
 	"start_date calendar_start_date "
-	"c_choice color_choice"
-	"end_date calendar_end_date";
+	"end_date calendar_end_date"
+	"c_choice color_choice";
 	
 	align-items : center;
 	justify-items: center;
@@ -325,9 +325,7 @@ button {
 	cursor : pointer;
 	color : transparent;
 }
-.color:focus{
-	border: 3px solid #558BCF;
-}
+
 
 #blue{
 	background-color : #BFC8D7;
@@ -335,7 +333,7 @@ button {
 }
 
 #pink{
-	background-color : #F1BCAE;
+	background-color : #F8DAE2;
 }
 #orange{
 	background-color : #F6B99D;

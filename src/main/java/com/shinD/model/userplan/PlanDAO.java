@@ -158,7 +158,7 @@ public class PlanDAO {
 		plan.setPlan_content(rs.getString("plan_content"));
 		plan.setStart_date(rs.getDate("start_date"));
 		plan.setEnd_date(rs.getDate("end_date"));
-
+		plan.setColor(rs.getString("color"));
 		return plan;
 	}
 

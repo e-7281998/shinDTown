@@ -51,8 +51,9 @@ public class ReadPlan implements CommonControllerInterface {
 		JSONObject planObject = new JSONObject();
 		
 		planObject.put("plans", array);
-		response.setContentType("text/plan");
+		response.setContentType("text/plain");
 		response.setCharacterEncoding("utf-8");
+		System.out.println(planObject);
 		
 		return "responseBody:"+planObject.toString();
 	}
