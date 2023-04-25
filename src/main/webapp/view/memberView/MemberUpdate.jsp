@@ -45,6 +45,7 @@
 			
 			$.ajax({
 				url:"updatePwd",
+				method : "post",
 				data:{"pwd":pwd, "id" : "${loginUser.user_id}"},
 				success:(responseData) => {
 					if(responseData == 1)

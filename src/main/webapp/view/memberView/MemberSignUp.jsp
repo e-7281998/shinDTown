@@ -45,6 +45,7 @@
 		
 		$.ajax({
 			url:"classCheck",
+			method : "post",
 			data: classdata,
 			success: (responseData)=>{ 
 				if(responseData == -1)
