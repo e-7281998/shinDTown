@@ -22,7 +22,7 @@
 				<ul class="post_title">
 				<c:forEach items="${pclist }" var="post" varStatus ="status">
 				    
-					<li id="${status.count}" value="${status.count}"> <span>${post.POST_TITLE }</span> [좋아요:<p class="like"></p>] [댓글:<p class="com_count">${post.COUNT }개</p>]</li>
+					<li id="${status.count}" value="${status.count}"> <span>${post.POST_TITLE }</span> [좋아요:<p class="like">${post.POST_LIKES }</p>] [댓글:<p class="com_count">${post.POST_COMS }개</p>]</li>
 					<input type="hidden" id="${status.count}create" value="${post.POST_CREATE }">
 					<input type="hidden" id="${status.count}content" value="${post.POST_CONTENT }">
 					<input type="hidden" id="${status.count}code" value="${post.POST_CODE }">

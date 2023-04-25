@@ -92,31 +92,33 @@ public class PostDAO {
 
 		return postlist;
 	}
-	//게시글+댓글 목록(게시판 번호로 검색)
+	//게시글+댓글+좋아요 목록(게시판 번호로 검색)
 	public List<PostCommentVO> PostComSelect(int board_code){
 		List<PostCommentVO> postcommentlist = new ArrayList<>();
-		String sql[] = new String[2];
 		
-		 sql[0] = "select board_code,posts.post_code,posts.user_code,post_title,post_content,post_image,post_source,post_create,count(*) as count from posts join comments \r\n"
-				+ "on posts.post_code = comments.post_code group by board_code,posts.post_code,posts.user_code,post_title,post_content,post_image,post_source,post_create\r\n"
-				+ "having board_code ='"+board_code+"'";
+		String sql = "select p.post_code,p.board_code,p.user_code,p.post_title,p.post_content,p.post_image,p.post_source,p.post_create, count(c.post_code) as POST_COMS,\r\n"
+		 		+ "(select count(case when l.COM_CODE is null then 1 end) as POST_LIKES\r\n"
+		 		+ "from likes l join posts p on l.post_code =  p.post_code\r\n"
+		 		+ "where p.post_code = 2) as post_likes\r\n"
+		 		+ "from posts p join comments c on p.post_code = c.post_code\r\n"
+		 		+ "group by p.post_code,p.board_code,p.user_code,p.post_title,p.post_content,p.post_image,p.post_source,p.post_create,c.post_code\r\n"
+		 		+ "having p.board_code ='"+board_code+"'";
 		
-		 sql[1]="select count(likes.like) as LIKES\r\n"
-				+ "from likes left outer join posts on posts.post_code = likes.post_code\r\n"
-				+ "group by posts.post_code,likes.like\r\n"
-				+ "having posts.post_code ='"+board_code+"'";
+//		 sql[1]="select count(likes.like) as LIKES\r\n"
+//				+ "from likes left outer join posts on posts.post_code = likes.post_code\r\n"
+//				+ "group by posts.post_code,likes.like\r\n"
+//				+ "having posts.post_code ='"+board_code+"'";
 		conn = MySQLUtil.getConnection();
 
 		try {
-			for(int i =0;i<2;i++) {
+		
 			st = conn.createStatement();
-			rs = st.executeQuery(sql[i]);
+			rs = st.executeQuery(sql);
 			while (rs.next()) {
-				PostCommentVO post = makepostcomment(rs,i);
+				PostCommentVO post = makepostcomment(rs);
 				postcommentlist.add(post);
 			}
 			
-		}
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -130,10 +132,10 @@ public class PostDAO {
 	}
 
 
-	//게시글+댓글 목록 만들기---한번에 보여주려고
-	private PostCommentVO makepostcomment(ResultSet rs, int i) throws SQLException {
+	//게시글+댓글+좋아요 목록 만들기---한번에 보여주려고
+	private PostCommentVO makepostcomment(ResultSet rs) throws SQLException {
 		PostCommentVO post = new PostCommentVO();// VO에 맞게 보드생성
-		if(i==0) {
+	
 		post.setPOST_CODE(rs.getInt("POST_CODE"));
 		post.setBOARD_CODE(rs.getInt("BOARD_CODE"));
 		post.setUSER_CODE(rs.getInt("USER_CODE"));
@@ -142,9 +144,8 @@ public class PostDAO {
 		post.setPOST_IMAGE(rs.getString("POST_IMAGE"));
 		post.setPOST_TITLE(rs.getString("POST_TITLE"));
 		post.setPOST_CREATE(rs.getDate("POST_CREATE"));
-		post.setCOUNT(rs.getInt("COUNT"));
-		}else if(i==1)
-			post.setLIKES(rs.getInt("LIKES"));
+		post.setPOST_COMS(rs.getInt("POST_COMS"));
+		post.setPOST_LIKES(rs.getInt("POST_LIKES"));
 
 		return post;
 	}
