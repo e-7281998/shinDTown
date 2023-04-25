@@ -9,12 +9,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-
 import com.shinD.controller.message.ChatroomVO;
 import com.shinD.controller.message.MessageVO;
-import com.shinD.util.DateUtil;
+import com.shinD.model.member.MemberVO;
 import com.shinD.util.MySQLUtil;
 
 
