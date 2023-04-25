@@ -31,16 +31,14 @@
 	</c:if>
 	 --%>
 	<!-- 채팅창 -->
+	
 	<div id="_chatbox" >
 		<fieldset>
+		
 			<div id="messageWindow"></div>
 			<br /> 
-			<input id="insertMessage" type="text" onkeyup="enterkey()" />
-			<input type="button" value="send" onclick="send()" />
-
-			
-			
-			ajax를 이용해서 불러오기!!
+			<input id="insertMessage" type="text" onkeyup="enterkey()"/> 
+			<input id="send" type="button" value="send" onclick="send()" />
 			
 		</fieldset>
 	</div>
@@ -51,10 +49,14 @@
 		<div class="chats">
 
 			<div class="chat_able" id="chatroom" >
+			
 			<form action="selectChatRoom.jk" method="get">
 				<fieldset class="chat_field">
 					<legend>접속중인 사람</legend>
 					<ul>
+						<c:forEach items="${memberList }" var="member" varStatus="status" >
+							<p>${member.user_name}</p>
+							</c:forEach>
 						<!-- <li class="chat" value="1">전은정</li>session값 가져오기
 						<li class="chat" value="2">양유진</li>
 						<li class="chat" value="3">유지만</li>
@@ -101,26 +103,7 @@
 
 				<div class="text">
 
-					<div class="me_1">
-						<p>안녕하게요!</p>
-					</div>
-					<div class="other_1">
-						<p>안녕하숑숑~</p>
-					</div>
-
-					<div class="me_2">
-						<p>배고파요~</p>
-					</div>
-
-					<div class="other_2">
-						<p>머먹고 싶으세요?</p>
-					</div>
-					<div class="other_3">
-						<p>머먹고 싶으세요?</p>
-					</div>
-					<div class="other_4">
-						<p>머먹고 싶으세요?</p>
-					</div>
+					
 				</div>
 				<form>
 				<div class="typing">
@@ -151,27 +134,53 @@
 		}
 	}); */
 	
+
 	
 	
 </script>
 <script>
 	//var webSocket = new WebSocket('ws://localhost:9090/shinDTown/websocket');
-	var webSocket = new WebSocket('ws://'+location.host+'/shinDTown/websocket');
+	var webSocket = new WebSocket('ws://'+location.host+'/shinDTown/selectChatRoom.jk');
 	webSocket.onerror = function(event) {onError(event)};
 	webSocket.onopen = function(event) {onOpen(event)};
-	webSocket.onmessage = function(event) {onMessage(event)};
+	webSocket.onmessage = function(event) {onMessage(event)};	
 	
-	
-	
+	var num;
+
+	//var me=${user_code };
+/* 	
+	선택한 유저의 코드->user_code를 메시지와 함께 보내고 
+	그 코드가 일치하면 받는걸로 */
 	function onMessage(event) {
-		console.log(event.data);
+		//console.log(event.data);
 		var message = event.data.split("|");
 		var sender = message[0];
+	
 		var content = message[1];
 		if (content == "") return; 
 		var originalMessage = $("#messageWindow").html();
+		var receiveCode= content.substr(0,1);
 		
-		if (content.match("/")) {
+		//console.log("시작>>>>>>>>>>>");
+		
+		if(receiveCode == ${user_code}){
+			//console.log("유저코드 입니다>>>>>>"+ ${user_code});
+			
+			if (content.match("!")) {
+				$("#messageWindow").html( originalMessage
+										+ "<p class='chat_content'><b class='impress'>"
+										+ sender + " : " + content
+										+ "</b></p>");
+			} else {
+			
+				$("#messageWindow").html( originalMessage
+								+ "<p class='chat_content'>" + sender
+								+ " : " + content + "</p>");
+			
+		}
+			}
+		
+/* 		if (content.match("/")) {
 			if (content.match(("/" + $("#chat_code").val()))) {
 				 
 				var temp = content.replace("/" + $("#chat_code").val(),
@@ -187,18 +196,24 @@
 				}
 			} 
 		} else {
+			if(receiveCode == ${user_code}){
 			if (content.match("!")) {
 				$("#messageWindow").html( originalMessage
 										+ "<p class='chat_content'><b class='impress'>"
 										+ sender + " : " + content
 										+ "</b></p>");
 			} else {
+			
 				$("#messageWindow").html( originalMessage
 								+ "<p class='chat_content'>" + sender
 								+ " : " + content + "</p>");
-			}
+			
 		}
+			}
+		} */
 		 
+		
+		
 	}  
 	function onOpen(event) {
 		//$("#messageWindow").html("<p class='chat_content'>안녕하세요. 채팅에 참여하였습니다.</p>");
@@ -206,14 +221,20 @@
 	function onError(event) {
 		alert(event.data);
 	}
+	
+	
 	function send() {
 		//console.log("============>>>>>>"+$(this).val());
 
-		console.log("==========> " + $("#insertMessage").val());
+		//console.log("==========> " + $("#insertMessage").val());
 		/* 어떤 정보를 넣어주려고 작성 */
+		//채팅하기 누른 사람의 chat_code값으로 넣어주기
+		
+
+		console.log("num>>>>>>"+num+"me>>>>>>>"+${user_code });
 		$.ajax({
 			url:"insertMessage.jk",
-			data:{"chat_code":1,"sender":1,"message_data":$("#insertMessage").val()},
+			data:{"chat_code":num,"sender":${user_code },"message_data":$("#insertMessage").val()},
 			success:function(data){
 				alert(data+"성공!");
 			},
@@ -224,9 +245,7 @@
 		
 		//String userId = (String)session.getAttribute("");
 		  
-		  var sender = "1";
-		  // 상대방 ID를 파라미터로 받아오기
-		  var chat_code="1";
+		 
 		  //var friendId =;
 		  //String friendId = (String)session.getAttribute("userId");
 		  
@@ -239,7 +258,7 @@
 							+ message + "</p>");
 		}
 		
-		webSocket.send($("#chat_id").val() + "|" + message);
+		webSocket.send("${user_name}"+ "|" + message); 
 		$("#insertMessage").val("");
 	}
 	//     엔터키를 통해 send함
@@ -256,39 +275,55 @@
 	
 
 	
-</script>
-<script>
-$(function(){
+
+
+
+	$(function(){
+		$("#_chatbox").hide();
+	})
+	
+	$(".chatbtn").on("click",function(){
+		
+		//클릭시 send와 enter가 나온다.
+		//$("#_chatbox").show();
+		$("#_chatbox").toggle(); // show -> hide , hide -> show
+		
+	})
+	
+/* $(function(){
 	$.ajax({
 		url:"selectChatRoom.jk",
 		success:function(aa){
-			
 			alert("성공!"+aa);
 		}
 	})
-
-
-})
-
+})  */
+ 
 $(".chatbtn").on("click",function(){
+
+ 
 	//var chat_code = "#"+$(this).val()+"_code";
 	//console.log("chat_code>>>>>>>>"+ chat_code);
+	num= $(this).val();
+	console.log("num>>>>."+num);
 	$.ajax({
 		url:"readConnectRoom.jk",
-		data:{"chat_code" : $(this).val() },
+		data:{"chat_code" : num},
 		success:function(responseData){
 			var events=eval("(" +responseData+")");
 // 			console.log(responseData);
 // 			console.log(events.message);
+				$("#chatroom").html("");
 				$.each(
 						events.message,
 						function(index, element){
-							console.log(element.message_data); 
+							//console.log(element.message_data); 
+							
 							if("${loginUSer.userId}" == $.trim(element.sender)){
-								$("#chatroom").append("<div class='me'> + <p>" + element.message_data + "</p> </div>");
+								$("#chatroom").append("<div class='me'><p>" + element.message_data + "</p> </div>");
 
 							}else{
-								$("#chatroom").append("<div class='other'> + <p>" + element.message_data + "</p> </div>");
+								$("#chatroom").append("<div class='other'><p>" + element.message_data + "</p> </div>");
 							}
 								
 						});
