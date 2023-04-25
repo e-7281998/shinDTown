@@ -19,22 +19,33 @@ public class Git implements CommonControllerInterface{
 		
 		if(path.equals("gitRegister") )
 			return registerGit(request);
-		else if(path.equals("withdraw") )
-			return withdrawGit(request);
+		else if(path.equals("gitUpdate") )
+			return updateGiId(request);
+		else if(path.equals("getGitId") )
+			return getGitId(request);
 		else 
-			return readGit(request);
+			return getGitId(request);
 		 
+	} 
+	//깃 수정하기
+	private String updateGiId(HttpServletRequest request) {
+		GitService service = new GitService();
+		
+		HttpSession session = request.getSession();
+		int user_code = (int)session.getAttribute("user_code");
+		String git_id = request.getParameter("git_id");
+ 		int result = service.updateGiId(user_code, git_id);
+		
+ 		return "responseBody:"+result;
 	}
-
-	//git 삭제하기
-	private String withdrawGit(HttpServletRequest request) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	//git 불러오기
-	private String readGit(HttpServletRequest request) {
- 		return null;
+	private String getGitId(HttpServletRequest request) {
+		GitService service = new GitService();
+		String user_code = request.getParameter("user_code");
+		String result = service.getGitId(user_code);
+		if(result == null)
+			return "responseBody:-1";
+		return "responseBody:"+result;
 	}
 
 	//git 등록하기
@@ -44,8 +55,7 @@ public class Git implements CommonControllerInterface{
 		HttpSession session = request.getSession();
 		int user_code = (int)session.getAttribute("user_code");
 		String git_id = request.getParameter("git_id");
-		System.out.println("sql 보낼거야 ) user_code: " + user_code + " || git_id: "+git_id);
-		int result = service.registerGit(user_code, git_id);
+ 		int result = service.registerGit(user_code, git_id);
 		
  		return "responseBody:"+result;
 	}

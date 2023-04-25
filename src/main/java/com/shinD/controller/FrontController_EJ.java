@@ -26,7 +26,9 @@ import com.shinD.controller.member.MemberWithdraw;
 			"/view/memberView/updatePwd",
 			"/view/memberView/logout",
 			"/view/gitView/gitRegister",
-			"/view/main.jsp"})
+			"/view/gitView/getGitId",
+			"/view/gitView/gitUpdate"
+			})
 public class FrontController_EJ extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -61,6 +63,8 @@ public class FrontController_EJ extends HttpServlet {
 			 break; 
 		case "/view/gitView/gitRegister":
 		case "/view/main.jsp":
+		case "/view/gitView/getGitId":
+		case "/view/gitView/gitUpdate":
  			controller = new Git();
 			 break; 
 		default:

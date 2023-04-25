@@ -9,94 +9,118 @@
 </head>
 <body>
 	 
-	<div class="git">
-		<img src="https://ghchart.rshah.org/e-7281998">
+	<div class="git"> 
+		<img id="grass" src="">
 		<form>
 			<input type="text" id="git_id" class="id fom" placeholder="git 아이디" />
-			<input type="button" id="git_register" class="submit" value="git 아이디">
+			<input type="button" id="git_register" class="submit" value="등록하기">
+			<input type="button" id="git_update" class="submit" value="수정하기">
 		</form>
-		<input type="button" id="git_read" class="submit" value="git 불러오기">
-		<ul id="repos">
-			<li class="repo">
-				<div class="repo_title"><span>repo1</span><a>link1</a></div>
-				<ul class="commits">
-					<li class="commit">repo date</li>
-					<li class="commit">repo date</li>
-					<li class="commit">repo date</li>
-				</ul>
-			</li>
-			<li class="repo">
-				<div class="repo_title"><span>repo2</span><a>link2</a></div>
-				<ul class="commits">
-					<li class="commit">repo date</li>
-					<li class="commit">repo date</li>
-					<li class="commit">repo date</li>
-				</ul>
-			</li>
-			 
+ 		<ul id="repos"> 
 		</ul>	
 	</div>
 		
 	<script>
-		const readBtn = document.getElementById("git_read");
-		readBtn.addEventListener("click", getRepos)
-		async function getRepos(){
-			//gitAPI
-			//const url = "http://api.github.com";
+		 window.onload = function(){
+			$("#git_register").hide();
+			$("#git_update").hide();
 			
+			$.ajax({
+				url:"getGitId",
+				data: {"user_code":${user_code}},
+				success : (responseData) => {
+					var gitBtn = $("#git_register")
+					if(!(responseData == -1)){
+ 						$("#git_update").show(); 
+						//repo, commit, wksel 불러오기
+						getRepos(responseData);
+					}else{
+ 						$("#git_register").show();
+					}
+				},
+				error:(message)=>{
+					console.log(message);
+				}
+			})
+ 		} 
+		 
+		 
+		
+		async function getRepos(gitId){
+			//gitAPI
+			//const url = "http://api.github.com"; 
 			//유저 정보 가져옴
 			//const url = "https://api.github.com/users/e-7281998";
 			
+			//git 잔디 불러오기
+			$("#grass").attr( "src", "https://ghchart.rshah.org/"+gitId);
 			//개인 repo 가져옴
-			const repoUrl = "https://api.github.com/users/e-7281998/repos";
+ 			const repoUrl = "https://api.github.com/users/"+gitId+"/repos";
 			const repoRresponse = await fetch(repoUrl);
 			const repoResult = await repoRresponse.json();
-			
-			var repos = document.getElementById("repos");
-			//repoResult.forEach((repo) => {
-				//repo명
-				//console.log(repo.name);
-				//repo 링크
-				//console.log(repo.html_url);
-				
-				//<div class="repo_title"><span>repo1</span><a>link1</a></div>
-			//})
+			 
+			//repo명, 바로가기 링크 걸기
+			var repoUl = document.getElementById("repos");
+			var repoArr = [];
+			repoUl.innerHTML="";
 			for(var i=0; i<repoResult.length; i++){
-				var repoLi = document.createElement("li");
-				//var repo = repos[i];
-				//var repoLink = repo[i].html_url
-				//repoLi.innerHTML = "<div class='repo_title'><span>"+repo+"</span><a>"+repoLink+"</a></div>";
-				console.log(repos[i]);
-				//repoLi.innerHTML = "<div class='repo_title'><span>repo</span><a>link</a></div>";
-				//repos.append(repoLi);
-			}
+ 				var repoName = repoResult[i].name;
+ 				var repoLink = repoResult[i].html_url; 
+				var repoDate = repoResult[i].pushed_at.slice(0,10);
+				
+				var repo = {"repoName":repoName,"repoLink":repoLink,"repoDate":repoDate};
+				repoArr[i] = repo;
+ 			}
 			
+ 			var sortRepo;
+ 			if(Object.keys(repoArr).length > 1){
+				sortRepo = repoArr.sort((repo1, repo2) => { 
+					if(repo1.repoDate > repo2.repoDate) return -1;
+					if(repo1.repoDate < repo2.repoDate) return 1;
+					return 0; 
+				})
+			}else{
+				sortRepo = repoArr;
+			}
+			 
+			//repo 화면에 부착하기
+			for(var i=0; i<Math.min(5, sortRepo.length); i++){
+				repoUl.innerHTML += "<li class='repo'><div class='repo_title'><span>"+sortRepo[i].repoName+"</span><a href="+sortRepo[i].repoLink+" target='_blank'>바로가기</a></div></li>"
+			}
 				
 			
-			//개인 repo의 commit 내용 불러오기
-			const commitUrl = "https://api.github.com/repos/e-7281998/shinDTown/commits"
-			const commitResponse = await fetch(commitUrl);
-			const commitResult= await commitResponse.json();
-			
-			for(var i=0; i<10; i++){
-				console.log(commitResult[i]);
-				console.log(commitResult[i].commit.message);
-				const author = commitResult[i].commit.author.date.replace("T"," ").slice(0,16);
-				console.log(author);
-			}
+			//개인 repo의 commit 내용 불러오기 
+			var repoLl = document.getElementsByClassName("repo") ; 
+			for(var j=0; j<Math.min(5,sortRepo.length); j++){
+				
+				const commitUrl = "https://api.github.com/repos/"+gitId+"/"+sortRepo[j].repoName+"/commits";
+				const commitResponse = await fetch(commitUrl);
+				const commitResult= await commitResponse.json();
+				
+				var commitUl = document.createElement("ul");
+				commitUl.classList.add("commits");
+				 
+				for(var i=0; i<Math.min(5, Object.keys(commitResult[j]).length); i++){
+					var msg = commitResult[i].commit.message;
+ 					var data = commitResult[i].commit.author.date.replace("T"," ").slice(0,16);
+
+					commitUl.innerHTML += "<li class='commit'><span>"+msg+"</span><span>"+data+"</span></li>"; 
+				}  
+				repoLl[j].append(commitUl);
+			} 
  			
-			//console.log(result);
-		} 
-	</script>
-	<script>
-		//gitID 등록하기
+ 		} 
+ 		
+ 		//gitID 등록하기
 		$("#git_register").on("click", () => {
 			$.ajax({
 				url:"gitRegister",
 				data: {"git_id":$("#git_id").val()},
 				success : (responseData) => {
 					if(responseData == 1){
-						alert('git 등록 완료');
+ 						$("#git_update").show();
+						$("#git_register").hide();
+						getRepos($("#git_id").val());
 					}else{
 						alert("git 등록 실패");
 					}
@@ -106,6 +130,25 @@
 				}
 			})
 		})
-	</script>
+		
+		//gitID 수정하기
+		$("#git_update").on("click", () => {
+			$.ajax({
+				url:"gitUpdate",
+				data: {"git_id":$("#git_id").val()},
+				success : (responseData) => {
+					if(responseData == 1){
+						alert('Git ID 수정 완료'); 
+						getRepos($("#git_id").val());
+					}else{
+						alert("git 등록 실패");
+					}
+				},
+				error:(message)=>{
+					console.log(message);
+				}
+			})
+		})
+	</script> 
 </body>
 </html>
