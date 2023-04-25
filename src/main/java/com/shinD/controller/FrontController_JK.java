@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.websocket.server.ServerEndpoint;
 
 import com.shinD.controller.message.MessageToConnectMemberController;
 import com.shinD.controller.message.ReadConnectRoomController;
@@ -20,6 +21,7 @@ import com.shinD.controller.message.InsertMessageController;
 
 
 @WebServlet("*.jk")
+
 public class FrontController_JK extends HttpServlet {
 	private static final long serialVersionUID = 1L;
  
@@ -71,10 +73,7 @@ public class FrontController_JK extends HttpServlet {
 		case "/view/chatView/selectReadOneMessage.jk":
  			controller = new SelectReadOneMessageController();
 			 break;	 
-//		//접속중인 사람 목록 보기
-//		case "/view/chatView/messageToConnectMember.jk":
-// 			controller = new MessageToConnectMemberController();
-//			 break;	 
+	
 		default:
 			break;
 		}
