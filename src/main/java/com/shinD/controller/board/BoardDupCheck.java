@@ -14,9 +14,8 @@ public class BoardDupCheck implements CommonControllerInterface {
 		HttpServletRequest request = (HttpServletRequest) data.get("request");
 		
 		String board_name = request.getParameter("board_name");
-		System.out.println(board_name);
 		BoardService bservice = new BoardService();
-		int result =  bservice.boardCheck(board_name);
+		int result =  bservice.boardCheck(board_name);//보드 중복체크
 	
 		
 		return "responseBody:"+result;

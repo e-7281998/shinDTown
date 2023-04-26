@@ -24,7 +24,6 @@ public class CommentCreate implements CommonControllerInterface {
 		//메소드 형식 따라서
 		if(method.equals("POST")) {
 			int post_code = Integer.parseInt(request.getParameter("post_code"));
-			System.out.println("포스트코드"+post_code);
 			int user_code= (Integer)session.getAttribute("user_code");
 			String com_comment = request.getParameter("com_comment");
 			
@@ -33,7 +32,8 @@ public class CommentCreate implements CommonControllerInterface {
 			
 			cservice.CommentCreate(com);
 			
-			page = "redirect:/shinDTown/board/detail.jm";
+			//보드디테일 컨드롤러로 이동
+			page = "redirect:/shinDTown/board/detail.com";
 			}else {
 		
 			}

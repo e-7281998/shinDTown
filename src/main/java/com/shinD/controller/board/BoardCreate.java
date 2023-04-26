@@ -22,7 +22,7 @@ public class BoardCreate implements CommonControllerInterface {
 		HttpServletRequest request = (HttpServletRequest) data.get("request");//입력받은 값 가져오기
 		
 		request.setCharacterEncoding("utf-8");//인코딩
-		String page = "../view/boardView/BoardCreate.jsp";
+		String page = "../view/boardView/BoardCreate.jsp";//게시판명이 있으면 재시작
 		String method = (String)data.get("method");
 		BoardService bservice = new BoardService();
 		
@@ -42,7 +42,8 @@ public class BoardCreate implements CommonControllerInterface {
 				bservice.BoardCreate((Integer)session.getAttribute("user_code"),request.getParameter("board_name"));//위에서 만든 보드형식으로 새로운 보드 만들기
 				System.out.println("생성 완료햇습니다.");
 				
-				page = "redirect:/shinDTown/board/read.jm";
+				//보드리드로 이동
+				page = "redirect:/shinDTown/board/read.com";
 			}
 			
 		}else {return page;}

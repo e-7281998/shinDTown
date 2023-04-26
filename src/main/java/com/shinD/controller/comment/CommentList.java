@@ -29,9 +29,10 @@ public class CommentList implements CommonControllerInterface {
 		CommentService cservice = new CommentService();
 		List<CommentVO> comlist = null;
 	
-		comlist = cservice.ComList(Integer.parseInt(request.getParameter("post_code")));
+		comlist = cservice.ComList(Integer.parseInt(request.getParameter("post_code")));//댓글리스트 가져오기
 		request.setAttribute("comlist", comlist);
 		
+		//댓글리스트 json으로 변환
 		JSONArray array = new JSONArray();
 		for(CommentVO com:comlist) {
 			JSONObject object = new JSONObject();
