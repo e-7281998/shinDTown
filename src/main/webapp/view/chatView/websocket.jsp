@@ -74,12 +74,7 @@
 				<div class="text">
 
 				</div>
-				<form>
-				<div class="typing">
-						<textarea class="type_area"></textarea>
-						<input type="button" class="send" value="전송"></button>
-				</div>
-				</form>
+
 			</div>
 		</div>
 	</div>
@@ -194,15 +189,6 @@
 		
 	})
 	
-/* $(function(){
-	$.ajax({
-		url:"selectChatRoom.jk",
-		success:function(aa){
-			alert("성공!"+aa);
-		}
-	})
-})  */
- 
 $(".chatbtn").on("click",function(){
 
  
@@ -215,13 +201,10 @@ $(".chatbtn").on("click",function(){
 		data:{"chat_code" : num},
 		success:function(responseData){
 			var events=eval("(" +responseData+")");
-// 			console.log(responseData);
-// 			console.log(events.message);
 				$("#chatroom").html("");
 				$.each(
 						events.message,
 						function(index, element){
-							//console.log(element.message_data); 
 							
 							if("${loginUSer.userId}" == $.trim(element.sender)){
 								$("#chatroom").append("<div class='me'><p>" + element.message_data + "</p> </div>");
@@ -231,8 +214,6 @@ $(".chatbtn").on("click",function(){
 							}
 								
 						});
-			/*}); */
-			
 			}
 	}) 
 })
@@ -267,8 +248,6 @@ $(".chatbtn").on("click",function(){
 		getInfiniteUnread();
 	});
 	 */
-	
-	
 
 	</script>
 
