@@ -23,9 +23,7 @@ import com.shinD.controller.plan.DetailPlan;
 import com.shinD.controller.plan.ReadPlan;
  
 @WebServlet({"/view/calendarView/ReadPlan", "/view/calendarView/CreatePlan", 
-	"/view/calendarView/DetailPlan", "/view/calendarView/DeletePlan", "/view/boardView/likes",
-	"/view/boardView/delete", "/view/boardView/checklike", "/view/boardView/deletelike",
-	"/view/boardView/getcomcode"})
+	"/view/calendarView/DetailPlan", "/view/calendarView/DeletePlan"})
 public class FrontController_YJ extends HttpServlet {
 	private static final long serialVersionUID = 1L;
  
@@ -39,44 +37,23 @@ public class FrontController_YJ extends HttpServlet {
 		data.put("response", response);
 		
 		switch (path) {
-		case "/view/calendarView/ReadPlan": {
+		case "/view/calendarView/ReadPlan.com": {
 			controller = new ReadPlan();
 			break;
 		}
-		case "/view/calendarView/CreatePlan": {
+		case "/view/calendarView/CreatePlan.com": {
 			controller = new CreatePlan();
 			break;
 		}
-		case "/view/calendarView/DetailPlan" : {
+		case "/view/calendarView/DetailPlan.com" : {
 			controller  = new DetailPlan();
 			break;
 		}
-		case "/view/calendarView/DeletePlan" : {
+		case "/view/calendarView/DeletePlan.com" : {
 			controller = new DeletePlan();
 			break;
 		}
-		case "/view/boardView/likes" : {
-			controller = new CommentLikes();
-			break;
-		}
-		case "/view/boardView/delete" : {
-			controller = new CommentDelete();
-			break;
-		}
-		case "/view/boardView/checklike" : {
-			controller = new CommentCheck();
-			break;
-		}
-		case "/view/boardView/deletelike" : {
-			controller = new DeleteLike();
-			break;
-		}
-		case "/view/boardView/getcomcode" : {
-			controller = new ComCode();
-			break;
-		}
-		
-		}
+    }
 	
 		
 		 

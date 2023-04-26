@@ -231,7 +231,7 @@
 												$
 														.ajax({
 															method : "GET",
-															url : "${path}/view/calendarView/ReadPlan",
+															url : "${path}/view/calendarView/ReadPlan.com",
 															data : {
 																"id" : "${loginUser.user_id}"
 															},
@@ -286,7 +286,7 @@
 															"id" : "${loginUser.user_id}"
 														},
 														url : "${path}/view/calendarView/DetailPlan?plan_code="
-																+ plan_code,
+																+ plan_code + ".com",
 														success : function(
 																responseData) {
 															var plan = eval("("
@@ -358,7 +358,7 @@
 																			.ajax({
 																				method : "POST",
 																				url : "${path}/view/calendarView/DetailPlan?plan_code="
-																						+ plan_code,
+																						+ plan_code+".com",
 																				data : obj,
 																				success : function(
 																						responseData) {
@@ -404,7 +404,7 @@
 																					"id" : "${loginUser.user_id}"
 																				},
 																				url : "${path}/view/calendarView/DeletePlan?plan_code="
-																						+ plan_code,
+																						+ plan_code+".com",
 																				success : function(
 																						responseData) {
 																					alert("삭제 되었습니다.");
@@ -444,6 +444,7 @@
 						});
 		//
 		$("#addCalendar").on("click", function(e) {
+			e.preventDefault();
 			e.stopPropagation();
 			console.log("addcalendar");
 			console.dir(e);
@@ -451,7 +452,7 @@
 			var obj = editCalendar();
 			$.ajax({
 				method : "POST",
-				url : "${path}/view/calendarView/CreatePlan",
+				url : "${path}/view/calendarView/CreatePlan.com",
 				data : obj,
 				success : function(responseData) {
 					alert("일정이 등록되었습니다");

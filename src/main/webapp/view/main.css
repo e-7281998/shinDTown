@@ -14,6 +14,7 @@ body {
 	display: grid;
 	width: 80%;
 	overflow: visible;
+	margin-top: 3%;
 	grid-template-rows: repeat(5, 3fr);
 	grid-template-columns: 50px 2fr 0.8fr 5fr 50px;
 	grid-template-areas: ". script1 btn greet greet"
@@ -38,13 +39,13 @@ body {
 	background-repeat: no-repeat;
 }
 
-.btn {
+.btn1 {
 	grid-area: btn;
 	display: grid;
 	align-items: end;
 }
 
-.btn>button {
+button {
 	background-color: skyblue;
 	border: none;
 	padding: 10px 10px;
@@ -56,6 +57,7 @@ body {
 	display: grid;
 	grid-template-rows: 1fr 1fr 0.3fr 1.8fr;
 	grid-template-columns: 0.3fr 2.5fr 1.5fr 0.3fr;
+	margin-top : 3%;
 	grid-template-areas:
 	 ". main_board git . " 
 	 ". main_board calendar . "
@@ -224,6 +226,10 @@ button {
 	
 	align-items : center;
 	justify-items: end;
+}
+.calendar{
+	grid-area : calendar;
+	height : 480px;
 }
 #closeCalendar{
 	grid-area: closeCalendar;
