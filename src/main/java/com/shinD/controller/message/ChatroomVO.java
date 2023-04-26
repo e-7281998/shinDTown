@@ -1,4 +1,4 @@
-package com.shinD.controller.chat;
+package com.shinD.controller.message;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,7 +12,8 @@ import lombok.ToString;
 @Setter
 @ToString
 public class ChatroomVO {
-	private int CHAT_CODE;
-	private int CHAT_USER_1_CODE;
-	private int CHAT_USER_2_CODE;
+	private int chat_code;
+	private int friend_code;
+	private String friend_name;
+	
 }

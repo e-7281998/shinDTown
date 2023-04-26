@@ -1,4 +1,4 @@
-package com.shinD.controller.chat;
+package com.shinD.model.message;
 
 import java.util.Date;
 
@@ -14,10 +14,10 @@ import lombok.ToString;
 @Setter
 @ToString
 public class MessageVO {
-	 private int MESSAGE_CODE;
-	 private int CHAT_CODE;
-	 private int SENDER;
-	 private Date MESSAGE_CREATE;
-	 private String MESSAGE_DATA;
-	 private Boolean MESSAGE_OPEN;
+	 private int message_code;
+	 private int chat_code;
+	 private int sender;
+	 private Date message_create;
+	 private String message_data;
+	 private boolean message_open;
 }
