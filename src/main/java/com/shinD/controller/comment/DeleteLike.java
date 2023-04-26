@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.shinD.controller.CommonControllerInterface;
 import com.shinD.model.comment.CommentService;
 
-public class CommentDelete implements CommonControllerInterface{
+public class DeleteLike implements CommonControllerInterface{
 
 	@Override
 	public String execute(Map<String, Object> data) throws Exception {
@@ -15,10 +15,11 @@ public class CommentDelete implements CommonControllerInterface{
 		
 		CommentService cs = new CommentService();
 		int com_code = Integer.parseInt(request.getParameter("com_code"));
-		int result = cs.deleteComment(com_code);
+		int user_code = Integer.parseInt(request.getParameter("user_code"));
 		
-		if(result == 0) {
-			System.out.println("삭제 성공");
+		int result = cs.DeleteLike(com_code, user_code);
+		
+		if(result == 1) {
  			return "responseBody:1";
 		} 
 		else
@@ -26,5 +27,4 @@ public class CommentDelete implements CommonControllerInterface{
 				
 		
 	}
-
 }

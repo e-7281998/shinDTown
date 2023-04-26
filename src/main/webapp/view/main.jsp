@@ -16,6 +16,11 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 <script src="../jq/jquery-3.6.4.min.js"></script>
 <link href="${path}/view/main.css" rel="stylesheet" />
+<script>
+/* 	window.onload=function(){
+		location.href='/shinDTown/board/main.jm';
+	} */
+</script>
 </head>
 <body class="main">
 	<%@include file="header.jsp"%>
@@ -24,56 +29,28 @@
 		<div class="main_page">
 
 			<div class="main_board">
-				<fieldset class="board_list_1"
-					onclick="location.href='/shinDTown/view/boardView/BoardDetail.jsp'">
-					<legend>맛집게시판</legend>
-					<!-- for문으로 각 게시판에서 DB에서 상단에 있는 3개씩 가져오기 -->
-					<ul class="board_title">
-						<li class="title">[피자스쿨] 내가 여기서 먹어sdfsf봤는데,,</li>
-						<li>[어사출또] 여기 맛있더라,, 라면 + 초밥123123123</li>
-						<li>[CU] 편의점 꿀팁 알려준다...</li>
-					</ul>
-				</fieldset>
-
-
-				<fieldset class="board_list_2"
-					onclick="location.href='/shinDTown/view/boardView/BoardDetail.jsp'">
-					<legend>질문게시판</legend>
-					<ul class="board_title">
-						<li>[피자스쿨] 내가 여기서 먹어봤는데,,</li>
-						<li>[어사출또] 여기 맛있더라,, 라면 + 초밥 추천</li>
-						<li>[CU] 편의점 꿀팁 알려준다...</li>
-					</ul>
-				</fieldset>
-
-				<fieldset class="board_list_3"
-					onclick="location.href='/shinDTown/view/boardView/BoardDetail.jsp'">
-					<legend>취업정보게시판</legend>
-					<ul class="board_title">
-						<li>[피자스쿨] 내가 여기서 먹어봤는데,,</li>
-						<li>[어사출또] 여기 맛있더라,, 라면 + 초밥 추천</li>
-						<li>[CU] 편의점 꿀팁 알려준다...</li>
-					</ul>
-				</fieldset>
-
-				<fieldset class="board_list_4"
-					onclick="location.href='/shinDTown/view/boardView/BoardDetail.jsp'">
-					<legend>면접준비게시판</legend>
-					<ul class="board_title">
-						<li>[피자스쿨] 내가 여기서 먹어봤는데,,</li>
-						<li>[어사출또] 여기 맛있더라,, 라면 + 초밥 추천</li>
-						<li>[CU] 편의점 꿀팁 알려준다...</li>
-					</ul>
-				</fieldset>
+				<c:forEach items="${boardlist }" var = "board" varStatus="status" begin="1" end="4">
+					<fieldset class="board_list_${status.count}"
+						onclick="location.href='/shinDTown/board/detail.jm?BOARD_NAME=${board.BOARD_NAME }'">
+						<legend>${board.BOARD_NAME }</legend>
+							<c:forEach items="${boardpostlist }" var = "boardpost" varStatus ="status">
+								<c:if test="${board.BOARD_CODE  == boardpost.BOARD_CODE }">
+									<ul class="board_title">
+										<li>-${boardpost.POST_TITLE }</li>
+									</ul>
+								</c:if>
+							</c:forEach>
+					</fieldset>
+				</c:forEach>
 			</div>
 
 
 
 			<div class="more_btn">
 				<button
-					onclick="location.href='/shinDTown/view/boardView/BoardRead.jsp'">더보기</button>
+					onclick="location.href='/shinDTown/shinDTown/board/read.jm'">더보기</button>
 				<button
-					onclick="location.href='/shinDTown/view/boardView/BoardCreate.jsp'">새게시판</button>
+					onclick="location.href='/shinDTown/shinDTown/board/create.jm'">새게시판</button>
 			</div>
 
 			<div class="git">
@@ -142,18 +119,16 @@
 					<legend>hot 게시판</legend>
 					<div class="left">
 						<ul class="board_title">
-							<li>[피자스쿨] 내가 여기서 먹어봤는데,,</li>
-							<li>[어사출또] 여기 맛있더라,, 라면 + 초밥 추천</li>
-							<li>[피자스쿨] 내가 여기서 먹어봤는데,,</li>
-							<li>[어사출또] 여기 맛있더라,, 라면 + 초밥 추천</li>
+							<c:forEach items="${posttop }" var="post" begin="0" end="3">
+								<li>${post.POST_TITLE }</li>
+							</c:forEach>
 						</ul>
 					</div>
 					<div class="right">
 						<ul class="board_title">
-							<li>[피자스쿨] 내가 여기서 먹어봤는데,,</li>
-							<li>[어사출또] 여기 맛있더라,, 라면 + 초밥 추천</li>
-							<li>[피자스쿨] 내가 여기서 먹어봤는데,,</li>
-							<li>[어사출또] 여기 맛있더라,, 라면 + 초밥 추천</li>
+							<c:forEach items="${posttop }" var="post" begin="4" end="7">
+								<li>${post.POST_TITLE }</li>
+							</c:forEach>
 						</ul>
 					</div>
 				</fieldset>

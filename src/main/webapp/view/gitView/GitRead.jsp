@@ -26,7 +26,7 @@
 			$("#git_update").hide();
 			
 			$.ajax({
-				url:"getGitId",
+				url:"getGitId.com",
 				data: {"user_code":${user_code}},
 				success : (responseData) => {
 					var gitBtn = $("#git_register")
@@ -85,7 +85,7 @@
 			 
 			//repo 화면에 부착하기
 			for(var i=0; i<Math.min(5, sortRepo.length); i++){
-				repoUl.innerHTML += "<li class='repo'><div class='repo_title'><span>"+sortRepo[i].repoName+"</span><a href="+sortRepo[i].repoLink+" target='_blank'>바로가기</a></div></li>"
+				repoUl.innerHTML += "<li class='repo'><div><span class='repo_title'>"+sortRepo[i].repoName+"</span><a href="+sortRepo[i].repoLink+" target='_blank'>바로가기</a></div></li>"
 			}
 				
 			
@@ -108,13 +108,20 @@
 				}  
 				repoLl[j].append(commitUl);
 			} 
- 			
+			
+
+			
+			$(".repo_title").on("click", () => {
+				console.log($(this).parents().next("ul"));
+				$(this).parents().next("ul").toggle();
+				/* $( $(this) +" .commit").toggle();  */
+			})
  		} 
  		
  		//gitID 등록하기
 		$("#git_register").on("click", () => {
 			$.ajax({
-				url:"gitRegister",
+				url:"gitRegister.com",
 				data: {"git_id":$("#git_id").val()},
 				success : (responseData) => {
 					if(responseData == 1){
@@ -134,7 +141,7 @@
 		//gitID 수정하기
 		$("#git_update").on("click", () => {
 			$.ajax({
-				url:"gitUpdate",
+				url:"gitUpdate.com",
 				data: {"git_id":$("#git_id").val()},
 				success : (responseData) => {
 					if(responseData == 1){

@@ -16,10 +16,21 @@ import com.shinD.controller.board.BoardCreate;
 import com.shinD.controller.board.BoardDelete;
 import com.shinD.controller.board.BoardDetail;
 import com.shinD.controller.board.BoardDupCheck;
+import com.shinD.controller.board.BoardMain;
 import com.shinD.controller.board.BoardRead;
+import com.shinD.controller.comment.ComCode;
+import com.shinD.controller.comment.CommentCheck;
 import com.shinD.controller.comment.CommentCreate;
+import com.shinD.controller.comment.CommentDelete;
+import com.shinD.controller.comment.CommentLikes;
 import com.shinD.controller.comment.CommentList;
+import com.shinD.controller.comment.DeleteLike;
+import com.shinD.controller.plan.CreatePlan;
+import com.shinD.controller.plan.DeletePlan;
+import com.shinD.controller.plan.DetailPlan;
+import com.shinD.controller.plan.ReadPlan;
 import com.shinD.controller.post.PostCreate;
+import com.shinD.controller.post.PostLike;
 
 
 @WebServlet("*.jm")
@@ -39,6 +50,11 @@ public class FrontController_JM extends HttpServlet {
 		System.out.println(path);
 		switch (path) {
 		// 보드 생성 컨트롤
+		case "/board/main.jm":
+			controller = new BoardMain();
+			break;
+
+			// 보드 생성 컨트롤
 		case "/board/create.jm":
 			controller = new BoardCreate();
 			break;
@@ -67,6 +83,11 @@ public class FrontController_JM extends HttpServlet {
 		case "/post/create.jm":
 			controller = new PostCreate();
 			break;
+
+		// 게시글 조와요
+		case "/post/like.jm":
+			controller = new PostLike();
+			break;
 			
 		// 댓글 생성
 		case "/comment/create.jm":
@@ -79,6 +100,7 @@ public class FrontController_JM extends HttpServlet {
 			controller = new CommentList();
 			break;
 
+		
 			
 		default:
 			break;

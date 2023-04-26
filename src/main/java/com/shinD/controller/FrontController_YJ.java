@@ -23,9 +23,7 @@ import com.shinD.controller.plan.DetailPlan;
 import com.shinD.controller.plan.ReadPlan;
  
 @WebServlet({"/view/calendarView/ReadPlan", "/view/calendarView/CreatePlan", 
-	"/view/calendarView/DetailPlan", "/view/calendarView/DeletePlan", "/view/boardView/likes",
-	"/view/boardView/delete", "/view/boardView/checklike", "/view/boardView/deletelike",
-	"/view/boardView/getcomcode"})
+	"/view/calendarView/DetailPlan", "/view/calendarView/DeletePlan"})
 public class FrontController_YJ extends HttpServlet {
 	private static final long serialVersionUID = 1L;
  
@@ -55,28 +53,7 @@ public class FrontController_YJ extends HttpServlet {
 			controller = new DeletePlan();
 			break;
 		}
-		case "/view/boardView/likes.com" : {
-			controller = new CommentLikes();
-			break;
-		}
-		case "/view/boardView/delete.com" : {
-			controller = new CommentDelete();
-			break;
-		}
-		case "/view/boardView/checklike.com" : {
-			controller = new CommentCheck();
-			break;
-		}
-		case "/view/boardView/deletelike.com" : {
-			controller = new DeleteLike();
-			break;
-		}
-		case "/view/boardView/getcomcode.com" : {
-			controller = new ComCode();
-			break;
-		}
-		
-		}
+    }
 	
 		
 		 

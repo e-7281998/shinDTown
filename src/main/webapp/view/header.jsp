@@ -85,16 +85,16 @@ background: none;
 		<div class="bar_menu">
 		
 		<c:if test="${sessionScope.loginUser == null}">
-		<a href="/shinDTown/view/memberView/MemberSignUp.jsp"><h2 class="menu">회원가입</h2></a>
-		<a href="/shinDTown/view/memberView/MemberLogin.jsp"><h2 class="menu">로그인</h2></a>
+		<a href="/shinDTown/view/memberView/MemberSignUp.com"><h2 class="menu">회원가입</h2></a>
+		<a href="/shinDTown/view/memberView/MemberLogin.com"><h2 class="menu">로그인</h2></a>
 		</c:if>
 		
 		<c:if test="${sessionScope.loginUser != null}">
-		<a href="/shinDTown/view/main.jsp"><h2 class="menu">홈</h2></a>
+		<a href="/shinDTown/board/main.com"><h2 class="menu">홈</h2></a>
 		<a href="/shinDTown/board/read.jm"><h2 class="menu">게시판</h2></a>
 		<a href="/shinDTown/view/chatView/ChatRead.jsp"><h2 class="menu">채팅방</h2></a>
 		<a href="/shinDTown/view/memberView/MemberUpdate.jsp"><h2 class="menu">마이페이지</h2></a>
-		<a id="logout" href="/shinDTown/view/memberView/logout"><h2 class="menu">로그아웃</h2></a>
+		<a id="logout" href="/shinDTown/view/memberView/logout.com"><h2 class="menu">로그아웃</h2></a>
 		</c:if>
 		</div>
 	</div>

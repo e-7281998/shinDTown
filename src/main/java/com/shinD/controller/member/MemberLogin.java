@@ -19,6 +19,13 @@ public class MemberLogin implements CommonControllerInterface{
 	public String execute(Map<String, Object> data) throws Exception {
 		HttpServletRequest request = (HttpServletRequest)data.get("request");
  		
+		String[] pathArr = request.getRequestURI().split("/");
+		String pathCh = pathArr[pathArr.length-1];
+		
+		if(pathCh.equals("MemberLogin.com"))
+			return "MemberLogin.jsp";
+		
+		// id 중복 확인인지, 회원가입인지 확인하기
 		MemberService service = new MemberService();
 		
 		String id = request.getParameter("id");
@@ -54,7 +61,7 @@ public class MemberLogin implements CommonControllerInterface{
 			session.setAttribute("user_name", member.getUser_name());
 			 			
 			String path = request.getContextPath();			
-			return  "redirect:"+path+"/view/main.jsp";
+			return  "redirect:"+path+"/board/main.com";
 		}else {	//로그인 실패
 			System.out.println("로그인 실패");
 			String path = request.getContextPath();			
