@@ -17,7 +17,7 @@ import javax.websocket.server.ServerEndpoint;
 @OnOpen은 클라이언트에서 서버로 접속할 때의 처리.
 @OnClose는 접속이 끊겼을때 처리*/
 
-@ServerEndpoint("/websocket")
+@ServerEndpoint("/selectChatRoom.com")
 public class WebSocket {
 
 	private static Set<Session> clients = Collections.synchronizedSet(new HashSet<Session>());
