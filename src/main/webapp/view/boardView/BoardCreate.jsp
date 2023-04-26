@@ -16,7 +16,7 @@
 	<%@include file="../header.jsp"%>
 	<div class="body">
 		<div class="board_page_2">
-			<form class="posting_form" action = "/shinDTown/board/create.jm" method="POST">
+			<form class="posting_form" action = "/shinDTown/board/create.com" method="POST">
 			
 				<div class="new_title">
 					<label class="label_1">게시판명</label> 
@@ -44,7 +44,7 @@ $(function(){
 		$("#dup_check").on("click",function(){
 			//page이동 없이 서버에 요청보내고 응답받기 :ajax
 		$.ajax({
-			url:"/shinDTown/board/dupcheck.jm",
+			url:"/shinDTown/board/dupcheck.com",
 			data:{"board_name":$("#title").val()},
 			success:function(responseData){
 				$("#message").text(responseData);

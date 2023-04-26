@@ -24,7 +24,7 @@
 				</fieldset>
 			</div>
 
-			<form class="posting" method = "POST" action = "/shinDTown/post/create.jm">
+			<form class="posting" method = "POST" action = "/shinDTown/post/create.com">
 				<input type = "hidden" id="board_name" name="board_name" value="${board_name }">
 				<div class="post_form">
 					<label>제목</label> <input type="text" name="post_title" class="title"
