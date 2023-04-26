@@ -20,7 +20,7 @@ import com.shinD.controller.message.InsertMessageController;
  
 
 
-@WebServlet("*.jk")
+@WebServlet("*.com")
 
 public class FrontController_JK extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -40,37 +40,37 @@ public class FrontController_JK extends HttpServlet {
 		switch (path) { 
 		
 		// 내가 속한 채팅방목록
-		case "/view/chatView/selectChatRoom.jk":
+		case "/view/chatView/selectChatRoom.com":
 			controller = new SelectChatRoomController();
 			break;
 		
 		//chat보내기
-		case "/view/chatView/insertMessage.jk":
+		case "/view/chatView/insertMessage.com":
  			controller = new InsertMessageController();
 			 break;
 		
 		// 지금 접속한 유저와의 채팅방 ->리턴값 :접속한 채팅방
-		case "/view/chatView/messageToConnectMember.jk":
+		case "/view/chatView/messageToConnectMember.com":
  			controller = new MessageToConnectMemberController();
 			 break;
 		
 		//나와 상대가 접속한 채팅방의 데이터→접속하지 않아도 채팅 내용 확인 가능	 
-		case "/view/chatView/readConnectRoom.jk":
+		case "/view/chatView/readConnectRoom.com":
  			controller = new ReadConnectRoomController();
 			 break;
 		
 		//메시지 받기
-		case "/view/chatView/selectReceiveMessage.jk":
+		case "/view/chatView/selectReceiveMessage.com":
  			controller = new SelectReceiveMessageController();
  			break;
  			
 		//읽지 않은 메시지
-		case "/view/chatView/selectNotReadMessage.jk":
+		case "/view/chatView/selectNotReadMessage.com":
  			controller = new SelectNotReadMessageController();
 			 break;	 
 		
 		//특정 메시지 읽기
-		case "/view/chatView/selectReadOneMessage.jk":
+		case "/view/chatView/selectReadOneMessage.com":
  			controller = new SelectReadOneMessageController();
 			 break;	 
 	
