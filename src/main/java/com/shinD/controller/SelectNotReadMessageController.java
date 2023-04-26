@@ -1,9 +1,15 @@
 package com.shinD.controller;
 
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import com.shinD.model.message.MessageService;
 import com.shinD.model.message.MessageVO;
@@ -17,11 +23,38 @@ public class SelectNotReadMessageController implements CommonControllerInterface
 		
 		HttpServletRequest request = (HttpServletRequest) data.get("request");
 		MessageService service = new MessageService();
+		HttpServletResponse response = (HttpServletResponse) data.get("response");
+		HttpSession session = request.getSession();
 		
 		MessageVO messagevo = new MessageVO();
+		System.out.println("message>>>>>"+messagevo);
+		List<MessageVO> messagelist = service.selectNotReadMessage(Integer.parseInt(request.getParameter("user_code")));
+		System.out.println("messagelist>>>>>>>"+ messagelist);
+		
+		JSONArray array = new JSONArray();
 		
 		
-		return page;
+		for(MessageVO mem: messagelist) {
+			JSONObject object = new JSONObject();
+			
+			object.put("message_code", mem.getMessage_code());
+			object.put("sender", mem.getSender());
+			object.put("message_create", mem.getMessage_create());
+			object.put("message_data", mem.getMessage_data());
+			object.put("message_open", mem.isMessage_open());
+			object.put("chat_code", mem.getChat_code());
+			array.add(object);
+			
+		}
+		
+		JSONObject memObj = new JSONObject();
+		
+		memObj.put("message", array);
+		response.setContentType("text/plain");
+		response.setCharacterEncoding("utf-8");
+		
+	
+		return "responseBody:"+memObj.toString();
 	}
 
 	private MessageVO makeEmp(HttpServletRequest request) throws UnsupportedEncodingException {

@@ -21,7 +21,7 @@ public class SelectReadOneMessageController implements CommonControllerInterface
 		
 		MessageVO message = makeEmp(request);
 		
-		
+		System.out.println("message>>>>>>>>>>.."+message);
 		
 		
 		return null;
