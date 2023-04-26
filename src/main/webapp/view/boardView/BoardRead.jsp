@@ -16,8 +16,8 @@
 
 		<div class="board_page">
 			<div class="boards">
-				<c:forEach items="${boardlist }" var = "board" begin="1" end="4" >
-					<fieldset class="board_list"  onclick="location.href='/shinDTown/board/detail.jm?BOARD_NAME=${board.BOARD_NAME }'">
+				<c:forEach items="${boardlist }" var = "board" begin="0" end="4" >
+					<fieldset class="board_list"  onclick="location.href='/shinDTown/board/detail.com?BOARD_NAME=${board.BOARD_NAME }'">
 						<legend>${board.BOARD_NAME }</legend>
 						<c:forEach items="${boardpostlist }" var = "boardpost" varStatus ="status">
 							<c:if test="${board.BOARD_CODE  == boardpost.BOARD_CODE }">
@@ -30,8 +30,8 @@
 				</c:forEach>
 			
 				
-				<c:forEach items="${boardtop }" var = "board" varStatus ="status">
-				<fieldset class="board_list" onclick="location.href='/shinDTown/board/detail.jm?BOARD_NAME=${board.BOARD_NAME }'">
+				<c:forEach items="${boardlist }" var = "board" varStatus ="status" begin="5" >
+				<fieldset class="board_list" onclick="location.href='/shinDTown/board/detail.com?BOARD_NAME=${board.BOARD_NAME }'">
 					<legend> <c:out value="${board.BOARD_NAME }"/></legend>
 					<c:forEach items="${boardpostlist }" var = "boardpost" varStatus ="status">
 							<c:if test="${board.BOARD_CODE  == boardpost.BOARD_CODE }">
@@ -47,7 +47,7 @@
 
 			<div class="find">
 				<div class="search">
-					<form class="search_form"  method="post" action = "/shinDTown/board/read.jm">
+					<form class="search_form"  method="post" action = "/shinDTown/board/read.com">
 						<input type="text" name="board_name" class="search_title"
 							placeholder="게시판 이름을 입력해 주세요 "> <input type="button"
 							class="search_btn" value="찾기">
@@ -64,7 +64,7 @@
 				</div>
 
 				<div class="create_board">
-					<button class="new_board" onclick="location.href='/shinDTown/board/create.jm'">새
+					<button class="new_board" onclick="location.href='/shinDTown/board/create.com'">새
 						게시판 만들기</button>
 				</div>
 			</div>

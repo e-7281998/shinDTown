@@ -10,8 +10,9 @@
 	width: 80%;
 	grid-template-rows: 0.3fr 1fr 1fr;
 	grid-template-columns: 0.3fr 2fr 2fr 0.3fr;
+	
 	grid-template-areas: 
-	". board_title . . " 
+	". board_title post_detail . " 
 	". board_list post_detail . "
 	". board_list post_detail . ";
 	gap: 2%;
@@ -19,6 +20,8 @@
 
 .board_title {
 	grid-area: board_title;
+	margin-left : 15px;
+	margin-top : 3%;
 }
 
 .board_list {
@@ -35,8 +38,9 @@
 .post_detail {
 	grid-area: post_detail;
 	visibility: hidden;
+	margin-top : 5%;
 	display: grid;
-	grid-template-rows: 300px 60px 200px;
+	grid-template-rows: 400px 60px 230px;
 	grid-template-columns: 550px;
 	grid-template-areas: 
 	"post" 
@@ -45,9 +49,13 @@
 }
 .post_title{
 	grid-area: post_title;
-	margin-left : 0;
+	margin-left : 10px;
 	overflow: scroll;
 	overflow-x: hidden;
+	padding : 15px;
+	margin : 10px;
+	box-shadow: 0 0 4px #558BCF;
+	border-radius : 20px;
 }
 ul {
 	padding-left : 0;
@@ -59,6 +67,11 @@ li{
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	font-size: 18px;
+}
+
+.post_line{
+	margin-left : 0;
 }
 .like{
 	display: inline;
@@ -87,10 +100,11 @@ li{
 
 .post {
 	grid-area: post;
-	border: 2px solid gray;
 	border-radius: 20px;
 	margin-left : 10px;
-	
+	border : 2px solid #558BCF;
+	overflow: scroll;
+	overflow-x: hidden;
 	display : grid;
 	grid-template-rows: 1fr 1fr 1fr;
 	grid-template-columns: 1fr 0.5fr;
@@ -117,11 +131,14 @@ li{
 
 .comment {
 	grid-area: comment;
+	margin-top : 5px;
+	margin-left : 5px;
 }
 
-.comment_list {
+.comment_pos {
 	grid-area: comment_list;
-	margin-left: 15px;
+	margin-left: 20px;
+	margin-top: 15px;
 	overflow: scroll;
 	overflow-x: hidden;
 }
@@ -155,8 +172,8 @@ input[type="submit"] {
 .comms {
 	display: grid;
 	grid-template-rows: 1fr;
-	grid-template-columns: 3fr 0.5fr 0.5fr;
-	grid-template-areas: "com good points";
+	grid-template-columns: 1.5fr 0.3fr 0.3fr 0.3fr;
+	grid-template-areas: "com good points delete";
 	align-items: center
 }
 
@@ -165,7 +182,20 @@ input[type="submit"] {
 	grid-area: com;
 	margin-left: 20px;
 }
-
+.delcom{
+	justify-content: center;
+	grid-area : delete;
+	width: 50px;
+	height: 30px;
+	outline: none;
+	border-radius: 15px;
+	border: 3px solid;
+	border-color: #558BCF;
+	background-color : #558BCF;
+	color : white;
+	font-size: 15px;
+	margin-right: 20px;
+}
 .good {
 	justify-content: center;
 	grid-area : good;
@@ -178,11 +208,12 @@ input[type="submit"] {
 	background-color : #558BCF;
 	color : white;
 	font-size: 15px;
-	margin-right: 100px;
+	margin-right: 20px;
 }
 
 .points {
 	grid-area: points;
+	float : left;
 }
 
 .line{

@@ -1,6 +1,4 @@
-package com.shinD.controller.git;
-
-import java.util.Date;
+package com.shinD.model.post;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,7 +11,10 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class GitVO {
-	 private String TOKEN;
-	 private int USER_CODE;
+public class LikeVO {
+	private int LIKE_CODE;
+	private int USER_CODE;
+	private int POST_CODE;
+	private int COM_CODE;
+	private int LIKEY;
 }

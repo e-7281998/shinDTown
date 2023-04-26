@@ -9,18 +9,19 @@
 .board_page{
 	display : grid;
 	width : 80%;
+	margin-top : 3%;
 	grid-template-rows: 1fr;
-	grid-template-columns: 0.3fr 1fr 1fr 0.3fr;
+	grid-template-columns: 50px 3fr 1fr 50px;
 	grid-template-areas: 
 	". boards find . ";
 	gap: 2%;
 }
 
+
 .boards {
 	grid-area : boards;
 	display : grid;
-	height : 700px;
-	width : 850px;
+	height : 650px;
 	grid-template-columns: repeat(2, 1fr);
 	gap: 2%;
 	overflow: scroll;
@@ -31,8 +32,12 @@
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	font-size: 18px;
 }
-
+#title_line{
+	margin-top : 1px;
+	width : 350px;
+}
 .find{
 	grid-area: find;
 	display : grid;
@@ -43,14 +48,20 @@
 	"list";
 	gap: 2%;
 }
+legend{
+	font-size : 20px;
+	text-align: center;
+}
 fieldset{
+	display : grid;
 	border: 3px solid;
 	border-color: #558BCF;
+	box-shadow: 0 0 2px #558BCF;
 	border-radius: 20px;
+	margin-right: 5px;
 }
 .board_title {
-	list-style: none;
-	width : 350px;
+/* 	list-style: none; */
 	padding-left : 15px;
 	cursor : pointer;
 }

@@ -11,29 +11,34 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.shinD.controller.git.Git;
 import com.shinD.controller.member.MemberLogin;
 import com.shinD.controller.member.MemberLogout;
 import com.shinD.controller.member.MemberSignUp;
 import com.shinD.controller.member.MemberUpdate;
 import com.shinD.controller.member.MemberWithdraw;
  
-@WebServlet({"/view/memberView/signup",
+/*@WebServlet({"/view/memberView/signup",
 			"/view/memberView/login",
 			"/view/memberView/idDupCheck", 
 			"/view/memberView/classCheck",
 			"/view/memberView/withdraw",
 			"/view/memberView/updatePwd",
-			"/view/memberView/logout"})
+			"/view/memberView/logout",
+			"/view/gitView/gitRegister",
+			"/view/gitView/getGitId",
+			"/view/gitView/gitUpdate"
+			})*/
 public class FrontController_EJ extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
  
  	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
  
- 		String path = request.getServletPath(); 
- 		//String path = request.getRequestURI().substring(request.getContextPath().length());
- 		//System.out.println("url 찍어봄 : " +request.getRequestURL());
+ 		String path = request.getServletPath();  
+ 		
 		CommonControllerInterface controller = null;
+		
 		Map<String, Object> data = new HashMap<>();
 		data.put("method", request.getMethod());
 		data.put("request", request); 
@@ -55,6 +60,12 @@ public class FrontController_EJ extends HttpServlet {
 			 break; 
 		case "/view/memberView/logout":
  			controller = new MemberLogout();
+			 break; 
+		case "/view/gitView/gitRegister":
+		case "/view/main.jsp":
+		case "/view/gitView/getGitId":
+		case "/view/gitView/gitUpdate":
+ 			controller = new Git();
 			 break; 
 		default:
 			break;

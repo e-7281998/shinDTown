@@ -1,41 +1,48 @@
 package com.shinD.model.comment;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class CommentService
- */
-@WebServlet("/CommentService")
-public class CommentService extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public CommentService() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+import com.shinD.model.post.LikeVO;
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+
+
+public class CommentService{
+	CommentDAO dao = new CommentDAO();
+	//댓글 생성
+	public int CommentCreate(CommentVO comment) {
+		return dao.CommentCreate(comment);
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+	//댓글
+	public List<CommentVO> ComList(int post_code){
+		return dao.ComList(post_code);
 	}
-
+	
+	public int Likes(int com_code) {
+		return dao.Likes(com_code);
+	}
+	
+	public int LikeCreate(LikeVO like) {
+		return dao.LikeCreate(like);
+	}
+	
+	public int deleteComment(int com_code) {
+		return dao.deleteComment(com_code);
+	}
+	
+	public int CheckCom(int com_code, int user_code) {
+		return dao.CheckCom(com_code, user_code);
+	}
+	public int DeleteLike(int com_code , int user_code) {
+		return dao.DeleteLike(com_code, user_code);
+	}
+	public int getcom(int post_code, int user_code, String com_comment) {
+		return dao.getcom(post_code, user_code, com_comment);
+	}
 }

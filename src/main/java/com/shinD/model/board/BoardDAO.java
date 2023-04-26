@@ -52,7 +52,6 @@ public class BoardDAO {
 
 			while (rs.next()) {// 값이 없을때까지 읽음
 				BoardVO board = makeBoard(rs);// 보드를 만들어주는 함수에 다녀와서 보드생성
-				System.out.println(board);// 테스트하려고 붙여놓음 지워도댐
 				boardlist.add(board);// 리스트에 보드 추가
 			}
 		} catch (SQLException e) {
@@ -73,7 +72,7 @@ public class BoardDAO {
 						select boards.*,post_code,post_title,
 						ROW_NUMBER() OVER(PARTITION BY boards.board_code) cnt
 						from boards join posts on posts.BOARD_CODE = boards.BOARD_CODE
-						order by boards.BOARD_CODE
+						order by posts.post_code desc
 				 ) aa
 				where aa.cnt <= 3;
 				""";
@@ -86,7 +85,6 @@ public class BoardDAO {
 
 			while (rs.next()) {// 값이 없을때까지 읽음
 				BoardPostVO board = makeBoardPost(rs);// 보드를 만들어주는 함수에 다녀와서 보드생성
-				System.out.println(board);// 테스트하려고 붙여놓음 지워도댐
 				boardpostlist.add(board);// 리스트에 보드 추가
 			}
 		} catch (SQLException e) {
@@ -133,7 +131,6 @@ public class BoardDAO {
 
 			while (rs.next()) {// 값이 없을때까지 읽음
 				BoardVO board = makeBoard(rs);// 보드를 만들어주는 함수에 다녀와서 보드생성
-				System.out.println(board);// 테스트하려고 붙여놓음 지워도댐
 				boardtop.add(board);// 리스트에 보드 추가
 			}
 		} catch (SQLException e) {
@@ -194,15 +191,15 @@ public class BoardDAO {
 		return result;
 	}
 
-	// 게시판명 검색(이름형)
+	// 게시판명 검색해서 이름으로 받기
 	public List<String> boardSerch(String board_name) {
 		List<String> bnamelist = new ArrayList<>();
-		String sql = "select board_name from boards where board_name =?";
+		String sql = "select board_name from boards where board_name like ?";
 		conn = MySQLUtil.getConnection();
 
 		try {
 			pst = conn.prepareStatement(sql);
-			pst.setString(1, board_name);
+			pst.setString(1, "%"+board_name+"%");//단어가 들어가면 무조건 찾기
 			rs = pst.executeQuery();
 
 			while (rs.next()) {
@@ -213,12 +210,14 @@ public class BoardDAO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			MySQLUtil.dbDisconnect(null, pst, conn);
 		}
 
 		return bnamelist;
 	}
 	
-		// 게시판명 검색(번호형)
+		// 게시판명 검색해서 번호로받기
 		public int boardSerchCode(String board_name) {
 			int bcode = 0;
 			String sql = "select board_code from boards where board_name =?";
@@ -237,6 +236,8 @@ public class BoardDAO {
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			}finally {
+				MySQLUtil.dbDisconnect(null, pst, conn);
 			}
 
 			return bcode;

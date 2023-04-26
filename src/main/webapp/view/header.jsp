@@ -34,11 +34,11 @@ fieldset{
 .container {
 	display: grid;
 	width: 80%;
-	grid-template-rows: 1fr;
+	grid-template-rows: 0.8fr;
 	grid-template-columns: 0.3fr 1fr 4fr 500px 0.3fr;
 	grid-template-areas: ". logo . bar_menu .";
 	place-items : center center;
-	padding-top : 10px;
+	padding-top : 5px;
 }
 
 .logo {
@@ -59,13 +59,14 @@ a{
 text-decoration: none;
 }
 
-hr {
-	margin: 0px 0px 40px 0px;
-}
 a{
  text-decoration: none;
  color : black;
  cursor : pointer;
+ }
+ 
+ hr{
+ 	width: 90%;
  }
 
 #logout{
@@ -74,7 +75,6 @@ background: none;
 }
 </style>
 
-<!-- 세션에 로그인 한 사용자를 받아와서 존재할 경우 -> (게시판 보러가기, 쪽지확인, 내정보 확인하기로 가기!) -->
 
 <div class="header"> 
 	<div class="container">
@@ -85,17 +85,18 @@ background: none;
 		<div class="bar_menu">
 		
 		<c:if test="${sessionScope.loginUser == null}">
-		<a href="/shinDTown/view/memberView/MemberSignUp.jsp"><h2 class="menu">회원가입</h2></a>
-		<a href="/shinDTown/view/memberView/MemberLogin.jsp"><h2 class="menu">로그인</h2></a>
+		<a href="/shinDTown/view/memberView/MemberSignUp.com"><h2 class="menu">회원가입</h2></a>
+		<a href="/shinDTown/view/memberView/MemberLogin.com"><h2 class="menu">로그인</h2></a>
 		</c:if>
 		
 		<c:if test="${sessionScope.loginUser != null}">
-		<a href="/shinDTown/view/main.jsp"><h2 class="menu">홈</h2></a>
+		<a href="/shinDTown/board/main.com"><h2 class="menu">홈</h2></a>
 		<a href="/shinDTown/board/read.jm"><h2 class="menu">게시판</h2></a>
 		<a href="/shinDTown/view/chatView/selectChatRoom.com"><h2 class="menu">채팅방</h2></a>
 		<a href="/shinDTown/view/memberView/MemberUpdate.jsp"><h2 class="menu">마이페이지</h2></a>
-		<a id="logout" href="/shinDTown/view/memberView/logout"><h2 class="menu">로그아웃</h2></a>
+		<a id="logout" href="/shinDTown/view/memberView/logout.com"><h2 class="menu">로그아웃</h2></a>
 		</c:if>
 		</div>
 	</div>
 </div>
+<hr/>

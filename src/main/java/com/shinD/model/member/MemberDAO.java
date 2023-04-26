@@ -45,7 +45,7 @@ public class MemberDAO {
 	//개인 캘린더 생성 
 	public void createCalendar(String id){
 		String tableName = id+"_plan";
-		String sql = "CREATE TABLE "+tableName+"(`PLAN_CODE` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,`PLAN_TITLE` VARCHAR(45) NOT NULL,`PLAN_CONTENT` VARCHAR(45) NOT NULL, `START_DATE` DATE NOT NULL, `END_DATE` DATE NOT NULL )";
+		String sql = "CREATE TABLE "+tableName+"(`PLAN_CODE` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,`PLAN_TITLE` VARCHAR(45) NOT NULL,`PLAN_CONTENT` VARCHAR(100) NOT NULL, `COLOR` VARCHAR(45) , `START_DATE` DATE NOT NULL, `END_DATE` DATE NOT NULL )";
 		conn = MySQLUtil.getConnection();
 				
 		try {

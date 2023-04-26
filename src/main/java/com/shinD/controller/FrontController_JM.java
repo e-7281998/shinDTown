@@ -16,11 +16,24 @@ import com.shinD.controller.board.BoardCreate;
 import com.shinD.controller.board.BoardDelete;
 import com.shinD.controller.board.BoardDetail;
 import com.shinD.controller.board.BoardDupCheck;
+import com.shinD.controller.board.BoardMain;
 import com.shinD.controller.board.BoardRead;
+import com.shinD.controller.comment.ComCode;
+import com.shinD.controller.comment.CommentCheck;
+import com.shinD.controller.comment.CommentCreate;
+import com.shinD.controller.comment.CommentDelete;
+import com.shinD.controller.comment.CommentLikes;
+import com.shinD.controller.comment.CommentList;
+import com.shinD.controller.comment.DeleteLike;
+import com.shinD.controller.plan.CreatePlan;
+import com.shinD.controller.plan.DeletePlan;
+import com.shinD.controller.plan.DetailPlan;
+import com.shinD.controller.plan.ReadPlan;
 import com.shinD.controller.post.PostCreate;
+import com.shinD.controller.post.PostLike;
 
 
-@WebServlet("*.jm")
+@WebServlet("*.com")
 public class FrontController_JM extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -32,39 +45,63 @@ public class FrontController_JM extends HttpServlet {
 		Map<String, Object> data = new HashMap<>();
 		data.put("method", request.getMethod());
 		data.put("request", request);
+		data.put("response", response);
 
 		System.out.println(path);
 		switch (path) {
-		// 보드 생성 컨트롤
-		case "/board/create.jm":
+		// 보드 메인
+		case "/board/main.com":
+			controller = new BoardMain();
+			break;
+
+			// 보드 생성 컨트롤
+		case "/board/create.com":
 			controller = new BoardCreate();
 			break;
 
 		// 보드 목록 컨트롤
-		case "/board/read.jm":
+		case "/board/read.com":
 			controller = new BoardRead();
 			break;
 
 		// 보드 삭제 컨트롤
-		case "/board/delete.jm":
+		case "/board/delete.com":
 			controller = new BoardDelete();
 			break;
 
 		// 보드 중복 체크
-		case "/board/dupcheck.jm":
+		case "/board/dupcheck.com":
 			controller = new BoardDupCheck();
 			break;
 
 		// 보드 디테일
-		case "/board/detail.jm":
+		case "/board/detail.com":
 			controller = new BoardDetail();
 			break;
 
 		// 게시글 생성
-		case "/post/create.jm":
+		case "/post/create.com":
 			controller = new PostCreate();
 			break;
 
+		// 게시글 조와요
+		case "/post/like.com":
+			controller = new PostLike();
+			break;
+			
+		// 댓글 생성
+		case "/comment/create.com":
+			controller = new CommentCreate();
+			break;
+
+		// 댓글 리스트
+		case "/comment/list.com":
+			System.out.println("------------");
+			controller = new CommentList();
+			break;
+
+		
+			
 		default:
 			break;
 		}

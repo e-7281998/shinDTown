@@ -5,6 +5,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import com.shinD.controller.CommonControllerInterface;
+import com.shinD.model.board.BoardService;
 
 public class BoardDelete implements CommonControllerInterface {
 
@@ -30,8 +31,6 @@ public class BoardDelete implements CommonControllerInterface {
 			}else{
 				System.out.println("삭제권한이 없습니다..");
 			}
-			bservice.boardAll();//잘 삭제된건가 찍어봄
-				
 		}
 		
 		
