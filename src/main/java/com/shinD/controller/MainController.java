@@ -17,8 +17,14 @@ import com.shinD.controller.board.BoardDetail;
 import com.shinD.controller.board.BoardDupCheck;
 import com.shinD.controller.board.BoardMain;
 import com.shinD.controller.board.BoardRead;
+import com.shinD.controller.comment.ComCode;
+import com.shinD.controller.comment.CommentCheck;
 import com.shinD.controller.comment.CommentCreate;
+import com.shinD.controller.comment.CommentDelete;
+import com.shinD.controller.comment.CommentLikes;
 import com.shinD.controller.comment.CommentList;
+import com.shinD.controller.comment.DeleteLike;
+import com.shinD.controller.comment.com_userName;
 import com.shinD.controller.git.Git;
 import com.shinD.controller.member.MemberLogin;
 import com.shinD.controller.member.MemberLogout;
@@ -144,7 +150,31 @@ public class MainController extends HttpServlet {
 			 break;	 
 		case "/view/chatView/selectReadOneMessage.com":
  			controller = new SelectReadOneMessageController();
-			 break;	 
+			 break;	
+		case "/view/boardView/likes.com" : {
+			controller = new CommentLikes();
+			break;
+		}
+		case "/view/boardView/delete.com" : {
+			controller = new CommentDelete();
+			break;
+		}
+		case "/view/boardView/checklike.com" : {
+			controller = new CommentCheck();
+			break;
+		}
+		case "/view/boardView/deletelike.com" : {
+			controller = new DeleteLike();
+			break;
+		}
+		case "/view/boardView/getcomcode.com" : {
+			controller = new ComCode();
+			break;
+		}
+		case "/view/boardView/getComUserName.com" : {
+			controller = new com_userName();
+			break;
+		}
 		
 		default:
 			break;
@@ -159,7 +189,7 @@ public class MainController extends HttpServlet {
 		}
 		if(page.indexOf("redirect:") >= 0) {
  			response.sendRedirect(page.substring(9));
-		}else if(page.indexOf("responseBody") >= 0){
+		}else if(page.indexOf("responseBody:") >= 0){
  			response.getWriter().append(page.substring(13));
 		}else if(page.indexOf("download") >= 0){ 
 		}else { 
