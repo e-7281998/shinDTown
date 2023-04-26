@@ -74,13 +74,14 @@
 	
 	<script>
 	var post_code;
-	var like;
+	var post_like;
 	
 	var title;
 	var date;
 	var content;
-	var like;
+	var com_like;
 	var code;
+	var com_user;
 	
 	$(document).ready(function() {
 			$("li").on("click",function() {
@@ -88,7 +89,7 @@
 				title= $(this).find("span").text();
 				date = "#"+$(this).val()+"create";
 				content = "#"+$(this).val()+"content";
-				like = "#"+$(this).val()+"likes";
+				post_like = "#"+$(this).val()+"likes";
 				code = "#"+$(this).val()+"code";
 				
 				/* console.log($(code).val()); */
@@ -97,7 +98,7 @@
 				$("#post_detail .title h3 ").text(title);
 				$("#post_detail .date h3 ").text($(date).val());
 				$("#post_detail .content p ").text($(content).val());
-				$("#post_like").text($(like).text());
+				$("#post_like").text($(post_like).text());
 				$("#post_code").val($(code).val());
 				$("#post_detail").css("visibility", "visible"); 
 			});
@@ -117,14 +118,16 @@
 				$.each(responseData.comlist, function(index,item){
 					
 					getlikes(item.COM_CODE);
+					getcom_userName(item.COM_CODE);
 					
  					var head = "<div class='comment_list'><div class='comms'><div class='comm'>";
  					var foot = "</div><button class='good' onclick='setlike("+item.COM_CODE+")' id='"+item.COM_CODE+
- 					"_btn2' value='"+item.COM_CODE+"'>공감</button><p class='points' id='" +item.COM_CODE+ "_txt'>" + like 
+ 					"_btn2' value='"+item.COM_CODE+"'>공감</button><p class='points' id='" +item.COM_CODE+ "_txt'>" + com_like 
  					+"</p><button class='delcom' id= '" +item.COM_CODE+ "_btn' onclick='delCom("+item.COM_CODE+")'>삭제</button>"
  					+" </div><hr class='line'/></div>";
 	 					
 					$("#comments").append(head + 
+					"<p>"+com_user+"</p>"+
  					"<p>"+item.COM_COMMENT+"</p>" +
  					foot);
 					
@@ -170,7 +173,7 @@
 					success:function(data){
 					if(data="OK"){
 					$("#post_like").text(parseInt($("#post_like").text())+1);
-					$(like).text(parseInt($(like).text())+1);
+					$(post_like).text(parseInt($(post_like).text())+1);
 					}
 					}
 				})
@@ -183,9 +186,9 @@
 				method : "GET",
 				data : {"com_code": a},
 				async : false,
-				url: "${path}/view/boardView/likes",
+				url: "${path}/view/boardView/likes.com",
 				success: function(responseData){
-					like = responseData;
+					com_like = responseData;
 				},
 				error: function(){
 					console.log("err");
@@ -193,7 +196,7 @@
 				
 			});
 			
-			return like;
+			return com_like;
 		}
 	function newComment(){
 		
@@ -202,23 +205,28 @@
 		$.ajax({
 			method : "POST",
 			data : {"post_code" : post_code, "user_code" : ${user_code}, "com_comment" : com_comment},
-			url : "/shinDTown/comment/create/com",
+			url : "/shinDTown/comment/create.com",
 			async: false,
 			success: function(){
 				
 				var com_code = parseInt(getcom_code(post_code, ${user_code}, com_comment));
 				
 				getlikes(com_code);
+				getcom_userName(com_code);
 				
-				var head = "<div class='comment_list'><div class='comms'><div class='comm'>";
+				var head = "<div class='comment_list' id='"+com_code+"_list'><div class='comms'><div class='comm'>";
 					var foot = "</div><button class='good' onclick='setlike("+com_code+")' id='"+com_code+
-					"_btn2' value='"+com_code+"'>공감</button><p class='points' id='"+com_code+ "_txt'>" + like
+					"_btn2' value='"+com_code+"'>공감</button><p class='points' id='"+com_code+ "_txt'>" + com_like
 					+"</p><button class='delcom' id= '" +com_code+ "_btn' onclick='delCom("+com_code+")'>삭제</button>"
 					+" </div><hr class='line'/></div>";
- 					
-				$("#comments").append(head + 
+					
+					
+				$("#com_comment").val("");
+				$("#comments").append(head +
+					"<p>"+com_user+"</p>"+
 					"<p>"+com_comment+"</p>" +
 					foot);
+				
 				
 			},
 			error : function(){
@@ -234,9 +242,8 @@ function getcom_code(post_code, user_code, com_comment){
 		method : "GET",
 		async: false,
 		data : {"com_comment": com_comment, "post_code" : post_code, "user_code" : "${user_code}"},
-		url: "${path}/view/boardView/getcomcode",
+		url: "${path}/view/boardView/getcomcode.com",
 		success: function(responseData){
-			console.log("response : "  +responseData);
 			com_code = responseData;
 		},
 		error: function(){
@@ -246,24 +253,39 @@ function getcom_code(post_code, user_code, com_comment){
 	});	
 	return com_code;
 }
-	
+
 function delCom(com_code, user_code){
-		console.log("check_code : " + com_code + " : "+ user_code);
+	$.ajax({
+		method : "GET",
+		data : {"com_code": com_code, "user_code" : user_code},
+		url: "${path}/view/boardView/delete.com",
+		success: function(responseData){
+			alert("삭제 완료");
+			$("#"+com_code+"_list").hide();
+		},
+		error: function(){
+			console.log("err");
+		}
 		
+	});
+}
+	
+function getcom_userName(com_code){
+		console.log("이름 가져오기 :" + com_code);
 		$.ajax({
 			method : "GET",
-			data : {"com_code": com_code, "user_code" : user_code},
-			url: "${path}/view/boardView/delete",
+			data : {"com_code": com_code},
+			async : false,
+			url: "${path}/view/boardView/getComUserName.com",
 			success: function(responseData){
-				console.log(responseData);
-				alert("삭제 완료");
-				reload_comments(post_code);
+				com_user = responseData;
 			},
 			error: function(){
 				console.log("err");
 			}
 			
 		});
+		return com_user;
 }
 	
 function setlike(com_code){
@@ -274,7 +296,7 @@ function setlike(com_code){
 		$.ajax({
 			method : "POST",
 			data : {"com_code": com_code, "post_code" : post_code, "user_code" : "${user_code}"},
-			url: "${path}/view/boardView/deletelike",
+			url: "${path}/view/boardView/deletelike.com",
 			success: function(responseData){
 				if(responseData > 0){
 					console.log("cancle  : " + responseData);
@@ -292,7 +314,7 @@ function setlike(com_code){
 		$.ajax({
 			method : "POST",
 			data : {"com_code": com_code, "post_code" : post_code, "user_code" : "${user_code}"},
-			url: "${path}/view/boardView/likes",
+			url: "${path}/view/boardView/likes.com",
 			success: function(responseData){
 				console.log($("#"+com_code+ "_txt"));
 				var origin = $("#"+com_code+ "_txt").text() ;
@@ -313,7 +335,7 @@ function checklike(com_code){
 	$.ajax({
 		method : "GET",
 		data : {"com_code": com_code, "user_code" : "${user_code}"},
-		url: "${path}/view/boardView/checklike",
+		url: "${path}/view/boardView/checklike.com",
 		async : false,
 		success: function(responseData){
 			check =  responseData;

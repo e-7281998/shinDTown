@@ -39,7 +39,7 @@ public class CommentLikes implements CommonControllerInterface {
 			LikeVO like = makeLike(post_code, com_code, user_code);
 			cs.LikeCreate(like);
 			
-			return "redirect:/shinDTown/board/detail.jm";
+			return "redirect:/shinDTown/board/detail.com";
 		}
 	}
 	private LikeVO makeLike(int post_code, int com_code, int user_code) {

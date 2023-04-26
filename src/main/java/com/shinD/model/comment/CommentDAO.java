@@ -68,6 +68,29 @@ public class CommentDAO {
 		
 		return comlist;
 	}
+	
+	//댓글 작성자 가져오기
+		public String com_userName(int com_code){
+			String user_name = null;
+			String sql = "select user_name as name from users u join comments c on u.user_code = c.USER_CODE where COM_CODE = ?";
+			conn = MySQLUtil.getConnection();
+			
+			try {
+				pst = conn.prepareStatement(sql);
+				pst.setInt(1, com_code);
+				rs = pst.executeQuery();
+				
+				while(rs.next()) {
+					user_name = (String) rs.getString("name");
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				MySQLUtil.dbDisconnect(null, pst, conn);
+			}
+			return user_name;
+		}
 	//댓글 좋아요했는지 확인
 	public int CheckCom(int com_code, int user_code) {
 		int result = 0;
@@ -182,7 +205,7 @@ public class CommentDAO {
 	//댓글 확인
 	public int getcom(int post_code, int user_code, String com_comment) {
 		int result = 0;
-		String sql = "select com_code from comments where post_code = ? AND USER_CODE = ? and com_comment = ?";
+		String sql = "select max(com_code) as com_code from comments where post_code = ? AND USER_CODE = ? and com_comment = ?";
 		conn = MySQLUtil.getConnection();
 		try {
 			pst = conn.prepareStatement(sql);
