@@ -31,7 +31,7 @@
 			<div class="main_board">
 				<c:forEach items="${boardlist }" var = "board" varStatus="status" begin="1" end="4">
 					<fieldset class="board_list_${status.count}"
-						onclick="location.href='/shinDTown/board/detail.jm?BOARD_NAME=${board.BOARD_NAME }'">
+						onclick="location.href='/shinDTown/board/detail.com?BOARD_NAME=${board.BOARD_NAME }'">
 						<legend>${board.BOARD_NAME }</legend>
 							<c:forEach items="${boardpostlist }" var = "boardpost" varStatus ="status">
 								<c:if test="${board.BOARD_CODE  == boardpost.BOARD_CODE }">
@@ -48,9 +48,9 @@
 
 			<div class="more_btn">
 				<button
-					onclick="location.href='/shinDTown/shinDTown/board/read.jm'">더보기</button>
+					onclick="location.href='/shinDTown/shinDTown/board/read.com'">더보기</button>
 				<button
-					onclick="location.href='/shinDTown/shinDTown/board/create.jm'">새게시판</button>
+					onclick="location.href='/shinDTown/shinDTown/board/create.com'">새게시판</button>
 			</div>
 
 			<div class="git">

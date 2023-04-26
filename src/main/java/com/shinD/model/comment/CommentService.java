@@ -24,6 +24,10 @@ public class CommentService{
 		return dao.ComList(post_code);
 	}
 	
+	public String com_userName(int com_code) {
+		return dao.com_userName(com_code);
+	}
+	
 	public int Likes(int com_code) {
 		return dao.Likes(com_code);
 	}
