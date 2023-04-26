@@ -24,7 +24,6 @@ import com.shinD.controller.comment.CommentDelete;
 import com.shinD.controller.comment.CommentLikes;
 import com.shinD.controller.comment.CommentList;
 import com.shinD.controller.comment.DeleteLike;
-import com.shinD.controller.comment.com_userName;
 import com.shinD.controller.git.Git;
 import com.shinD.controller.member.MemberLogin;
 import com.shinD.controller.member.MemberLogout;
@@ -74,6 +73,7 @@ public class MainController extends HttpServlet {
  			controller = new MemberWithdraw();
 			 break; 
 		case "/view/memberView/updatePwd.com":
+		case "/view/memberView/MemberUpdate.com":
  			controller = new MemberUpdate();
 			 break; 
 		case "/view/memberView/logout.com":
@@ -113,7 +113,6 @@ public class MainController extends HttpServlet {
 			controller = new CommentCreate();
 			break;
 		case "/comment/list.com":
-			System.out.println("------------");
 			controller = new CommentList();
 			break;
 		//유진
@@ -123,11 +122,30 @@ public class MainController extends HttpServlet {
 		case "/view/calendarView/CreatePlan.com":
 			controller = new CreatePlan();
 			break;
-		case "/view/calendarView/DetailPlan.com" : 
+		case "/view/calendarView/DetailPlan.com": 
 			controller  = new DetailPlan();
 			break;
-		case "/view/calendarView/DeletePlan.com" : 
+		case "/view/calendarView/DeletePlan.com": 
 			controller = new DeletePlan();
+			break;
+
+		case "/view/boardView/likes.com":
+			controller = new CommentLikes();
+			break;
+		case "/view/boardView/delete.com":
+			controller = new CommentDelete();
+			break;
+		case "/view/boardView/checklike.com":
+			controller = new CommentCheck();
+			break;
+		case "/view/boardView/deletelike.com":
+			controller = new DeleteLike();
+			break;
+		case "/view/boardView/getcomcode.com":
+			controller = new ComCode();
+			break;
+		case "/view/boardView/getComUserName.com":
+			//controller = new com_userName();
 			break;
 		//진경
 		case "/view/chatView/selectChatRoom.com":
@@ -151,30 +169,6 @@ public class MainController extends HttpServlet {
 		case "/view/chatView/selectReadOneMessage.com":
  			controller = new SelectReadOneMessageController();
 			 break;	
-		case "/view/boardView/likes.com" : {
-			controller = new CommentLikes();
-			break;
-		}
-		case "/view/boardView/delete.com" : {
-			controller = new CommentDelete();
-			break;
-		}
-		case "/view/boardView/checklike.com" : {
-			controller = new CommentCheck();
-			break;
-		}
-		case "/view/boardView/deletelike.com" : {
-			controller = new DeleteLike();
-			break;
-		}
-		case "/view/boardView/getcomcode.com" : {
-			controller = new ComCode();
-			break;
-		}
-		case "/view/boardView/getComUserName.com" : {
-			controller = new com_userName();
-			break;
-		}
 		
 		default:
 			break;
