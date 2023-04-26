@@ -85,7 +85,10 @@
 					<ul>
 					
 						<c:forEach items="${chatRoomList}" var="chatroom" >
-							<li class="chat" value="1" >${chatroom.friend_name} <button class="chatbtn" value="${chatroom.chat_code}" >채팅하기</button>
+							<li class="chat" value="1" >${chatroom.friend_name} <button class="chatbtn" value="${chatroom.chat_code}" >채팅하기
+								<span id="unread">&hearts;</span>
+							</button>
+						
 							<input type="hidden" id="${chatroom.chat_code}_code" value="${chatroom.chat_code}"></li>
 							
 						</c:forEach>
@@ -336,9 +339,36 @@ $(".chatbtn").on("click",function(){
 	$(function(){
 		
 	})
+	function getUnread(){
+		$.ajax({
+			type:"POST",
+			url:"selectNotReadMessage.com",
+			data:{
+				user_code: encodeURIComponent(${user_code}),
+			},
+			success:function(result){
+				if(result >=1){
+					showUnread(result);
+				}else showUnread('');
+			}
+		})
+	}
+	function getInfiniteUnread(){
+		setInterval(function(){
+			getUnread();
+		}, 4000);
+	}
+	
+	function showUnread(result){
+		$('#unread').html(result);
+	}
+	
+	$(document).ready(function(){
+		getInfiniteUnread();
+	});
 	
 	
-
+	
 
 	</script>
 
