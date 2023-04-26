@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.shinD.model.post.LikeVO;
 import com.shinD.util.MySQLUtil;
 
 public class CommentDAO {
@@ -16,6 +17,7 @@ public class CommentDAO {
 	Statement st;
 	PreparedStatement pst;
 	ResultSet rs;
+	int result = 0;
 	
 	//댓글 생성
 	public int CommentCreate(CommentVO comment) {
@@ -41,7 +43,7 @@ public class CommentDAO {
 		return result;
 	}
 	
-	//댓글
+	//댓글읽기
 	public List<CommentVO> ComList(int post_code){
 		List<CommentVO> comlist = new ArrayList<>();
 		String sql = "select * from comments where post_code = ?";
@@ -65,6 +67,142 @@ public class CommentDAO {
 	
 		
 		return comlist;
+	}
+	//댓글 좋아요했는지 확인
+	public int CheckCom(int com_code, int user_code) {
+		int result = 0;
+		String sql = "select like_code from LIKES where COM_CODE = ? AND USER_CODE = ?";
+		conn = MySQLUtil.getConnection();
+		try {
+			pst = conn.prepareStatement(sql);
+			pst.setInt(1, com_code);
+			pst.setInt(2, user_code);
+			
+			rs = pst.executeQuery();
+			while(rs.next()) {
+				result = rs.getInt("like_code");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			result = -1;
+		} finally {
+			MySQLUtil.dbDisconnect(null, pst, conn);
+		}
+		System.out.println("comm 좋아요 결과" + result);
+		return result;
+	}
+	
+	//좋아요 수 가져오기~
+	public int Likes(int com_code) {
+		int likes = 0;
+		String sql = "select count(*) as count from likes where com_code = ?";
+		conn = MySQLUtil.getConnection();
+		
+		try {
+			pst = conn.prepareStatement(sql);
+			pst.setInt(1, com_code);
+			rs = pst.executeQuery();
+			
+			while(rs.next()) {
+				likes = rs.getInt("count");
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			MySQLUtil.dbDisconnect(null, pst, conn);
+		}
+	
+		return likes;
+	}
+	
+	// 좋아요 달기
+	public int LikeCreate(LikeVO like) {
+		int result = 0;
+		String sql="insert into likes(USER_CODE,POST_CODE, COM_CODE) values(?,?,?)";
+		conn = MySQLUtil.getConnection();
+		
+		try {
+			pst=conn.prepareStatement(sql);
+			pst.setInt(1, like.getUSER_CODE());
+			pst.setInt(2, like.getPOST_CODE());
+			pst.setInt(3, like.getCOM_CODE());
+			result= pst.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			MySQLUtil.dbDisconnect(null, pst, conn);
+		}
+		
+		return result;
+	}
+	// 좋아요취소 
+	public int DeleteLike(int com_code , int user_code) {
+		String sql = "delete from likes where com_code = ? and user_code = ?";
+		conn = MySQLUtil.getConnection();
+		try {
+			pst = conn.prepareStatement(sql);
+			pst.setInt(1, com_code);
+			pst.setInt(2, user_code);
+
+			result = pst.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			result = -1;
+		} finally {
+			MySQLUtil.dbDisconnect(null, pst, conn);
+		}
+		System.out.println("like 삭제 결과" + result);
+		return result;
+	}
+	// 댓글 삭제
+	public int deleteComment(int com_code) {
+		String sql = "delete from comments where com_code = ?";
+		conn = MySQLUtil.getConnection();
+		try {
+			pst = conn.prepareStatement(sql);
+			pst.setInt(1, com_code);
+
+			result = pst.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			result = -1;
+		} finally {
+			MySQLUtil.dbDisconnect(null, pst, conn);
+		}
+		System.out.println("comm 삭제 결과" + result);
+		return result;
+	}
+	//댓글 확인
+	public int getcom(int post_code, int user_code, String com_comment) {
+		int result = 0;
+		String sql = "select com_code from comments where post_code = ? AND USER_CODE = ? and com_comment = ?";
+		conn = MySQLUtil.getConnection();
+		try {
+			pst = conn.prepareStatement(sql);
+			pst.setInt(1, post_code);
+			pst.setInt(2, user_code);
+			pst.setString(3, com_comment);
+			
+			rs = pst.executeQuery();
+			while(rs.next()) {
+				result = rs.getInt("com_code");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			result = -1;
+		} finally {
+			MySQLUtil.dbDisconnect(null, pst, conn);
+		}
+		System.out.println("comm의 번호 가져오기 결과" + result);
+		return result;
 	}
 
 	private CommentVO makeCom(ResultSet rs2) throws SQLException {

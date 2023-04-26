@@ -21,4 +21,13 @@ public class PostService {
 	public List<PostCommentVO> PostComSelect(int board_code){
 			return dao.PostComSelect(board_code);
 		}
+	
+	//인기게시글 순서대로 가져오기
+		public List<PostCommentVO> PostTop(){
+			return dao.PostTop();
+		}
+		//게시글 좋아요
+		public int postLike(int user_code,int post_code) {
+			return dao.postLike(user_code, post_code);
+		}
 }

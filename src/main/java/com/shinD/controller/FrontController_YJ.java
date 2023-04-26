@@ -12,13 +12,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.shinD.controller.comment.ComCode;
+import com.shinD.controller.comment.CommentCheck;
+import com.shinD.controller.comment.CommentDelete;
+import com.shinD.controller.comment.CommentLikes;
+import com.shinD.controller.comment.DeleteLike;
 import com.shinD.controller.plan.CreatePlan;
 import com.shinD.controller.plan.DeletePlan;
 import com.shinD.controller.plan.DetailPlan;
 import com.shinD.controller.plan.ReadPlan;
  
 @WebServlet({"/view/calendarView/ReadPlan", "/view/calendarView/CreatePlan", 
-	"/view/calendarView/DetailPlan", "/view/calendarView/DeletePlan"})
+	"/view/calendarView/DetailPlan", "/view/calendarView/DeletePlan", "/view/boardView/likes",
+	"/view/boardView/delete", "/view/boardView/checklike", "/view/boardView/deletelike",
+	"/view/boardView/getcomcode"})
 public class FrontController_YJ extends HttpServlet {
 	private static final long serialVersionUID = 1L;
  
@@ -46,7 +53,29 @@ public class FrontController_YJ extends HttpServlet {
 		}
 		case "/view/calendarView/DeletePlan" : {
 			controller = new DeletePlan();
+			break;
 		}
+		case "/view/boardView/likes" : {
+			controller = new CommentLikes();
+			break;
+		}
+		case "/view/boardView/delete" : {
+			controller = new CommentDelete();
+			break;
+		}
+		case "/view/boardView/checklike" : {
+			controller = new CommentCheck();
+			break;
+		}
+		case "/view/boardView/deletelike" : {
+			controller = new DeleteLike();
+			break;
+		}
+		case "/view/boardView/getcomcode" : {
+			controller = new ComCode();
+			break;
+		}
+		
 		}
 	
 		

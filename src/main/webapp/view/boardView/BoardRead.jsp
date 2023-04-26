@@ -16,7 +16,7 @@
 
 		<div class="board_page">
 			<div class="boards">
-				<c:forEach items="${boardlist }" var = "board" begin="1" end="4" >
+				<c:forEach items="${boardlist }" var = "board" begin="0" end="4" >
 					<fieldset class="board_list"  onclick="location.href='/shinDTown/board/detail.jm?BOARD_NAME=${board.BOARD_NAME }'">
 						<legend>${board.BOARD_NAME }</legend>
 						<c:forEach items="${boardpostlist }" var = "boardpost" varStatus ="status">
@@ -30,7 +30,7 @@
 				</c:forEach>
 			
 				
-				<c:forEach items="${boardtop }" var = "board" varStatus ="status">
+				<c:forEach items="${boardlist }" var = "board" varStatus ="status" begin="5" >
 				<fieldset class="board_list" onclick="location.href='/shinDTown/board/detail.jm?BOARD_NAME=${board.BOARD_NAME }'">
 					<legend> <c:out value="${board.BOARD_NAME }"/></legend>
 					<c:forEach items="${boardpostlist }" var = "boardpost" varStatus ="status">

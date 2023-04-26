@@ -28,7 +28,7 @@ public class BoardDetail implements CommonControllerInterface {
 		PostService pservice = new PostService();
 		BoardService bservise = new  BoardService();
 		
-		if(method.equals("GET")) {
+	
 	
 			int bcode = bservise.boardSerchCode(board_name);//보드 이름을 받아서 검색
 			List<PostVO>postlist = pservice.PostSelect(bcode);//게시글 리스트를 보드번호를 받아서 뽑기
@@ -37,9 +37,7 @@ public class BoardDetail implements CommonControllerInterface {
 			request.setAttribute("board_name", board_name);//보드이름 보내주기
 			request.setAttribute("postlist", postlist);//게시글목록 값 리퀘스트에넣기
 			request.setAttribute("pclist", pclist);//게시글+댓글목록 값 리퀘스트에넣기
-			}else {
-				
-			}
+			System.out.println(pclist);
 		
 		return "../view/boardView/BoardDetail.jsp";
 	}

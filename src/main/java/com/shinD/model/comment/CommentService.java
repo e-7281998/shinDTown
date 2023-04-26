@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.shinD.model.post.LikeVO;
+
 
 
 public class CommentService{
@@ -20,5 +22,27 @@ public class CommentService{
 	//댓글
 	public List<CommentVO> ComList(int post_code){
 		return dao.ComList(post_code);
+	}
+	
+	public int Likes(int com_code) {
+		return dao.Likes(com_code);
+	}
+	
+	public int LikeCreate(LikeVO like) {
+		return dao.LikeCreate(like);
+	}
+	
+	public int deleteComment(int com_code) {
+		return dao.deleteComment(com_code);
+	}
+	
+	public int CheckCom(int com_code, int user_code) {
+		return dao.CheckCom(com_code, user_code);
+	}
+	public int DeleteLike(int com_code , int user_code) {
+		return dao.DeleteLike(com_code, user_code);
+	}
+	public int getcom(int post_code, int user_code, String com_comment) {
+		return dao.getcom(post_code, user_code, com_comment);
 	}
 }
