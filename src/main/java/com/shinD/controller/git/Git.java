@@ -17,11 +17,11 @@ public class Git implements CommonControllerInterface{
 		String[] pathArr = request.getRequestURI().split("/");
 		String path = pathArr[pathArr.length-1];
 		
-		if(path.equals("gitRegister") )
+		if(path.equals("gitRegister.com") )
 			return registerGit(request);
-		else if(path.equals("gitUpdate") )
+		else if(path.equals("gitUpdate.com") )
 			return updateGiId(request);
-		else if(path.equals("getGitId") )
+		else if(path.equals("getGitId.com") )
 			return getGitId(request);
 		else 
 			return getGitId(request);

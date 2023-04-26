@@ -20,14 +20,13 @@ public class MemberSignUp implements CommonControllerInterface{
 		String path = pathArr[pathArr.length-1];
 		
 		// id 중복 확인인지, 회원가입인지 확인하기
-		if(path.equals("signup") )
+		if(path.equals("MemberSignUp.com"))
+			return "MemberSignUp.jsp";
+		else if(path.equals("signup.com"))
 			return signHandle(request);
-		else if(path.equals("classCheck")) {
+		else if(path.equals("classCheck.com"))
 			return certiCheck(request);
-		}
-		else {
-			System.out.println("여기야");
-		}
+		else
 			return idDupcheck(request);
 		
 	} 
@@ -79,9 +78,6 @@ public class MemberSignUp implements CommonControllerInterface{
 		pwd = encrypt.getEncrypt(pwd, salt);
  		//회원가입 신청
 		int result = service.registertUser(name, id, pwd, classNum, salt);
-		return "responseBody:"+result;
-
-		//return "redirect:"+path+"/view/memberView/MemberLogin.jsp";
-		
+		return "responseBody:"+result; 
 	}
 }

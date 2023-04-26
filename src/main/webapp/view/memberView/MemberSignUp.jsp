@@ -44,7 +44,7 @@
 			}
 		
 		$.ajax({
-			url:"classCheck",
+			url:"classCheck.com",
 			method : "post",
 			data: classdata,
 			success: (responseData)=>{ 
@@ -67,7 +67,7 @@
 			return;			
 		} 
 			$.ajax({
-			url:"idDupCheck",
+			url:"idDupCheck.com",
 			data:{"id":$(".id").val()},
 			success: (responseData)=>{ 
 				if(responseData == 1){
@@ -124,7 +124,7 @@
 		
 		 //회원가입 ajax로 보내기
 		$.ajax({
-			url:"signup",
+			url:"signup.com",
 			data: userdata,
 			success: (responseData)=>{ 
 				if(responseData == 1){

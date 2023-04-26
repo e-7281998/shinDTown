@@ -18,7 +18,7 @@ import com.shinD.controller.member.MemberSignUp;
 import com.shinD.controller.member.MemberUpdate;
 import com.shinD.controller.member.MemberWithdraw;
  
-@WebServlet({"/view/memberView/signup",
+/*@WebServlet({"/view/memberView/signup",
 			"/view/memberView/login",
 			"/view/memberView/idDupCheck", 
 			"/view/memberView/classCheck",
@@ -28,7 +28,7 @@ import com.shinD.controller.member.MemberWithdraw;
 			"/view/gitView/gitRegister",
 			"/view/gitView/getGitId",
 			"/view/gitView/gitUpdate"
-			})
+			})*/
 public class FrontController_EJ extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
