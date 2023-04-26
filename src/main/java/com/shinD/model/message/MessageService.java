@@ -3,7 +3,6 @@ package com.shinD.model.message;
 import java.util.List;
 
 import com.shinD.controller.message.ChatroomVO;
-import com.shinD.controller.message.MessageVO;
 
 public class MessageService {
 	MessageDAO messageDao = new MessageDAO();

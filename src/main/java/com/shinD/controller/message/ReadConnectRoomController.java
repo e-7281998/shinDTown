@@ -11,6 +11,7 @@ import org.json.simple.JSONObject;
 
 import com.shinD.controller.CommonControllerInterface;
 import com.shinD.model.message.MessageService;
+import com.shinD.model.message.MessageVO;
 
 public class ReadConnectRoomController implements CommonControllerInterface{
 	//나와 상대가 접속한 채팅방의 메시지들 조회→접속하지 않아도 채팅방 클릭시 메시지 조회 가능

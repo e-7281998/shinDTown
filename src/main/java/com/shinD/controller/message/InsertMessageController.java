@@ -1,13 +1,13 @@
 package com.shinD.controller.message;
 
 import java.io.UnsupportedEncodingException;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import com.shinD.controller.CommonControllerInterface;
 import com.shinD.model.message.MessageService;
+import com.shinD.model.message.MessageVO;
 
 public class InsertMessageController implements CommonControllerInterface{
 

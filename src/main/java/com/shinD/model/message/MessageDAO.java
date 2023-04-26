@@ -10,8 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.shinD.controller.message.ChatroomVO;
-import com.shinD.controller.message.MessageVO;
-import com.shinD.model.member.MemberVO;
 import com.shinD.util.MySQLUtil;
 
 
@@ -163,7 +161,7 @@ public class MessageDAO {
 					MySQLUtil.dbDisconnect(rs, st, conn);
 				}
 			
-				System.out.println(messagelist+"<<<<<<message");
+				//System.out.println(messagelist+"<<<<<<message");
 				return messagelist;
 			}
 		
@@ -245,9 +243,9 @@ public class MessageDAO {
 				try {
 					
 					String sql="""
-							select MESSAGE_CODE from MESSAGES 
+							select distinct(messages.chat_code)  from MESSAGES 
 							JOIN CHATROOMS ON MESSAGES.CHAT_CODE = CHATROOMS.CHAT_CODE
-							WHERE MESSAGES.CHAT_CODE = '3' and not sender='1' and MESSAGE_OPEN = '0'
+							WHERE MESSAGE_OPEN = '0'
 							""" ;//모든메시지를 다 읽어라
 				
 					pst = conn.prepareStatement(sql);

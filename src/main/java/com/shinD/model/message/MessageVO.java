@@ -1,4 +1,4 @@
-package com.shinD.controller.message;
+package com.shinD.model.message;
 
 import java.util.Date;
 

@@ -50,7 +50,7 @@
 
 			<div class="chat_able" id="chatroom" >
 			
-			<form action="selectChatRoom.jk" method="get">
+			<form action="selectChatRoom.com" method="get">
 				<fieldset class="chat_field">
 					<legend>접속중인 사람</legend>
 					<ul>
@@ -99,7 +99,7 @@
 
 			</div>
 
-			<div class="chatroom" id="chatroom" action="http://localhost:9090/shinDTown/view/chatView/readConnectRoom.jk" method="get">
+			<div class="chatroom" id="chatroom" action="http://localhost:9090/shinDTown/view/chatView/readConnectRoom.com" method="get">
 
 				<div class="text">
 
@@ -140,7 +140,7 @@
 </script>
 <script>
 	//var webSocket = new WebSocket('ws://localhost:9090/shinDTown/websocket');
-	var webSocket = new WebSocket('ws://'+location.host+'/shinDTown/selectChatRoom.jk');
+	var webSocket = new WebSocket('ws://'+location.host+'/shinDTown/selectChatRoom.com');
 	webSocket.onerror = function(event) {onError(event)};
 	webSocket.onopen = function(event) {onOpen(event)};
 	webSocket.onmessage = function(event) {onMessage(event)};	
@@ -233,7 +233,7 @@
 
 		console.log("num>>>>>>"+num+"me>>>>>>>"+${user_code });
 		$.ajax({
-			url:"insertMessage.jk",
+			url:"insertMessage.com",
 			data:{"chat_code":num,"sender":${user_code },"message_data":$("#insertMessage").val()},
 			success:function(data){
 				alert(data+"성공!");
@@ -274,7 +274,6 @@
 	}, 0); */
 	
 
-	
 
 
 
@@ -307,7 +306,7 @@ $(".chatbtn").on("click",function(){
 	num= $(this).val();
 	console.log("num>>>>."+num);
 	$.ajax({
-		url:"readConnectRoom.jk",
+		url:"readConnectRoom.com",
 		data:{"chat_code" : num},
 		success:function(responseData){
 			var events=eval("(" +responseData+")");
@@ -333,7 +332,12 @@ $(".chatbtn").on("click",function(){
 	}) 
 })
 
-
+	/* 읽지 않은 메시지 표시 */
+	$(function(){
+		
+	})
+	
+	
 
 
 	</script>

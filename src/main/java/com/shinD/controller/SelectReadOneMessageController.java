@@ -5,8 +5,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.shinD.controller.message.MessageVO;
 import com.shinD.model.message.MessageService;
+import com.shinD.model.message.MessageVO;
 
 public class SelectReadOneMessageController implements CommonControllerInterface {
 	

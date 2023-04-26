@@ -1,11 +1,12 @@
 package com.shinD.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.shinD.controller.message.MessageVO;
 import com.shinD.model.message.MessageService;
+import com.shinD.model.message.MessageVO;
 
 public class SelectNotReadMessageController implements CommonControllerInterface {
 
@@ -20,7 +21,24 @@ public class SelectNotReadMessageController implements CommonControllerInterface
 		MessageVO messagevo = new MessageVO();
 		
 		
-		return null;
+		return page;
 	}
+
+	private MessageVO makeEmp(HttpServletRequest request) throws UnsupportedEncodingException {
+		request.setCharacterEncoding("utf-8");
+		int message_code = Integer.parseInt(request.getParameter("message_code"));
+		int chat_code = Integer.parseInt(request.getParameter("chat_code"));
+		int sender=Integer.parseInt(request.getParameter("sender"));
+		String message_data=request.getParameter("message_data");
+		
+		MessageVO mem = new MessageVO();
+		mem.setMessage_code(message_code);
+		mem.setChat_code(chat_code);
+		mem.setSender(sender);
+		mem.setMessage_data(message_data);
+		
+		return mem;
+	}
+	
 
 }
