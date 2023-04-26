@@ -34,6 +34,7 @@ public class LoginCheckFilter extends HttpFilter implements Filter {
 			 req.getServletPath().equals("/view/memberView/idDupCheck.com") ||
 			 req.getServletPath().equals("/view/memberView/classCheck.com") ||
 			 req.getServletPath().equals("/view/memberView/MemberSignUp.com")||
+			 req.getServletPath().equals("/view/memberView/MemberLogin.com")||
 			 req.getServletPath().equals("/view/memberView/login.com")) {
 		 
 		 }else { HttpSession session = req.getSession();
