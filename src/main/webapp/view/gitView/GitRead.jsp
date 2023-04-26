@@ -99,23 +99,15 @@
 				
 				var commitUl = document.createElement("ul");
 				commitUl.classList.add("commits");
-				 
-				for(var i=0; i<Math.min(5, Object.keys(commitResult[j]).length); i++){
+				
+ 				for(var i=0; i<Math.min(5, Object.keys(commitResult).length); i++){
 					var msg = commitResult[i].commit.message;
  					var data = commitResult[i].commit.author.date.replace("T"," ").slice(0,16);
 
 					commitUl.innerHTML += "<li class='commit'><span>"+msg+"</span><span>"+data+"</span></li>"; 
 				}  
 				repoLl[j].append(commitUl);
-			} 
-			
-
-			
-			$(".repo_title").on("click", () => {
-				console.log($(this).parents().next("ul"));
-				$(this).parents().next("ul").toggle();
-				/* $( $(this) +" .commit").toggle();  */
-			})
+			}  
  		} 
  		
  		//gitID 등록하기
