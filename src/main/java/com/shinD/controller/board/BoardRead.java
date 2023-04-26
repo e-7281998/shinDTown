@@ -43,6 +43,7 @@ public class BoardRead implements CommonControllerInterface {
 			request.setAttribute("boardserch", boardserch);
 		}
 	
+		//보드리드로 이동
 		return "../view/boardView/BoardRead.jsp";
 	}
 

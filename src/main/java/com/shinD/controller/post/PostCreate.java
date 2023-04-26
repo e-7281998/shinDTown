@@ -24,7 +24,7 @@ public class PostCreate implements CommonControllerInterface {
 	public String execute(Map<String, Object> data) throws Exception {
 		HttpServletRequest request = (HttpServletRequest) data.get("request");
 		request.setCharacterEncoding("utf-8");//인코딩
-		String page="../view/postView/PostCreate.jsp";
+		String page="../view/postView/PostCreate.jsp";//이상하면 다시 돌아오기
 		String method = (String)data.get("method");
 		PostService pservice = new PostService();
 		String board_name= request.getParameter("board_name");//보드이름저장
@@ -45,6 +45,7 @@ public class PostCreate implements CommonControllerInterface {
 			
 			System.out.println("생성 완료햇습니다.");
 			
+			//보드디테일로 돌아감
 			page = "redirect:/shinDTown/board/detail.jm";
 			
 		}

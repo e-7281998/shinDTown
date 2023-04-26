@@ -38,6 +38,7 @@ public class BoardMain implements CommonControllerInterface {
 				
 			}
 		
+		//메인jsp로 이동
 		return "../view/main.jsp";
 	}
 

@@ -30,7 +30,7 @@
 					</ul>
 				<div class="posting">
 					<button class="posting_btn"
-						onclick="location.href='/shinDTown/post/create.jm?board_name=${board_name}'">글쓰기</button>
+						onclick="location.href='/shinDTown/post/create.com?board_name=${board_name}'">글쓰기</button>
 				</div>
 			</div>
 
@@ -107,7 +107,7 @@
 		$("li").on("click",function (e){
 			//page이동 없이 서버에 요청보내고 응답받기 :ajax
 		$.ajax({
-			url:"/shinDTown/comment/list.jm",
+			url:"/shinDTown/comment/list.com",
 			data:{"post_code":$("#"+$(this).val()+"code").val()},
 			success:function(data){
 				
@@ -165,7 +165,7 @@
 		$("#post_likebtn").on("click",function(){
 			//page이동 없이 게시글 좋아요 후 좋아요 부분 +
 			$.ajax({
-					url:"/shinDTown/post/like.jm",
+					url:"/shinDTown/post/like.com",
 					data:{"post_code":$("#post_code").val()},
 					success:function(data){
 					if(data="OK"){
@@ -202,7 +202,7 @@
 		$.ajax({
 			method : "POST",
 			data : {"post_code" : post_code, "user_code" : ${user_code}, "com_comment" : com_comment},
-			url : "/shinDTown/comment/create.jm",
+			url : "/shinDTown/comment/create/com",
 			async: false,
 			success: function(){
 				
