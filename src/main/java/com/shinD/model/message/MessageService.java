@@ -36,8 +36,8 @@ public class MessageService {
 	 
 	 }
 	
-	 public List<MessageVO> selectNotReadMessage(int message_chat_code, int sender) {
-		 return messageDao.selectNotReadMessage(message_chat_code, sender);
+	 public List<MessageVO> selectNotReadMessage(int user_code) {
+		 return messageDao.selectNotReadMessage(user_code);
 	 }
 		 
 	 public List<MessageVO> selectReadOneMessage(int message_code) {

@@ -234,7 +234,7 @@ public class MessageDAO {
 		
 		 
 		 //읽지 않은 메시지
-		 public List<MessageVO> selectNotReadMessage(int message_chat_code, int sender) {
+		 public List<MessageVO> selectNotReadMessage(int user_code) { 
 				//검증하는 sql 문
 	
 				List<MessageVO> messagelist = new ArrayList<>();
@@ -243,26 +243,28 @@ public class MessageDAO {
 				try {
 					
 					String sql="""
-							select distinct(messages.chat_code)  from MESSAGES 
+							select distinct(messages.chat_code) as chat_code from MESSAGES 
 							JOIN CHATROOMS ON MESSAGES.CHAT_CODE = CHATROOMS.CHAT_CODE
-							WHERE MESSAGE_OPEN = '0'
-							""" ;//모든메시지를 다 읽어라
+							WHERE MESSAGE_OPEN = '0' and (chatrooms.chat_user_1_code=? or chatrooms.chat_user_2_code=?)
+							""" ;//
+					//
 				
 					pst = conn.prepareStatement(sql);
-		
+					
+					pst.setInt(1, user_code);
+					pst.setInt(2, user_code);
+				
 
-					pst.setInt(1, message_chat_code);
-					pst.setInt(2, sender);
-				
-				
-					st=conn.createStatement();//통로를 만들어야함.sql문장을 보내면 됨.
+					//st=conn.createStatement();//통로를 만들어야함.sql문장을 보내면 됨. pst, st 둘중 하나만 해도됨.
 					
 					rs = pst.executeQuery();//실행은 디비에서 하고 결과는 자바쪽으로 온것
 					
 					while(rs.next()) {//데이터를 읽어서 arraylist에 담음.
-						MessageVO message = makeEmp3(rs);
+						MessageVO message = new MessageVO();
+						message.setChat_code(rs.getInt("chat_code"));
 						messagelist.add(message);
 					}
+					System.out.println(("messagelist>>>"+messagelist));
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -325,7 +327,7 @@ public class MessageDAO {
 			private MessageVO makeEmp3(ResultSet rs) throws SQLException {
 				MessageVO message = new MessageVO();
 
-				message.setMessage_code(rs.getInt("MESSAGE_CODE "));
+				message.setMessage_code(rs.getInt("MESSAGE_CODE"));
 				return message;
 			}
 

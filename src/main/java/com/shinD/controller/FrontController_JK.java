@@ -20,7 +20,7 @@ import com.shinD.controller.message.InsertMessageController;
  
 
 
-@WebServlet("*.com")
+//@WebServlet("*.com")
 
 public class FrontController_JK extends HttpServlet {
 	private static final long serialVersionUID = 1L;

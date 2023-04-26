@@ -19,7 +19,13 @@
 </head>
 <body>
     <%@ include file="../header.jsp" %> 	
-	<div id="_chatbox" >
+	<div id="_chatbox" style="display:none">
+		<div class="chatroom" id="chatroom" action="http://localhost:9090/shinDTown/view/chatView/readConnectRoom.com" method="get">
+			<div class="text" >
+
+			</div>
+
+		</div>	
 		<fieldset>
 		
 			<div id="messageWindow"></div>
@@ -35,7 +41,7 @@
 	<div class="body">
 		<div class="chats">
 
-			<div class="chat_able" id="chatroom" >
+			<div class="chat_able" id="chat_able">
 
 				<form action="selectChatRoom.com" method="get">
 					<fieldset class="chat_field">
@@ -50,7 +56,7 @@
 					</fieldset>
 				</form>
 			</div>
-			<div class="chatlist" id="chatroom" >
+			<div class="chatlist" id="" >
 			<!-- ajax 이용해서 서버로 갔다가 온다 . form을 사용할 필요 없음. form은 버튼을 눌러서 데이터를 가져올때 필요함 -->
 			
 				<fieldset class="chat_field">
@@ -60,8 +66,9 @@
 					<ul>
 					
 						<c:forEach items="${chatRoomList}" var="chatroom" >
-							<li class="chat" value="1" >${chatroom.friend_name} <button class="chatbtn" value="${chatroom.chat_code}" >채팅하기
-								<span id="unread">&hearts;</span>
+							<li class="chat" value="${chatroom.chat_code}">${chatroom.friend_name} 
+							<button class="chatbtn" onclick="button(${chatroom.chat_code})" value="${chatroom.chat_code}" >채팅하기
+								<!-- <span id="unread">&hearts;</span> -->
 							</button>
 						
 							<input type="hidden" id="${chatroom.chat_code}_code" value="${chatroom.chat_code}"></li>
@@ -70,12 +77,12 @@
 					</ul>
 				</fieldset>			
 			</div>
-			<div class="chatroom" id="chatroom" action="http://localhost:9090/shinDTown/view/chatView/readConnectRoom.com" method="get">
-				<div class="text">
+			<!-- <div class="chatroom" id="chatroom" action="http://localhost:9090/shinDTown/view/chatView/readConnectRoom.com" method="get">
+				<div class="text" >
 
 				</div>
 
-			</div>
+			</div> -->
 		</div>
 	</div>
 </body>
@@ -105,7 +112,7 @@
 		var content = message[1];
 		if (content == "") return; 
 		var originalMessage = $("#messageWindow").html();
-		
+		console.log("idx>>>>>>>"+idx);
 		var receiveCode= content.substr(0,idx);
 		
 		//console.log("시작>>>>>>>>>>>");
@@ -138,9 +145,6 @@
 	
 	function send() {
 
-		
-
-		console.log("num>>>>>>"+num+"me>>>>>>>"+${user_code });
 		$.ajax({
 			url:"insertMessage.com",
 			data:{"chat_code":num,"sender":${user_code },"message_data":$("#insertMessage").val()},
@@ -155,7 +159,7 @@
 		var message = $("#insertMessage").val() ;
 		if (message != "") {
 			$("#messageWindow").html($("#messageWindow").html() + "<p class='chat_content'>나 : "
-							+ message + "</p>")+"|";//추가한 부분
+							+ message + "</p>");//추가한 부분
 		}
 		
 		webSocket.send("${user_name}"+ "|" + message); 
@@ -172,29 +176,34 @@
 		var elem = $('#messageWindow');
 		elem.scrollTop = elem.scrollHeight;
 	}, 0); 
-	
 
-
-
-
-	$(function(){
+	/* $(function(){
 		$("#_chatbox").hide();
-	})
+	}) */
 	
-	$(".chatbtn").on("click",function(){
+	/*  $(".chatbtn").on("click",function(){
 		
 		//클릭시 send와 enter가 나온다.
 		//$("#_chatbox").show();
 		$("#_chatbox").toggle(); // show -> hide , hide -> show
 		
-	})
+	})  */
 	
-$(".chatbtn").on("click",function(){
-
- 
+function button(num){
+//$(".chatbtn").on("click",function(){
+	alert("눌렷니?");
+	$("#_chatbox").toggle();	
+	
+	/* if($("#chatroom ").css("display") == "block") $("#chatroom ").css("display","block");
+	else $("#chatroom").css("display","none"); */
+	
+	
+	console.log(num);
 	//var chat_code = "#"+$(this).val()+"_code";
 	//console.log("chat_code>>>>>>>>"+ chat_code);
-	num= $(this).val();
+	//num= $(this).val();
+	
+	
 	console.log("num>>>>."+num);
 	$.ajax({
 		url:"readConnectRoom.com",
@@ -210,45 +219,90 @@ $(".chatbtn").on("click",function(){
 								$("#chatroom").append("<div class='me'><p>" + element.message_data + "</p> </div>");
 
 							}else{
+								console.log("chatroom!!!!!!!!!!");
 								$("#chatroom").append("<div class='other'><p>" + element.message_data + "</p> </div>");
 							}
 								
 						});
 			}
 	}) 
-})
-
+//})
+	}
+	
+	
 	/* 읽지 않은 메시지 표시 */
-/* 	$(function(){
-		
+	$(function(){
+		getUnread();
 	})
+	
 	function getUnread(){
 		$.ajax({
 			type:"POST",
 			url:"selectNotReadMessage.com",
-			data:{"user_code": encodeURIComponent(${user_code})},
+			//data:{"user_code": encodeURIComponent(${user_code})},
+			data:{"user_code": ${user_code}},
 			success:function(result){
-				if(result >=1){
+				/*  if(result.size() >=1){
+					console.log("result>>>>>>>"+result);
 					showUnread(result);
-				}else showUnread('');
+				}else showUnread('');  */
+				
+				var jsonres;
+				jsonres = JSON.parse(result);
+				
+				//li에 있는 id값을 가져와야함
+				var list = $(".chat_field li");
+				
+				//console.log("22length>>"+jsonres.message.length);
+				//chat_code랑 message_open 여부 구하기
+				for(var i=0; i<jsonres.message.length; i++){
+					
+					var chat_code = jsonres.message[i].chat_code;
+					var message_open = jsonres.message[i].message_open;
+					console.log("list[i].value>>>>>>>"+list[i].value+"       "+"chat_code>>>>>>"+chat_code+"   message_open>>"+message_open);
+					//list[0].value가 chat_code를 의미하므로 이를 이용해서 구하기
+					for(var j=0; j<jsonres.message.length; j++){
+						if(list[j].value==chat_code && !message_open){
+							//읽지않은 메시지가 존재함.
+							list[j].innerHTML+="&hearts;";				
+						}
+					}
+				}
+		
+				//console.log(list[0].value);
+				
+			
+				
+				/* for(var i=0; i<Object.keys("message").length; i++){
+					console.log();
+				} */
+				
 			}
 		})
 	}
+/* 	{"message":[{"message_data":null,"message_code":0,
+		"sender":0,"message_create":null,"message_open":false},
+		{"message_data":null,"message_code":0,"sender":0,
+			"message_create":null,"message_open":false},
+			{"message_data":null,"message_code":0,"sender":0,
+				"message_create":null,"message_open":false}]} */
+/* 	
 	function getInfiniteUnread(){
 		setInterval(function(){
 			getUnread();
 		}, 4000);
-	}
+	} */
 	
 	function showUnread(result){
+		consol.log("showUnread>>>>>");
 		$('#unread').html(result);
 	}
 	
-	$(document).ready(function(){
+/* 	$(document).ready(function(){
 		getInfiniteUnread();
 	});
-	 */
-
+	 
+ */
 	</script>
 
 </body>
