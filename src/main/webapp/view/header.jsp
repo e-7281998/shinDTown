@@ -90,7 +90,7 @@ background: none;
 		</c:if>
 		
 		<c:if test="${sessionScope.loginUser != null}">
-		<a href="/shinDTown/board/main.com"><h2 class="menu">홈</h2></a>
+		<a href="/shinDTown/main.com"><h2 class="menu">홈</h2></a>
 		<a href="/shinDTown/board/read.jm"><h2 class="menu">게시판</h2></a>
 		<a href="/shinDTown/view/chatView/ChatRead.jsp"><h2 class="menu">채팅방</h2></a>
 		<a href="/shinDTown/view/memberView/MemberUpdate.jsp"><h2 class="menu">마이페이지</h2></a>
