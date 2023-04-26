@@ -15,6 +15,13 @@ public class MemberUpdate implements CommonControllerInterface {
 		MemberService service = new MemberService();
 		
 		HttpServletRequest request = (HttpServletRequest)data.get("request");
+		
+		String[] pathArr = request.getRequestURI().split("/");
+		String path = pathArr[pathArr.length-1];
+		
+		if(path.equals("MemberUpdate.com"))
+			return "MemberUpdate.jsp";
+		
 		String id = (String) request.getParameter("id");
 		String pwd = (String) request.getParameter("pwd");
 		 
