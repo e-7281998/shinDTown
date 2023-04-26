@@ -55,7 +55,9 @@
 					<legend>접속중인 사람</legend>
 					<ul>
 						<c:forEach items="${memberList }" var="member" varStatus="status" >
-							<p>${member.user_name}</p>
+							<c:if test="${user_name ne member.user_name}">
+								<p>${member.user_name}</p>
+							</c:if >
 							</c:forEach>
 						<!-- <li class="chat" value="1">전은정</li>session값 가져오기
 						<li class="chat" value="2">양유진</li>
@@ -150,7 +152,10 @@
 	
 	var num;
 
-	//var me=${user_code };
+
+	
+	console.log("me>>>>>"+me);
+/* 	//var me=${user_code }; */
 /* 	
 	선택한 유저의 코드->user_code를 메시지와 함께 보내고 
 	그 코드가 일치하면 받는걸로 */
@@ -343,9 +348,7 @@ $(".chatbtn").on("click",function(){
 		$.ajax({
 			type:"POST",
 			url:"selectNotReadMessage.com",
-			data:{
-				user_code: encodeURIComponent(${user_code}),
-			},
+			data:{"user_code": encodeURIComponent(${user_code})},
 			success:function(result){
 				if(result >=1){
 					showUnread(result);
