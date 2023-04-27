@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="path" value="${pageContext.request.contextPath }" scope="application"></c:set>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>ShinDTown</title>
+ <link rel="shortcut icon" type="image/x-icon" href="${path}/view/img/logo.png">
 <link href="member.css" rel="stylesheet" />
 <script src="<%=request.getContextPath()%>/jq/jquery-3.6.4.min.js"></script>
 </head>
@@ -44,7 +47,7 @@
 			} 
 			
 			$.ajax({
-				url:"updatePwd.com",
+				url:"${path}/view/memberView/updatePwd.com",
 				method : "post",
 				data:{"pwd":pwd, "id" : "${loginUser.user_id}"},
 				success:(responseData) => {
@@ -97,7 +100,7 @@
 				return;
 			
 			$.ajax({
-				url: "withdraw.com",
+				url: "${path}/view/memberView/withdraw.com",
 				data : {"id":"${loginUser.user_id}"},
 				success: (responseData) => {
 					if(responseData == 1){

@@ -6,7 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>ShinDTown</title>
+ <link rel="shortcut icon" type="image/x-icon" href="${path}/view/img/logo.png">
 <link href="${path}/view/boardView/board.css" rel="stylesheet" />
 </head>
 <body class="main">
@@ -16,16 +17,18 @@
 
 		<div class="board_page">
 			<div class="boards">
-				<c:forEach items="${boardlist }" var = "board" begin="0" end="4" >
+				<c:forEach items="${boardlist}" var = "board" begin="0" end="4" >
 					<fieldset class="board_list"  onclick="location.href='/shinDTown/board/detail.com?BOARD_NAME=${board.BOARD_NAME }'">
 						<legend>${board.BOARD_NAME }</legend>
 						<c:forEach items="${boardpostlist }" var = "boardpost" varStatus ="status">
 							<c:if test="${board.BOARD_CODE  == boardpost.BOARD_CODE }">
 								<ul class="board_title">
-									<li>-${boardpost.POST_TITLE }</li>
+									<li class="post_title">${boardpost.POST_TITLE }</li>
+									<hr class="b_line"/>
 								</ul>
 							</c:if>
 						</c:forEach>
+
 					</fieldset>
 				</c:forEach>
 			
@@ -36,7 +39,8 @@
 					<c:forEach items="${boardpostlist }" var = "boardpost" varStatus ="status">
 							<c:if test="${board.BOARD_CODE  == boardpost.BOARD_CODE }">
 								<ul class="board_title">
-									<li>-${boardpost.POST_TITLE }</li>
+									<li class="post_title">${boardpost.POST_TITLE }</li>
+									<hr class="b_line"/>
 								</ul>
 							</c:if>
 						</c:forEach>
@@ -49,23 +53,25 @@
 				<div class="search">
 					<form class="search_form"  method="post" action = "/shinDTown/board/read.com">
 						<input type="text" name="board_name" class="search_title"
-							placeholder="게시판 이름을 입력해 주세요 "> <input type="button"
-							class="search_btn" value="찾기">
+							placeholder="게시판 이름을 입력해 주세요 "> 
+							<input type="submit" class="search_btn" value="찾기">
 					</form>
 				</div>
 
 				<div class="list">
 					<ul class="lists">
-					<c:forEach items="${boardserch }" var = "boardser" varStatus ="status">
-						<li>${boardser }</li>
+					<c:forEach items="${boardserch}" var = "boardser" varStatus ="status">
+						<li onclick="location.href='/shinDTown/board/detail.com?BOARD_NAME=${boardser}'">
+							${boardser}
+						</li>
 						<hr class="line"/>
 					</c:forEach>	
 					</ul>
 				</div>
 
 				<div class="create_board">
-					<button class="new_board" onclick="location.href='/shinDTown/board/create.com'">새
-						게시판 만들기</button>
+					<button class="new_board" onclick="location.href='/shinDTown/board/create.com'">
+					새게시판 만들기</button>
 				</div>
 			</div>
 		</div>

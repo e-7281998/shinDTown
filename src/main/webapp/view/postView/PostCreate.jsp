@@ -6,8 +6,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>ShinDTown</title>
+ <link rel="shortcut icon" type="image/x-icon" href="${path}/view/img/logo.png">
 <link href="${path}/view/postView/post.css" rel="stylesheet" />
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="${path}/jq/jquery-3.6.4.min.js"></script>
 </head>
 <body class="main">
@@ -17,9 +19,7 @@
 
 			<div class="post_selector">
 				<fieldset class="post_selector">
-					<legend>추가항목</legend>
-					<input type="checkbox" id="photo" name="photo" value="photo">
-					<label for="photo">사진</label> <input type="checkbox" id="code"
+					<legend>추가항목</legend> <input type="checkbox" id="code"
 						name="code" value="code"> <label for="code">코드</label>
 				</fieldset>
 			</div>
@@ -31,20 +31,16 @@
 						id="title" />
 				</div>
 
-				<div class="post_form">
-					<label>내용</label> <input type="text" name="post_content" class="content" />
+				<div class="post_form" id="form_content">
+					<label>내용</label>
+					<textarea name="post_content" class="content"></textarea>
 				</div>
 
-				<div class="post_photo" id="form_photo" style="visibility:hidden;">
-					<label>사진</label> <input type="file" name="post_image" class="photo"
-						disabled />
-				</div>
 
 
 				<div class="post_form" id="form_code" style="display:none;">
 					<label>코드</label>
 					<textarea name="post_source" class="code"></textarea>
-					<!-- 					<label>코드</label> <input type="text" name="code" class="code" /> -->
 				</div>
 			
 				<div class="post_form btn">

@@ -14,7 +14,7 @@
 
 .signup {
 	width: 500px;
-	margin-top: 10px;
+	margin-top: 5%;
 }
 
 .form {
@@ -37,7 +37,7 @@
 }
 
 .form_3 {
-	margin-top: 15%;
+	margin-top: 10%;
 	display: grid;
 	grid-template-rows: 1fr 1fr 1fr 1fr 0.3fr 1fr;
 	grid-template-columns: 1fr 1fr 1fr;

@@ -24,6 +24,7 @@ import com.shinD.controller.comment.CommentDelete;
 import com.shinD.controller.comment.CommentLikes;
 import com.shinD.controller.comment.CommentList;
 import com.shinD.controller.comment.DeleteLike;
+import com.shinD.controller.comment.com_userName;
 import com.shinD.controller.git.Git;
 import com.shinD.controller.member.MemberLogin;
 import com.shinD.controller.member.MemberLogout;
@@ -38,8 +39,11 @@ import com.shinD.controller.plan.CreatePlan;
 import com.shinD.controller.plan.DeletePlan;
 import com.shinD.controller.plan.DetailPlan;
 import com.shinD.controller.plan.ReadPlan;
+import com.shinD.controller.post.PostCheck;
 import com.shinD.controller.post.PostCreate;
+import com.shinD.controller.post.PostDelete;
 import com.shinD.controller.post.PostLike;
+import com.shinD.controller.post.PostLikeDelete;
  
 @WebServlet("*.com")
 public class MainController extends HttpServlet {
@@ -103,11 +107,20 @@ public class MainController extends HttpServlet {
 		case "/board/detail.com":
 			controller = new BoardDetail();
 			break;
+		case "/post/delete.com":
+			controller = new PostDelete();
+			break;
 		case "/post/create.com":
 			controller = new PostCreate();
 			break;
+		case "/post/likecheck.com":
+			controller = new PostCheck();
+			break;
 		case "/post/like.com":
 			controller = new PostLike();
+			break;
+		case "/post/likedelete.com":
+			controller = new PostLikeDelete();
 			break;
 		case "/comment/create.com":
 			controller = new CommentCreate();
@@ -128,7 +141,6 @@ public class MainController extends HttpServlet {
 		case "/view/calendarView/DeletePlan.com": 
 			controller = new DeletePlan();
 			break;
-
 		case "/view/boardView/likes.com":
 			controller = new CommentLikes();
 			break;
@@ -145,7 +157,7 @@ public class MainController extends HttpServlet {
 			controller = new ComCode();
 			break;
 		case "/view/boardView/getComUserName.com":
-			//controller = new com_userName();
+			controller = new com_userName();
 			break;
 		//진경
 		case "/view/chatView/selectChatRoom.com":

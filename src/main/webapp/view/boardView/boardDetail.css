@@ -5,11 +5,12 @@
 	justify-content: center;
 }
 
+
 .board_detail {
 	display: grid;
 	width: 80%;
 	grid-template-rows: 0.3fr 1fr 1fr;
-	grid-template-columns: 0.3fr 2fr 2fr 0.3fr;
+	grid-template-columns: 0.3fr 2fr 2fr 1fr;
 	
 	grid-template-areas: 
 	". board_title post_detail . " 
@@ -17,6 +18,7 @@
 	". board_list post_detail . ";
 	gap: 2%;
 }
+
 
 .board_title {
 	grid-area: board_title;
@@ -27,7 +29,7 @@
 .board_list {
 	grid-area: board_list;
 	display : grid;
-	grid-template-rows: 350px 40px;
+	grid-template-rows: 2fr 40px;
 	grid-template-columns: 550px;
 	grid-template-areas: 
 	"post_title"
@@ -46,16 +48,44 @@
 	"post" 
 	"comment" 
 	"comment_list";
+	align-items: center
+}
+.date h3{
+	float : right;
+	margin-right : 10px;
+	padding : 10px;
 }
 .post_title{
 	grid-area: post_title;
 	margin-left : 10px;
-	overflow: scroll;
+	overflow: auto;
 	overflow-x: hidden;
 	padding : 15px;
 	margin : 10px;
 	box-shadow: 0 0 4px #558BCF;
 	border-radius : 20px;
+}
+.post_line{
+	width : 80%;
+}
+.post_title::-webkit-scrollbar {
+    width: 8px; 
+}
+
+.post_title::-webkit-scrollbar-thumb {
+    height: 30%; 
+    background: #217af4; 
+    
+    border-radius: 10px;
+}
+
+.post_title::-webkit-scrollbar-track {
+    background: rgba(33, 122, 244, .1);  
+}
+
+#board_delete{
+	float : right;
+	margin-right : 90px;
 }
 ul {
 	padding-left : 0;
@@ -86,15 +116,17 @@ li{
 	justify-content: flex-end;
 }
 
+
 .posting_btn{
 	height: 40px;
+	width : 100px;
 	outline: none;
 	border-radius: 15px;
 	border: 3px solid;
 	border-color: #558BCF;
 	background-color : #558BCF;
 	color : white;
-	font-size: 15px;
+	font-size: 17px;
 	margin-right: 20px;
 }
 
@@ -102,18 +134,46 @@ li{
 	grid-area: post;
 	border-radius: 20px;
 	margin-left : 10px;
+	height: 350px;
 	border : 2px solid #558BCF;
-	overflow: scroll;
+	overflow: auto;
 	overflow-x: hidden;
 	display : grid;
-	grid-template-rows: 1fr 1fr 1fr;
-	grid-template-columns: 1fr 0.5fr;
+	grid-template-rows: 1fr 1fr 6fr 6fr 1fr;
+	grid-template-columns: 1fr 0.5fr 1fr;
 	grid-template-areas: 
-	"title date" 
-	"content content" 
-	"like like";
+	"post_user . date" 
+	"title title . " 
+	"content content content"
+	"source source source"
+	"like . state ";
 	
 	padding-left : 10px;
+}
+
+.state{
+	grid-area: state;
+	display : flex; 
+	justify-content: flex-end;
+	margin-right : 20%;
+}
+.source{
+	grid-area: source;
+}
+
+.post::-webkit-scrollbar {
+    width: 8px; 
+}
+
+.post::-webkit-scrollbar-thumb {
+    height: 30%; 
+    background: #217af4; 
+    
+    border-radius: 10px;
+}
+
+.post::-webkit-scrollbar-track {
+    background: rgba(33, 122, 244, .1); 
 }
 
 .title{
@@ -128,6 +188,9 @@ li{
 .like{
 	grid-area: like;
 }
+.post_user{
+	grid-area: post_user;
+}
 
 .comment {
 	grid-area: comment;
@@ -139,12 +202,52 @@ li{
 	grid-area: comment_list;
 	margin-left: 20px;
 	margin-top: 15px;
-	overflow: scroll;
+	overflow: auto;
 	overflow-x: hidden;
+	height: 250px;
+}
+#post_likebtn{
+	border: none;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+}
+
+.emp{
+	object-fit: cover;
+    height: 30px;
+}
+
+.comment_btn{
+	border: none;
+	width : 60px;
+	height : 45px;
+	border-radius: 20px;
+	background-color: #558BCF;
+	color: white;
+	font-size: 15px;
+}
+.comment_pos::-webkit-scrollbar {
+    width: 8px; 
+}
+
+.comment_pos::-webkit-scrollbar-thumb {
+    height: 30%; 
+    background: #217af4; 
+    
+    border-radius: 10px;
+}
+
+.comment_pos::-webkit-scrollbar-track {
+    background: rgba(33, 122, 244, .1); 
 }
 
 .create_comment {
 	width: 100%;
+}
+
+.like_p{
+	display: inline-block;
 }
 
 input[type="text"] {
@@ -185,10 +288,10 @@ input[type="submit"] {
 .delcom{
 	justify-content: center;
 	grid-area : delete;
-	width: 50px;
+	width: auto;
 	height: 30px;
 	outline: none;
-	border-radius: 15px;
+	border-radius: 13px;
 	border: 3px solid;
 	border-color: #558BCF;
 	background-color : #558BCF;
@@ -202,7 +305,7 @@ input[type="submit"] {
 	width: 50px;
 	height: 30px;
 	outline: none;
-	border-radius: 15px;
+	border-radius: 13px;
 	border: 3px solid;
 	border-color: #558BCF;
 	background-color : #558BCF;

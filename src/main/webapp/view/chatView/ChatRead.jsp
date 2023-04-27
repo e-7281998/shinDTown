@@ -8,7 +8,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>ShinDTown</title>
+ <link rel="shortcut icon" type="image/x-icon" href="${path}/view/img/logo.png">
 <link href="${path }/view/chatView/chat.css" rel="stylesheet" />
 <script src="${path }/jq/jquery-3.6.4.min.js"></script>
 </head>

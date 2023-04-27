@@ -16,5 +16,5 @@ import lombok.ToString;
 public class GitVO {
 	 //private String token;
 	 private int user_code;
-	 private String git_id;
+	 private String git_id; 
 }

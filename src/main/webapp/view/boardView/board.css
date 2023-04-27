@@ -16,23 +16,48 @@
 	". boards find . ";
 	gap: 2%;
 }
-
+.b_line{
+	width: 95%;
+}
+.post_title{
+	margin-left : 15px;
+	height : 50%;
+}
 
 .boards {
 	grid-area : boards;
 	display : grid;
-	height : 650px;
+	height : 680px;
 	grid-template-columns: repeat(2, 1fr);
 	gap: 2%;
-	overflow: scroll;
+	overflow: auto;
 	overflow-x: hidden;
+}
+
+.boards::-webkit-scrollbar {
+    width: 8px; 
+}
+
+.boards::-webkit-scrollbar-thumb {
+    height: 30%; 
+    background: #217af4; 
+    
+    border-radius: 10px;
+}
+
+.boards::-webkit-scrollbar-track {
+    background: rgba(33, 122, 244, .1);  
+}
+ul
+.post_line{
+	width : 80%;
 }
 
 .board_title > li {
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
-	font-size: 18px;
+	font-size: 1.1em;
 }
 #title_line{
 	margin-top : 1px;
@@ -49,21 +74,20 @@
 	gap: 2%;
 }
 legend{
-	font-size : 20px;
+	font-size : 1.5em;
 	text-align: center;
 }
 fieldset{
 	display : grid;
-	border: 3px solid;
 	border-color: #558BCF;
 	box-shadow: 0 0 2px #558BCF;
 	border-radius: 20px;
 	margin-right: 5px;
 }
 .board_title {
-/* 	list-style: none; */
-	padding-left : 15px;
+	padding-left : 10px;
 	cursor : pointer;
+	margin-bottom : 7px;
 }
 .search_form{
 	display : flex;
@@ -95,19 +119,30 @@ fieldset{
 	grid-area: list;
 	border: 2px solid  #558BCF;
 	border-radius : 20px;
+	overflow: auto;
+	overflow-x: none;
 	display : grid;
-	
-	
-	grid-template-rows: repeat(5, 1fr);
+	grid-template-rows: 100px;
 	grid-template-columns: 1fr;
 	grid-template-areas: 
-	"lists"
-	"lists"
-	"lists"
-	"lists"
 	"lists";
-/* 	여기 이상  */
 }
+
+.list::-webkit-scrollbar {
+    width: 8px; 
+}
+
+.list::-webkit-scrollbar-thumb {
+    height: 20%; 
+    background: #217af4; 
+    
+    border-radius: 10px;
+}
+
+.list::-webkit-scrollbar-track {
+    background: rgba(33, 122, 244, .1);  
+}
+
 .lists{
 	grid-area: lists;
 }
@@ -195,6 +230,7 @@ ul.lists{
 	grid-area: dup_check;
 	margin: 10px;
 	height: 50px;
+	width : 80px;
 	outline: none;
 	border-radius: 20px;
 	border: 3px solid;
