@@ -22,12 +22,23 @@ public class PostService {
 			return dao.PostComSelect(board_code);
 		}
 	
-	//인기게시글 순서대로 가져오기
-		public List<PostCommentVO> PostTop(){
-			return dao.PostTop();
-		}
-		//게시글 좋아요
-		public int postLike(int user_code,int post_code) {
-			return dao.postLike(user_code, post_code);
+	public List<PostCommentVO> PostTop(){
+		return dao.PostTop();
+	}
+	//게시글 좋아요
+	public int postLike(int user_code,int post_code) {
+		return dao.postLike(user_code, post_code);
+	}
+	//게시글 좋아요했는지 확인
+	public int CheckCom(int post_code, int user_code) {
+		return dao.CheckPost(post_code, user_code);
+	}
+	//게시글 좋아요 삭제
+	public int postLikeDel(int post_code) {
+		return dao.postLikeDel(post_code);
+	}
+	//게시글 삭제
+		public int PostDelete(int post_code) {
+			return dao.PostDelete(post_code);
 		}
 }

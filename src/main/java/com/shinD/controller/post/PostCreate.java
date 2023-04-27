@@ -46,7 +46,7 @@ public class PostCreate implements CommonControllerInterface {
 			System.out.println("생성 완료햇습니다.");
 			
 			//보드디테일로 돌아감
-			page = "redirect:/shinDTown/board/detail.jm";
+			page = "redirect:/shinDTown/board/detail.com";
 			
 		}
 		

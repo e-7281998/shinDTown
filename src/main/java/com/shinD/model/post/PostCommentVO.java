@@ -22,6 +22,7 @@ public class PostCommentVO {
 	private String POST_IMAGE;
 	private String POST_SOURCE;
 	private Date POST_CREATE;
+	private String USER_NAME;
 	private int POST_COMS;
 	private int POST_LIKES;
 }

@@ -4,8 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8" />
-<title>Insert title here</title>
-
+<title>ShinDTown</title>
+<link rel="shortcut icon" type="image/x-icon" href="/view/img/logo.png">
 <link href="view/main.css" rel="stylesheet" />
 </head>
 <body>
@@ -18,8 +18,8 @@
 			<div class="script_2">
 				<h3>신한 DS 금융 과정을 모두 함께해요</h3>
 			</div>
-			<div class="btn">
-				<button onClick="location.href='view/memberView/MemberSignUp.jsp'">회원 가입 하기</button>
+			<div class="btn_index">
+				<button class="btn_in" onClick="location.href='view/memberView/MemberSignUp.jsp'">회원 가입 하기</button>
 			</div>
 			<div class="greeting_img">
 			</div>

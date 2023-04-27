@@ -16,5 +16,5 @@ public class MemberVO {
 	String user_name; 
 	String user_id; 
 	String user_pwd; 
-	int user_class; 
+	int user_class;
 }

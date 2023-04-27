@@ -166,17 +166,15 @@ public class BoardDAO {
 	}
 
 	// 게시판 삭제--result 값이 1이상이면 성공
-	// 유저코드와 보드이름이 일치해야 삭제가 가능하다.
-	public int boardDelete(String boar_name, int user_code) {
+	public int boardDelete(String board_name) {
 		int result = 0;
-		String sql = "delete from boards where board_name = ? and USER_CODE = ?";
+		String sql = "delete from boards where board_name =?";
 		conn = MySQLUtil.getConnection();
 
 		try {
 			// pst에 spl문 연결해주고 ? 변수에 값 저장
 			pst = conn.prepareStatement(sql);
-			pst.setString(1, boar_name);// 첫번째 ? 에 보드이름
-			pst.setInt(2, user_code);// 두번째 ?에 유저코드
+			pst.setString(1, board_name);// 첫번째 ? 에 보드이름
 
 			// pst를 실행시키고 성공시 1이상의 값 가져옴
 			result = pst.executeUpdate();
@@ -203,7 +201,6 @@ public class BoardDAO {
 			rs = pst.executeQuery();
 
 			while (rs.next()) {
-
 				bnamelist.add(rs.getString("BOARD_NAME"));
 			}
 
@@ -216,6 +213,32 @@ public class BoardDAO {
 
 		return bnamelist;
 	}
+	
+	// 게시판디테일 온로드될 떄 가져오기
+		public List<BoardVO> boardLoad(String board_name) {
+			List<BoardVO> bdetaillist = new ArrayList<>();
+			String sql = "select * from boards where board_name=?";
+			conn = MySQLUtil.getConnection();
+
+			try {
+				pst = conn.prepareStatement(sql);
+				pst.setString(1, board_name);//단어가 들어가면 무조건 찾기
+				rs = pst.executeQuery();
+
+				while (rs.next()) {
+					BoardVO board = makeBoard(rs);// 보드를 만들어주는 함수에 다녀와서 보드생성
+					bdetaillist.add(board);
+				}
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				MySQLUtil.dbDisconnect(null, pst, conn);
+			}
+
+			return bdetaillist;
+		}
 	
 		// 게시판명 검색해서 번호로받기
 		public int boardSerchCode(String board_name) {

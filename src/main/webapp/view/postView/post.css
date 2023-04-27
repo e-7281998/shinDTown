@@ -17,11 +17,11 @@ fieldset{
 .post{
 	display: grid;
 	
-	grid-template-rows: 0.5fr 5fr;
-	grid-template-columns: 1fr 5fr 0.5fr;
+	grid-template-rows: 1fr 8fr;
+	grid-template-columns: 50px 1fr 8fr 50px;
 	grid-template-areas: 
-	"post_selector . ."
-	". posting ."
+	". post_selector . ."
+	". . posting ."
 }
 
 .post_selector{
@@ -35,14 +35,14 @@ fieldset{
 
 	border-radius : 20px;
 	padding: 10px 10px;
-	grid-template-rows: 1fr 4fr 50px 4fr 30px;
-	grid-template-columns: 1fr;
+	grid-template-rows: 1fr 4fr 4fr 30px;
+	grid-template-columns: 5fr;
 	grid-template-areas: 
 	"title"
 	"content"
-	"photo"
 	"code"
 	"postbtn";
+	gap: 2%;
 }
 
 #form_code{
@@ -52,6 +52,7 @@ fieldset{
 	grid-area: title;
 	width : 80%;
 	height : 40px;
+	font-weight : bold;
 }
 
 #form_photo{
@@ -60,7 +61,11 @@ fieldset{
 .content{
 	grid-area: content;
 	width : 80%;
-	height : 300px;
+	padding : 10px;
+	border-radius: 20px;
+	border: 3px solid;
+	border-color: #558BCF;
+	font-size : 1em;
 }
 .photo{
 	grid-area: photo;
@@ -73,8 +78,7 @@ fieldset{
 	border-radius: 20px;
 	border: 3px solid;
 	border-color: #558BCF;
-	font-size : 1.2em;
-	font-weight: bold;
+	font-size : 1em;
 }
 .code:focus{
 	outline: none;
@@ -99,6 +103,9 @@ label{
 	justify-content: flex-end;
     align-items: flex-start;
 	
+}
+textarea{
+	font-size : 1.2em;
 }
 .post_form > input{
 	outline: none;

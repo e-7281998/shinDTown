@@ -21,12 +21,10 @@ public class PostLike implements CommonControllerInterface {
 		int post_code = Integer.parseInt(request.getParameter("post_code"));
 		
 		PostService pservice = new PostService();
-		int result = pservice.postLike(user_code, post_code);//게시글 증가
-		if(result>0) {	
-			return "responseBody:OK";
-		}
+		int result = pservice.postLike(user_code, post_code);//게시글 증가	
 		
-		return "responseBody:false";
+		return "responseBody:"+result;
 	}
+
 
 }

@@ -17,8 +17,8 @@ body {
 	margin-top: 3%;
 	grid-template-rows: repeat(5, 3fr);
 	grid-template-columns: 50px 2fr 0.8fr 5fr 50px;
-	grid-template-areas: ". script1 btn greet greet"
-		". script2 . greet greet" ". . . greet greet" ". . . greet greet"
+	grid-template-areas: ". script1 . greet greet"
+		". script2 btn_index greet greet" ". . . greet greet" ". . . greet greet"
 		". . . greet greet";
 }
 
@@ -39,23 +39,27 @@ body {
 	background-repeat: no-repeat;
 }
 
-.btn1 {
-	grid-area: btn;
+.btn_index {
+	grid-area: btn_index;
 	display: grid;
-	align-items: end;
+	align-items: start;
+}
+.btn_in{
+	
+	border: 3px solid;
+	border-color: #558BCF;
+	border-radius: 10px;
+	background-color: #558BCF;
+	padding : 10% 10%;
+	font-size : 15px;
+	color : white;
 }
 
-button {
-	background-color: skyblue;
-	border: none;
-	padding: 10px 10px;
-	border-radius: 10px;
-}
 
 /* main index */
 .main_page {
 	display: grid;
-	grid-template-rows: 1fr 1fr 0.3fr 1.8fr;
+	grid-template-rows: 200px 1fr 0.3fr 1.8fr;
 	grid-template-columns: 0.3fr 2.5fr 1.5fr 0.3fr;
 	margin-top : 3%;
 	grid-template-areas:
@@ -95,8 +99,74 @@ button {
 
 .git {
 	grid-area: git;
-	border: 2px solid gray;
 	margin-top: 9px;
+	
+	display : grid;
+	grid-template-rows: 0.5fr 1fr 0.5fr;
+	grid-template-areas: 
+	"git_title git_edit"
+	"git_body git_body"
+	". tabkey";
+}
+.git_title{
+	grid-area : git_title;
+	display : flex;
+	align-items: center;
+}
+.list{
+	display : flex;
+	justify-content: space-between;
+	margin-right : 200px;
+	margin-left : 3px;
+}
+.git_edit{
+	grid-area: git_edit;
+	display : flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+li .repo{
+	list-style : none;
+}
+.git_list{
+	display : none;
+	width : 100%;
+	height : 100%;
+	margin-top : 0;
+}
+.right {
+	display : flex;
+}
+.repo_title{
+	display : inline-block;
+}
+.tab{
+	white-space: pre;
+}
+.tabkey { 
+	grid-area : tabkey;
+	display: flex;
+    align-items: center;
+    justify-content: flex-end; 
+}
+#grass{
+	display: none;
+	width : 100%;
+	height : 100%;
+}
+#modal_repo{
+	margin-left : 10px;
+}
+.commit{
+	margin-top: 10px;
+}
+.git_body{
+	grid-area : git_body;
+	width : 100%;
+	height : 100%;
+}
+#git_register{
+	display : block;
 }
 
 .calendar {
@@ -175,6 +245,7 @@ button {
 	position: relative;
 	width : 100%;
 	height : 100%;
+	top: -20%;
 	z-index : 1; 
 }
 
@@ -184,7 +255,7 @@ button {
 }
 #modal .modalcontent{
 	width : 400px;
-	margin:-450px auto;
+	margin : -450px;
 	padding : 20px 10px;
 	background: #fff;
 	border: 2px solid #666;
@@ -201,6 +272,108 @@ button {
   z-index:-1;
 }
 
+.modal_body{
+	grid-area: modal_body;
+	display : grid;
+	
+	grid-template-rows : repeat(5, 1fr);
+	grid-template-columns : 1fr 4fr;
+	
+	grid-template-areas: 
+	"title  calendar_title "
+	"content calendar_content "
+	"start_date calendar_start_date "
+	"end_date calendar_end_date"
+	"c_choice color_choice";
+	
+	align-items : center;
+	justify-items: center;
+}
+
+
+
+
+.modal2{
+	display :none;
+	position: absolute;
+	top : 25%;
+	left: -5%;
+	width : 100%;
+	height : 100%;
+	z-index : 1; 
+}
+
+#modal2 button {
+	display: inline-block;
+	width : 80px; 
+	height: 45px;
+	margin-right : 10px;
+}
+#modal2 .modalcontent2{
+	width : 400px;
+	height : auto;
+	margin :auto;
+	padding : 20px 10px;
+	background: #fff;
+	border: 3px solid;
+	border-color: #558BCF;
+	border-radius: 20px;
+	height: 300px;
+}
+
+#modal2 .modal_layer {
+  position:fixed;
+  top:0;
+  left:0;
+  width: 100%;
+  height:100%;
+  background:rgba(0, 0, 0, 0.5);
+  z-index:-1;
+}
+
+.modal_body2{
+	grid-area: modal_body2;
+	align-items : center;
+	justify-items: center;
+}
+.modal_header2{
+	display: flex;
+	justify-content: space-between;
+}
+
+.submit{
+	cursor: pointer;
+	width: 70px;
+    height: 30px;
+    background-color: #558BCF;
+    color: white;
+    border: none;
+    border-radius: 20px;
+}
+.repo_check{
+	cursor: pointer;
+	width: auto;
+    height: 30px;
+    background-color: #558BCF;
+    color: white;
+    border: none;
+    border-radius: 20px;
+}
+
+#git_id{
+	border-color: #558BCF;
+    border-radius: 20px;
+    outline: none;
+}
+
+#git_id:focus{
+	box-shadow: 0 0 4px #558BCF;
+    outline: none;
+}
+#git_id:active{
+	outline: none;
+}
+
 .modalcontent{
 	display : grid;
 	grid-template-rows: 1fr 2fr 1fr;
@@ -215,7 +388,8 @@ button {
 	
 	gap: 2%;
 	
-} 
+}
+ 
 .modal_header{
 	grid-area: modal_header;
 	
@@ -247,23 +421,6 @@ button {
 	font-size : 20px;
 }
 
-.modal_body{
-	grid-area: modal_body;
-	display : grid;
-	
-	grid-template-rows : repeat(5, 1fr);
-	grid-template-columns : 1fr 4fr;
-	
-	grid-template-areas: 
-	"title  calendar_title "
-	"content calendar_content "
-	"start_date calendar_start_date "
-	"end_date calendar_end_date"
-	"c_choice color_choice";
-	
-	align-items : center;
-	justify-items: center;
-}
 .form-control{
 	border: 3px solid;
 	border-color: #558BCF;

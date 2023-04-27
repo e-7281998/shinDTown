@@ -31,10 +31,12 @@ public class BoardDetail implements CommonControllerInterface {
 		int bcode = bservise.boardSerchCode(board_name);// 보드 이름을 받아서 검색
 		List<PostVO> postlist = pservice.PostSelect(bcode);// 게시글 리스트를 보드번호를 받아서 뽑기
 		List<PostCommentVO> pclist = pservice.PostComSelect(bcode);// 보드번호 받아서 게시글 + 댓글리스트
+		List<BoardVO> myboard = bservise.boardLoad(board_name);
 
 		request.setAttribute("board_name", board_name);// 보드이름 보내주기
 		request.setAttribute("postlist", postlist);// 게시글목록 값 리퀘스트에넣기
 		request.setAttribute("pclist", pclist);// 게시글+댓글목록 값 리퀘스트에넣기
+		request.setAttribute("myboard", myboard);
 		System.out.println(pclist);
 
 		//보드디테일jsp로 감

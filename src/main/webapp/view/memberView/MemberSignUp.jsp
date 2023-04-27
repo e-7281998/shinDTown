@@ -4,9 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>ShinDTown</title>
+ <link rel="shortcut icon" type="image/x-icon" href="${path}/view/img/logo.png">
 <link href="member.css" rel="stylesheet" />
 <script src="<%=request.getContextPath()%>/jq/jquery-3.6.4.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
 	<%@include file="../header.jsp"%>
@@ -49,9 +51,9 @@
 			data: classdata,
 			success: (responseData)=>{ 
 				if(responseData == -1)
-					alert("인증번호가 다릅니다."); 
+					swal("인증실패!", "인증번호가 다릅니다!", 'warning');
 				else
-					alert("인증번호가 일치합니다.")
+					swal("인증성공!", "인증번호가 일치합니다!", 'success');
 			},
 			error:(message) => {
  				console.log(message);
@@ -71,10 +73,11 @@
 			data:{"id":$(".id").val()},
 			success: (responseData)=>{ 
 				if(responseData == 1){
-					alert("이미 존재하는 아이디 입니다.");
-					$(".id").focus().val("");
+					swal("아이디 중복!", "같은 아이디가 존재합니다!", 'warning').then(function(){
+						$(".id").focus().val("");
+					})
 				}else 
-					alert("사용 가능한 아이디 입니다."); 
+					swal("사용가능!", "사용가능한 아이디 입니다!", 'success');
 					 
 			},
 			error:(message) => {
@@ -95,23 +98,26 @@
 		 
 		//name 체크
   		if(!checkKor(name) || name.legnth >5 || checkSpc(name) || checkKor2(name)){
- 			alert('이름은 5자리 이하 한글만 가능합니다.');
- 			return;
+ 			swal("조건 확인!", "이름은 5자리 이하 한글만 가능합니다.", 'info');
+ 				return;
 		} 
 		//id 체크
   		if(!(checkNum(id) || checkEng(id)) || checkSpc(id) || id.length < 4 || id.length > 10){
- 			alert('아이디는 4~10자리 영문이나 숫자만 가능합니다.');
- 			return;			
+ 			swal("조건 확인!", "아이디는 4~10자리 영문이나 숫자만 가능합니다.", 'info');
+ 				return;
+ 			
 		} 
 		//pwd체크
  		if(!(checkNum(pwd) || checkEng(pwd)) || checkSpc(pwd) || pwd.length <6 || pwd.length > 10){
- 			alert('비밀번호는 6~10자리 이하 영문이나 숫자만 가능합니다.');
- 			return;
+ 			swal("조건 확인!", "비밀번호는 6~10자리 이하 영문이나 숫자만 가능합니다.", 'info');
+ 				return;
+ 			
 		} 
 		//pwd, pwd_check 확인
 		if(!(pwd == pwdchek)){
-			alert('비밀번호가 일치하지 않습니다.');
-			return;
+			swal("비밀번호 불일치!", "비밀번호가 일치하지 않습니다.", 'error');
+ 				return;
+ 			
 		}
 		
 		var userdata = {
@@ -128,13 +134,14 @@
 			data: userdata,
 			success: (responseData)=>{ 
 				if(responseData == 1){
-					alert("회원가입 성공");
-					location.href = "MemberLogin.jsp";
+					swal("회원가입 성공!", "회원 가입에 성공하셨습니다!", 'success').then(function (){
+						location.href = "MemberLogin.jsp";
+		 			});
 				}else if(responseData == -1){
-					alert('인증번호가 다릅니다.')
+					swal("인증번호 오류!", "인증번호를 확인해주세요!", 'error');
 				}
 				else{
- 					alert("회원가입 실패");					
+					swal("회원가입 실패!", "회원 가입에 실패하셨습니다!", 'error');
 				}
 
 			},

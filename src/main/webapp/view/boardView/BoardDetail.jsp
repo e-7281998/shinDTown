@@ -6,26 +6,42 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>ShinDTown</title>
+ <link rel="shortcut icon" type="image/x-icon" href="${path}/view/img/logo.png">
 <link href="${path}/view/boardView/boardDetail.css" rel="stylesheet" />
 <script src="${path}/jq/jquery-3.6.4.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body class="main">
 	<%@include file="../header.jsp"%>
 	<div class="body">
+	
 		<div class="board_detail">
 			<div class="board_title">
-				<h1>${board_name }</h1>
+				<h1>${board_name }</h1>			
+				<c:if test="${myboard[0].USER_CODE eq loginUser.user_code or loginUser.user_class eq 0}">
+					<button id="board_delete" class="delcom">게시판삭제</button>
+				</c:if>
 			</div>
 			<div class="board_list">
 				<ul class="post_title">
 				<c:forEach items="${pclist }" var="post" varStatus ="status">
-						<li id="${status.count}" value="${status.count}"> <span>${post.POST_TITLE }</span> [좋아요:<p class="like" id="${status.count}likes">${post.POST_LIKES }</p>] [댓글:<p class="com_count">${post.POST_COMS }개</p>]</li>
+					<div id="${post.POST_CODE}list }">
+						<li id="${status.count}" value="${status.count}"> <span>${post.POST_TITLE }</span> [좋아요:<p class="like" id="${status.count}likes">${post.POST_LIKES }</p>] [댓글:<p class="com_count" id="${status.count }coms">${post.POST_COMS }</p>개]
+						<c:if test="${post.USER_CODE eq loginUser.user_code or loginUser.user_class eq 0 }">
+							<button class="delcom" style="visibility: hidden; float: right;" id ="${status.count }post_delete" value="${post.POST_CODE }" onclick="postdelete();">삭제</button>
+						</c:if>
+						<hr class="post_line"/>
+						</li>
+		
+						
 						<input type="hidden" id="${status.count}create" value="${post.POST_CREATE }">
 						<input type="hidden" id="${status.count}content" value="${post.POST_CONTENT }">
-						<%-- <input type="hidden" id="${status.count}likes" value="${post.POST_LIKES}"> --%>
+						<input type="hidden" id="${status.count}post_user" value="${post.USER_NAME}">
+						<p style="display:none;" id="${status.count}post_source">${post.POST_SOURCE}</p>						
 						<input type="hidden" id="${status.count}code" value="${post.POST_CODE }">
+					</div>
 				</c:forEach>
 					</ul>
 				<div class="posting">
@@ -35,55 +51,89 @@
 			</div>
 
 			<div class="post_detail" id="post_detail" name ="post_detail" value="${post.POST_CODE }">
+			
 				<div class="post">
 
 					<div class="title">
-						<h3>제목 : </h3>
+						<p>제목 : </p>
+					</div>
+					
+					<div class="post_user">
+						<p>이름: </p>
 					</div>
 					
 					<div class="date" id ="date">
-						<h3>날짜: </h3>
+						<p>날짜: </p>
 					</div>
 
 					<div class="content">
 						<p>내용:</p>
 					</div>
+
+					<div class="source">
+						<p>소스코드:</p>
+					</div>
 					
 					<div class="like">
-						<p class="like_p">좋아유:</p>
+						<button id="post_likebtn"><img id= "imgs"/></button>
 						<p class="like_p" id="post_like"></p>
 					</div>
 					
-					<button id="post_likebtn">좋아</button>
-
+					<div class="state">
+						<p id="like_state"></p>
+					</div>
 				</div>
 
 				<div class="comment">
 					<form class="create_comment">
 						<input type="hidden" id="post_code" name="post_code">
 						<input type="text" class="comment" id ="com_comment" name="com_comment" > 
-						<input type="button" name="create_comment"onclick = "newComment()" value="등록" />
+						<input type="button" class="comment_btn" name="create_comment"onclick = "newComment()" value="등록" />
 					</form>
 				</div>
 				
 
 				<div class="comment_pos" id = "comments">
 				</div>
+				</div>
 		</div>
 	</div>
+
 	
 	<script>
-	var post_code;
-	var post_like;
-	
+	var user_name;
 	var title;
 	var date;
 	var content;
+	var coms;
+	var board_name=$("#board_title h1").text();
+	var post_delete;
+	var post_like;
+	var post_code;
+	var licount;
+	
 	var com_like;
-	var code;
 	var com_user;
 	
 	$(document).ready(function() {
+		
+		$("#board_delete").on("click",function(){
+			$.ajax({
+				method : "GET",
+				data : {"board_name": "${board_name}"},
+				url: "/shinDTown/board/delete.com",
+				success: function(responseData){
+					swal("게시판삭제!", "게시판이 삭제되었습니다!", 'success').then(function(){
+						location.href='/shinDTown/board/read.com';
+					})
+				},
+				error: function(){
+					console.log("err");
+				}
+				
+			});
+		});
+		
 			$("li").on("click",function() {
 				
 				title= $(this).find("span").text();
@@ -91,18 +141,60 @@
 				content = "#"+$(this).val()+"content";
 				post_like = "#"+$(this).val()+"likes";
 				code = "#"+$(this).val()+"code";
+				user_name = "#"+$(this).val()+"post_user";
+				coms="#"+$(this).val()+"coms";
+				post_delete="#"+$(this).val()+"post_delete";
+				source = "#"+$(this).val()+"post_source";
+				var lastcount = licount;
+				licount = "#"+$(this).val();
+				$("#like_state").text("");
+
 				
-				/* console.log($(code).val()); */
 				post_code = $(code).val();
 				
-				$("#post_detail .title h3 ").text(title);
-				$("#post_detail .date h3 ").text($(date).val());
-				$("#post_detail .content p ").text($(content).val());
+				$("#post_detail .title p ").text("제목 : " + title);
+				$("#post_detail .date p ").text("작성일자 : " + $(date).val());
+				$("#post_detail .post_user p ").text("작성자 : " + $(user_name).val());
+				$("#post_detail .content p ").text("내용 : " + $(content).val());
+				$("#post_detail .source p ").text($(source).val());
+				
+				
+				console.log($(post_like).text() + "shfjkdhfjks");
 				$("#post_like").text($(post_like).text());
-				$("#post_code").val($(code).val());
+				$("#post_code").val($(post_code).text());
 				$("#post_detail").css("visibility", "visible"); 
+				
+				$(lastcount+" button").css("visibility", "hidden"); 
+				$(post_delete).css("visibility","visible");
+				
+				if(post_likecheck(post_code)> 0){
+					$("#imgs").attr("src", "${path}/view/img/balloon-heart-fill.svg");
+					$("#imgs").val("안좋아");
+				}else{
+					$("#imgs").attr("src", "${path}/view/img/balloon-heart.svg");
+					$("#imgs").val("좋아");
+				}
 			});
+			
 		});
+	
+	function postdelete(){
+		$.ajax({
+			data : {"post_code": $(post_delete).val()},
+			url: "/shinDTown/post/delete.com",
+			success: function(responseData){
+				swal("게시글삭제!", "게시글이 삭제되었습니다!", 'success');
+				$(licount).css("display","none");
+				$("#post_detail").css("visibility", "hidden"); 
+								
+			},
+			error: function(){
+				console.log("err");
+			}
+			
+		});
+	}
+	
 		
 	$(function(){
 		$("li").on("click",function (e){
@@ -120,7 +212,7 @@
 					getlikes(item.COM_CODE);
 					getcom_userName(item.COM_CODE);
 					
- 					var head = "<div class='comment_list'><div class='comms'><div class='comm'>";
+ 					var head = "<div class='comment_list' id='"+item.COM_CODE+"_list'><div class='comms'><div class='comm'>";
  					var foot = "</div><button class='good' onclick='setlike("+item.COM_CODE+")' id='"+item.COM_CODE+
  					"_btn2' value='"+item.COM_CODE+"'>공감</button><p class='points' id='" +item.COM_CODE+ "_txt'>" + com_like 
  					+"</p><button class='delcom' id= '" +item.COM_CODE+ "_btn' onclick='delCom("+item.COM_CODE+")'>삭제</button>"
@@ -139,7 +231,6 @@
 					}
 					
 					if($.trim(item.USER_CODE) == ${user_code} || ${loginUser.user_class} == "0" ){
-						console.log("일치");
 						$("#"+item.COM_CODE+ "_btn").css("visibility", "visible"); 
 					}else{
 						$("#"+item.COM_CODE+ "_btn").css("visibility", "hidden"); 
@@ -158,7 +249,7 @@
 	$(document).ready(function() {
 		$("#com").click(function() {
 			if($("#comment").val().length==0){
-				alert("댓글을 입력해주시오");
+				alert("댓글을 입력해주세요!");
 				$("#comment").focus;
 				return false;
 				}
@@ -166,19 +257,73 @@
 	});
 	$(function(){
 		$("#post_likebtn").on("click",function(){
+			console.log($("#imgs").val());
 			//page이동 없이 게시글 좋아요 후 좋아요 부분 +
-			$.ajax({
-					url:"/shinDTown/post/like.com",
-					data:{"post_code":$("#post_code").val()},
-					success:function(data){
-					if(data="OK"){
-					$("#post_like").text(parseInt($("#post_like").text())+1);
-					$(post_like).text(parseInt($(post_like).text())+1);
-					}
-					}
-				})
+			if($("#imgs").val() == "좋아"){
+				post_likes(post_code);
+			}else{
+				post_del_like(post_code);
+			}
+			
 			})
+		}); 
+	
+	function post_del_like(post_code){
+		$.ajax({
+			method : "GET",
+			data : {"post_code": post_code},
+			url: "/shinDTown/post/likedelete.com",
+			success: function(responseData){
+				$("#"+post_code+"_list").hide();
+				$("#post_like").text(parseInt($("#post_like").text())-1);
+				
+				$(post_like).text(parseInt($(post_like).text())-1);	
+				
+				$("#imgs").attr("src","${path}/view/img/balloon-heart.svg");
+				$("#imgs").val("좋아");
+				$("#like_state").text("공감이 취소되었습니다!");
+			},
+			error: function(){
+				console.log("err");
+			}
+			
 		});
+	}
+	
+	
+	function post_likes(post_code){
+		$.ajax({
+				url:"/shinDTown/post/like.com",
+				data:{"post_code":post_code},
+				success:function(data){
+					$("#post_like").text(parseInt($("#post_like").text())+1);
+					$(post_like).text(parseInt($(post_like).text())+1);	
+					$("#imgs").attr("src","${path}/view/img/balloon-heart-fill.svg");
+					$("#imgs").val("안좋아");
+					$("#like_state").text("공감되었습니다!");
+					
+			}
+		})
+	}
+	
+		
+	function post_likecheck(post_code){
+		console.log(post_code);
+		var check;
+		$.ajax({
+			method : "GET",
+			data : {"post_code": post_code},
+			url: "/shinDTown/post/likecheck.com",
+			async : false,
+			success: function(responseData){
+				check =  responseData;
+			},
+			error: function(){
+				console.log("err");
+			}
+		});
+		return check;	
+	}
 	
 		function getlikes(a){
 			console.log("com_code: " +a);
@@ -223,10 +368,11 @@
 					
 				$("#com_comment").val("");
 				$("#comments").append(head +
-					"<p>"+com_user+"</p>"+
+					"<b>"+com_user+"</b>"+
 					"<p>"+com_comment+"</p>" +
 					foot);
 				
+				$(coms).text(parseInt($(coms).text())+1);
 				
 			},
 			error : function(){
@@ -235,7 +381,6 @@
 			
 		})
 	}
-//만약 사용자가 같은 내용을 여러번 적었다면.,,.? 구분 안되긴 함..(중복처리 막아야 함)
 function getcom_code(post_code, user_code, com_comment){
 	var com_code;
 	$.ajax({
@@ -254,13 +399,13 @@ function getcom_code(post_code, user_code, com_comment){
 	return com_code;
 }
 
-function delCom(com_code, user_code){
+function delCom(com_code){
+	console.log(com_code);
 	$.ajax({
 		method : "GET",
-		data : {"com_code": com_code, "user_code" : user_code},
+		data : {"com_code": com_code},
 		url: "${path}/view/boardView/delete.com",
 		success: function(responseData){
-			alert("삭제 완료");
 			$("#"+com_code+"_list").hide();
 		},
 		error: function(){
@@ -271,7 +416,6 @@ function delCom(com_code, user_code){
 }
 	
 function getcom_userName(com_code){
-		console.log("이름 가져오기 :" + com_code);
 		$.ajax({
 			method : "GET",
 			data : {"com_code": com_code},
@@ -291,8 +435,6 @@ function getcom_userName(com_code){
 function setlike(com_code){
 	console.log(com_code)
 	if($("#"+com_code+"_btn2").text() == "취소"){
-		console.log("취소");
-		
 		$.ajax({
 			method : "POST",
 			data : {"com_code": com_code, "post_code" : post_code, "user_code" : "${user_code}"},
@@ -316,11 +458,9 @@ function setlike(com_code){
 			data : {"com_code": com_code, "post_code" : post_code, "user_code" : "${user_code}"},
 			url: "${path}/view/boardView/likes.com",
 			success: function(responseData){
-				console.log($("#"+com_code+ "_txt"));
 				var origin = $("#"+com_code+ "_txt").text() ;
 				$("#"+com_code+ "_txt").text(parseInt(origin) + 1);
 				$("#"+com_code+"_btn2").text("취소");
-				alert("공감!");
 			},
 			error: function(){
 				console.log("err");

@@ -6,7 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>ShinDTownle here</title>
+ <link rel="shortcut icon" type="image/x-icon" href="${path}/view/img/logo.png">
 <link href="${path}/view/boardView/board.css" rel="stylesheet" />
 <script src="${path}/jq/jquery-3.6.4.min.js"></script>
 <script
@@ -21,8 +22,7 @@
 				<div class="new_title">
 					<label class="label_1">게시판명</label> 
 					<input type="text" name="board_name" id="title" />
-					<input type="button" id="dup_check" value="중복체크" />
-						<!-- <button class="dup_check">중복확인</button> -->
+					<input type="button" id="dup_check" class="dup_check" value="중복체크" />
 				</div>
 
 				<div class="new_pre">

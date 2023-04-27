@@ -34,8 +34,8 @@ public class BoardService {
 	}
 	
 	//게시판 삭제
-	public int boardDelete(String boardName, int userCode) {
-		return dao.boardDelete(boardName, userCode);		
+	public int boardDelete(String boardName) {
+		return dao.boardDelete(boardName);		
 	}
 	
 	//게시판명 검색
@@ -45,5 +45,9 @@ public class BoardService {
 	// 게시판명 검색(번호형)
 	public int boardSerchCode(String board_name) {
 		return dao.boardSerchCode(board_name);
+	}
+	// 게시판디테일 온로드될 떄 가져오기
+	public List<BoardVO> boardLoad(String board_name) {
+		return dao.boardLoad(board_name);
 	}
 }

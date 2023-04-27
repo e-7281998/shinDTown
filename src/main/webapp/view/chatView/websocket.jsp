@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>ShinDTown</title>
 <script src="${pageContext.request.contextPath}/jq/jquery-3.6.4.min.js"></script>
 <style>
 .chat_content {

@@ -4,6 +4,8 @@
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
  <c:set var="path" value="${pageContext.request.contextPath }" scope="application"></c:set>
  
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <style>
 
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400&display=swap');
@@ -65,8 +67,9 @@ a{
  cursor : pointer;
  }
  
- hr{
+ .header_line{
  	width: 90%;
+ 	box-shadow: 0 0 4px #558BCF;
  }
 
 #logout{
@@ -74,7 +77,6 @@ border: none;
 background: none;
 }
 </style>
-
 
 <div class="header"> 
 	<div class="container">
@@ -99,4 +101,16 @@ background: none;
 		</div>
 	</div>
 </div>
-<hr/>
+<hr class="header_line"/>
+
+
+<script>
+
+$(function(){
+	$('input[type="text"]').keydown(function() {
+		  if (event.keyCode === 13) {
+		    event.preventDefault();
+		  };
+		});
+})
+</script>
