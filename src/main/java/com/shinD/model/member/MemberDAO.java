@@ -131,7 +131,8 @@ public class MemberDAO {
 
 	//탈퇴하기
 	public int withdrawUser(String id) {
-		String sql = "delete from users where user_id = ?";
+//		String sql = "delete from users where user_id = ?";
+		String sql = "update users set user_name='(알수없음)',user_id='(알수없음)',user_pwd='(알수없음)',user_salt='(알수없음)',user_class=-1 where user_id = ?";
 		
 		conn = MySQLUtil.getConnection();
 		
