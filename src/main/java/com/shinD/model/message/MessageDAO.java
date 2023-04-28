@@ -9,6 +9,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSessionContext;
+
 import com.shinD.controller.message.ChatroomVO;
 import com.shinD.util.MySQLUtil;
 
@@ -23,7 +26,90 @@ public class MessageDAO {
 		ResultSet rs; //결과값을 넣어야함
 		int resultCount; //insert, update, delete건수
 		int result=0;
+		
+		//채팅방 목록에 없는 사람과의 채팅을 하게 된다면 방이 새로 만들어져야함.
+		//목록에 없는 사람은 어떻게 구하지?
+		
+		//목록은 chatRoomList라는 세션에 저장을 했음.
+		//chatRoomList에 있는 유저코드를 가져와서 존재하는지 접속중인 유저코드와 비교하자
+		
+		//chatroom에서 1번이 나거나 2번이 나일경우 채팅방이 존재하기 떄문에 sql문 실행이 안됨
+		
+		public int makeNewChatRoom(int user_1_code, int user_2_code) {
+			conn = MySQLUtil.getConnection();// db연결
 			
+			try {
+				String checkSql="""
+						select count(*) as count from chatrooms 
+						where (CHAT_USER_1_CODE=? and CHAT_USER_2_CODE=?)
+						or(CHAT_USER_2_CODE=? and CHAT_USER_1_CODE=?);
+						""";
+				
+				String sql = """
+						insert into chatrooms values(null, ?, ?) 			
+						""";
+				//chatcode를 알아내는 sql문 작성
+				
+				String findChatCode = """
+						select chat_code from chatrooms 
+						where (CHAT_USER_1_CODE=? and CHAT_USER_2_CODE=?)
+						or(CHAT_USER_2_CODE=? and CHAT_USER_1_CODE=?);
+						""";
+				
+				
+				//checkSql을 실행해서 그 값이 0이먄 실행.
+				
+				pst = conn.prepareStatement(checkSql);
+
+				pst.setInt(1, user_1_code);
+				pst.setInt(2, user_2_code);
+				pst.setInt(3, user_1_code);//내가 2번인 경우이므로
+				pst.setInt(4, user_2_code);
+				rs=pst.executeQuery();
+				
+				while(rs.next()) {
+					result = rs.getInt("count");
+				}
+				MySQLUtil.dbDisconnect(rs, pst, conn);
+				conn = MySQLUtil.getConnection();// db연결 
+				
+				if(result==0) {
+					pst = conn.prepareStatement(sql);
+					
+					pst.setInt(1, user_1_code);
+					pst.setInt(2, user_2_code);
+					pst.executeUpdate();
+					
+					MySQLUtil.dbDisconnect(rs, pst, conn);	
+					conn = MySQLUtil.getConnection();// db연결 
+				}
+				//chat_code찾기!
+				pst = conn.prepareStatement(findChatCode);
+
+				pst.setInt(1, user_1_code);
+				pst.setInt(2, user_2_code);
+				pst.setInt(3, user_1_code);//내가 2번인 경우이므로
+				pst.setInt(4, user_2_code);
+				
+				while(rs.next()) {
+					//result에 챗코드가 옵니다요
+					result = rs.getInt("chat_code");
+				}  
+				
+				
+		    } catch (SQLException e) {
+		      e.printStackTrace();
+		    } finally {
+		    
+		      MySQLUtil.dbDisconnect(rs, pst, conn);
+		    }
+			
+			return result;
+		}
+			
+		//내가 들어있는 채팅방의 message_open여부를 배열에 받아옴
+		//원래 있던 chatcode와 들어있는 chatcode와 비교해서 같으면서 매시지가 오픈이 1이면 하트로!(안읽었음으로)
+		
 		
 		//내가 속한 채팅방목록
 		 public List<ChatroomVO> selectChatRoom(int user_code) {
