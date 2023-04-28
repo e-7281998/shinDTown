@@ -12,6 +12,11 @@
 <script src="${path}/jq/jquery-3.6.4.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/monokai-sublime.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/1c.min.js" integrity="sha512-xgfaDoNzPFKxmI8PsnCBaSw5sJCy0l2QSPGc+S0ZLBcHeqvZltpqNyersdDwTF5+fFBpI2G6MdgjDtJ5xSityA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 </head>
 <body class="main">
 	<%@include file="../header.jsp"%>
@@ -70,8 +75,8 @@
 						<p>내용:</p>
 					</div>
 
-					<div class="source">
-						<p>소스코드:</p>
+					<div class="source" >
+						<pre><code style="display:none;"></code></pre>
 					</div>
 					
 					<div class="like">
@@ -85,10 +90,10 @@
 				</div>
 
 				<div class="comment">
-					<form class="create_comment">
+					<form class="create_comment" >
 						<input type="hidden" id="post_code" name="post_code">
 						<input type="text" class="comment" id ="com_comment" name="com_comment" > 
-						<input type="button" class="comment_btn" name="create_comment"onclick = "newComment()" value="등록" />
+						<input type="button" class="comment_btn" name="create_comment" onclick = "newComment()" value="등록" />
 					</form>
 				</div>
 				
@@ -157,7 +162,13 @@
 				$("#post_detail .post_user p ").text("작성자 : " + $(user_name).val());
 				$("#post_detail .content p ").text("내용 : " + $(content).val());
 				$("#post_detail .source p ").text($(source).val());
-				
+				if($(source).text() == ""){
+					$("#post_detail .source pre code").css("display", "none");
+					$("#post_detail .source pre code").text("");
+				}else{				
+					$("#post_detail .source pre code").css("display", "block");
+					$("#post_detail .source pre code").html($(source).text());
+				}
 				
 				console.log($(post_like).text() + "shfjkdhfjks");
 				$("#post_like").text($(post_like).text());
@@ -166,6 +177,8 @@
 				
 				$(lastcount+" button").css("visibility", "hidden"); 
 				$(post_delete).css("visibility","visible");
+				
+				
 				
 				if(post_likecheck(post_code)> 0){
 					$("#imgs").attr("src", "${path}/view/img/balloon-heart-fill.svg");
@@ -246,15 +259,15 @@
 		
 	});
 	});
-	$(document).ready(function() {
-		$("#com").click(function() {
-			if($("#comment").val().length==0){
+/* 	$(document).ready(function() {
+		$(".comment_btn").click(function() {
+			if($("#com_comment").val().length==0){
 				alert("댓글을 입력해주세요!");
-				$("#comment").focus;
-				return false;
+				return;
+				$("#com_comment").focus;
 				}
 		});
-	});
+	}); */
 	$(function(){
 		$("#post_likebtn").on("click",function(){
 			console.log($("#imgs").val());
@@ -346,6 +359,11 @@
 	function newComment(){
 		
 			var com_comment = $("#com_comment").val();
+			if($("#com_comment").val().length==0){
+				alert("댓글을 입력해주세요!");
+				return;
+				$("#com_comment").focus;
+				}
 
 		$.ajax({
 			method : "POST",

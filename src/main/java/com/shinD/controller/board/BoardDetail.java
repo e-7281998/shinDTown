@@ -37,7 +37,6 @@ public class BoardDetail implements CommonControllerInterface {
 		request.setAttribute("postlist", postlist);// 게시글목록 값 리퀘스트에넣기
 		request.setAttribute("pclist", pclist);// 게시글+댓글목록 값 리퀘스트에넣기
 		request.setAttribute("myboard", myboard);
-		System.out.println(pclist);
 
 		//보드디테일jsp로 감
 		return "../view/boardView/BoardDetail.jsp";
