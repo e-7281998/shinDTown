@@ -23,7 +23,7 @@
 						<c:forEach items="${boardpostlist }" var = "boardpost" varStatus ="status">
 							<c:if test="${board.BOARD_CODE  == boardpost.BOARD_CODE }">
 								<ul class="board_title">
-									<li class="post_title">${boardpost.POST_TITLE }</li>
+									<li class="post_title" id="${board.BOARD_CODE }">${boardpost.POST_TITLE }</li>
 									<hr class="b_line"/>
 								</ul>
 							</c:if>

@@ -67,7 +67,7 @@
 			
 				<div class="git_body">
 					<div class="git_img">
-						<img id="grass" src="" style="display: none;">
+						<img id="grass" src="${path}/view/img/git.png">
 					</div>
 						<ul id="repos" class="git_list"> 
 						</ul>

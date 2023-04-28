@@ -228,6 +228,9 @@ public class PostDAO {
 		post.setPOST_CODE(rs.getInt("POST_CODE"));
 		post.setBOARD_CODE(rs.getInt("BOARD_CODE"));
 		post.setUSER_CODE(rs.getInt("USER_CODE"));
+		if(rs.getInt("USER_CODE")==0) {
+			post.setUSER_CODE(0);
+		}
 		post.setPOST_TITLE(rs.getString("POST_TITLE"));
 		post.setPOST_CONTENT(rs.getString("POST_CONTENT"));
 		post.setPOST_IMAGE(rs.getString("POST_IMAGE"));
