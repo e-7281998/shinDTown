@@ -15,4 +15,7 @@ public class ChatroomVO {
 	private int chat_code;
 	private int friend_code;
 	private String friend_name;
+	
+	private int chat_user_1_code;
+	private int chat_user_2_code;
 }

@@ -26,11 +26,10 @@ public class ReadConnectRoomController implements CommonControllerInterface{
 		
 		MessageService mService = new MessageService();
 		int chat_code = Integer.parseInt(request.getParameter("chat_code"));
-		System.out.println("chat_code>>>>>>>>>"+chat_code);
+		
 		//메시지 조회
 		List<MessageVO> messagelist = mService.readConnectRoom(chat_code);
-		System.out.println(">>>>>>>>>왔엉");
-
+		
 		JSONArray array = new JSONArray();
 		
 		for(MessageVO mem: messagelist) {
@@ -45,8 +44,6 @@ public class ReadConnectRoomController implements CommonControllerInterface{
 			array.add(object);
 		}
 		
-		//request.setAttribute("messagelist", messagelist);
-		
 		JSONObject memObj = new JSONObject();
 		
 		memObj.put("message", array);
@@ -58,3 +55,4 @@ public class ReadConnectRoomController implements CommonControllerInterface{
 	}
 
 }
+

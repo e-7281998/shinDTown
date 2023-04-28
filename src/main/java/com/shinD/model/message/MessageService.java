@@ -43,4 +43,9 @@ public class MessageService {
 	 public List<MessageVO> selectReadOneMessage(int message_code) {
 		 return messageDao.selectReadOneMessage(message_code);
 	 }
+	 
+	 
+	public int makeNewChatRoom(int user_1_code, int user_2_code) {
+		return messageDao.makeNewChatRoom(user_1_code, user_2_code);
+	}
 }
