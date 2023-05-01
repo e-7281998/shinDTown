@@ -99,7 +99,7 @@ body {
 
 .git {
 	grid-area: git;
-	margin-top: 9px;
+	margin-top: -60px;
 	
 	display : grid;
 	grid-template-rows: 0.5fr 1fr 0.5fr;
@@ -130,7 +130,7 @@ li .repo{
 }
 .git_list{
 	display : none;
-	width : 100%;
+	min-width: 490px;
 	height : 100%;
 	margin-top : 0;
 }
@@ -311,7 +311,6 @@ button {
 }
 #modal2 .modalcontent2{
 	width : 400px;
-	height : auto;
 	margin :auto;
 	padding : 20px 10px;
 	background: #fff;
@@ -319,6 +318,23 @@ button {
 	border-color: #558BCF;
 	border-radius: 20px;
 	height: 300px;
+	overflow: scroll;
+    overflow-x: hidden;
+}
+
+.modalcontent2::-webkit-scrollbar {
+    width: 8px; 
+}
+
+.modalcontent2::-webkit-scrollbar-thumb {
+    height: 30%; 
+    background: #217af4; 
+    
+    border-radius: 10px;
+}
+
+.modalcontent2::-webkit-scrollbar-track {
+    background: rgba(33, 122, 244, .1);  
 }
 
 #modal2 .modal_layer {
@@ -351,6 +367,7 @@ button {
     border-radius: 20px;
 }
 .repo_check{
+	
 	cursor: pointer;
 	width: auto;
     height: 30px;

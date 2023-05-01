@@ -24,13 +24,13 @@ public class PostCreate implements CommonControllerInterface {
 	public String execute(Map<String, Object> data) throws Exception {
 		HttpServletRequest request = (HttpServletRequest) data.get("request");
 		request.setCharacterEncoding("utf-8");//인코딩
+		HttpSession session = request.getSession();
 		String page="../view/postView/PostCreate.jsp";//이상하면 다시 돌아오기
 		String method = (String)data.get("method");
 		PostService pservice = new PostService();
 		String board_name= request.getParameter("board_name");//보드이름저장
-		request.setAttribute("board_name", board_name);
-		HttpSession session = request.getSession();
-	
+		session.setAttribute("board_name", board_name);
+		
 		
 		if(method.equals("GET")) {
 	

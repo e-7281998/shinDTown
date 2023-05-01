@@ -72,8 +72,8 @@
 						<ul id="repos" class="git_list"> 
 						</ul>
 				</div>
-				<div class="tabkey">
-					<button class="repo_check" onclick="setRepo()" id="repo" style="display: none;">REPO CHECK</button>
+				<div class="tabkey" id="tabkey">
+					<button class="repo_check" onclick="setRepo()" id="repo" >REPO CHECK</button>
 				</div>
 			</div>
 			
@@ -163,14 +163,14 @@
 					<div class="left">
 						<ul class="board_title">
 							<c:forEach items="${posttop }" var="post" begin="0" end="3">
-								<li>${post.POST_TITLE }</li>
+								<li>-${post.POST_TITLE }</li>
 							</c:forEach>
 						</ul>
 					</div>
 					<div class="right">
 						<ul class="board_title">
 							<c:forEach items="${posttop }" var="post" begin="4" end="7">
-								<li>${post.POST_TITLE }</li>
+								<li>-${post.POST_TITLE }</li>
 							</c:forEach>
 						</ul>
 					</div>
@@ -242,30 +242,34 @@
 		
 		var gitId;
 
-		document.addEventListener('DOMContentLoaded', function() {
-			
-			$("#git_register").hide();
-			$("#git_update").hide();
-			
-			$.ajax({
-				url:"${path}/view/gitView/getGitId.com",
-				data: {"user_code":${user_code}},
-				success : (responseData) => {
-					gitId = responseData;
-					$("#grass").show();
-					$("#repo").show();
-					var gitBtn = $("#git_register")
-					if(!(responseData == -1)){
- 						$("#git_update").show(); 
-						getRepos(responseData);
-					}else{
- 						$("#git_register").show();
-					}
-				},
-				error:(message)=>{
-					console.log(message);
-				}
-			})
+	document.addEventListener('DOMContentLoaded', function() {
+            
+            $("#git_register").hide();
+            $("#git_update").hide();
+            $(".tabkey").hide();
+            
+            $.ajax({
+                url:"${path}/view/gitView/getGitId.com",
+                data: {"user_code":${user_code}},
+                success : (responseData) => {
+                    gitId = responseData;
+                    
+                    $("#grass").show();
+                    $(".tabkey").show();
+                    
+                    var gitBtn = $("#git_register")
+                    if(!(responseData == -1)){
+                        $("#git_update").show(); 
+                        $(".tabkey").show();
+                        getRepos(responseData);
+                    }else{
+                        $("#git_register").show();
+                    }
+                },
+                error:(message)=>{
+                    console.log(message);
+                }
+            })
 			
 
 			var calendarEl = document.getElementById('calendar');

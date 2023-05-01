@@ -80,7 +80,7 @@ background: none;
 
 <div class="header"> 
 	<div class="container">
-		<div class="logo"><a href="/shinDTown/index.jsp">
+		<div class="logo"><a href="/shinDTown/board/main.com">
 		<img src="/shinDTown/view/img/logo.png">
 		</a>
 		</div>

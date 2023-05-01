@@ -13,8 +13,8 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="C:/workspace/shinDTown/src/main/webapp/WEB-INF/lib/json-simple-1.1.1.jar"/>
-	<classpathentry kind="lib" path="C:/workspace/shinDTown/src/main/webapp/WEB-INF/lib/lombok.jar"/>
-	<classpathentry kind="lib" path="C:/workspace/shinDTown/src/main/webapp/WEB-INF/lib/mysql-connector-java-8.0.25.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse-workspace/shinDTown/src/main/webapp/WEB-INF/lib/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse-workspace/shinDTown/src/main/webapp/WEB-INF/lib/lombok.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse-workspace/shinDTown/src/main/webapp/WEB-INF/lib/mysql-connector-java-8.0.25.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

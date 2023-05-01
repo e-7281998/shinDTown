@@ -403,14 +403,15 @@ public class PostDAO {
 			return result;
 		}
 	//게시글 좋아요 삭제
-		public int postLikeDel(int post_code) {
+		public int postLikeDel(int post_code,int user_code) {
 			int result = 0;
-			String sql = "delete from likes where post_code = ?"; 
+			String sql = "delete from likes where post_code = ? and user_code=?"; 
 			conn=MySQLUtil.getConnection();
 			
 			try {
 				pst = conn.prepareStatement(sql);
 				pst.setInt(1, post_code);
+				pst.setInt(2, user_code);
 				result = pst.executeUpdate();
 				
 			} catch (SQLException e) {

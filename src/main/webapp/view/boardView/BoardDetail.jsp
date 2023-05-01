@@ -35,7 +35,8 @@
 					<div id="${post.POST_CODE}list }">
 						<li id="${status.count}" value="${status.count}"> <span>${post.POST_TITLE }</span> [좋아요:<p class="like" id="${status.count}likes">${post.POST_LIKES }</p>] [댓글:<p class="com_count" id="${status.count }coms">${post.POST_COMS }</p>개]
 						<c:if test="${post.USER_CODE eq loginUser.user_code or loginUser.user_class eq 0 }">
-							<button class="delcom" style="visibility: hidden; float: right;" id ="${status.count }post_delete" value="${post.POST_CODE }" onclick="postdelete();">삭제</button>
+							<button class="delcom" style="visibility: hidden; float: right;" id ="${status.count }post_delete" 
+							value="${post.POST_CODE }" onclick="postdelete();">삭제</button>
 						</c:if>
 						<hr class="post_line"/>
 						</li>

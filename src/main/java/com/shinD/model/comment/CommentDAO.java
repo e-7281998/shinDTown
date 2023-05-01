@@ -145,14 +145,13 @@ public class CommentDAO {
 	// 좋아요 달기
 	public int LikeCreate(LikeVO like) {
 		int result = 0;
-		String sql="insert into likes(USER_CODE,POST_CODE, COM_CODE) values(?,?,?)";
+		String sql="insert into likes(USER_CODE, COM_CODE) values(?,?)";
 		conn = MySQLUtil.getConnection();
 		
 		try {
 			pst=conn.prepareStatement(sql);
 			pst.setInt(1, like.getUSER_CODE());
-			pst.setInt(2, like.getPOST_CODE());
-			pst.setInt(3, like.getCOM_CODE());
+			pst.setInt(2, like.getCOM_CODE());
 			result= pst.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

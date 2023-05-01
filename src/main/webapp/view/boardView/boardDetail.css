@@ -288,7 +288,7 @@ input[type="submit"] {
 .delcom{
 	justify-content: center;
 	grid-area : delete;
-	width: 50px;
+	width: 150px;
 	height: 30px;
 	outline: none;
 	border-radius: 13px;

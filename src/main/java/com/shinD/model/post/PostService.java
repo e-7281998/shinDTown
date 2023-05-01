@@ -34,8 +34,8 @@ public class PostService {
 		return dao.CheckPost(post_code, user_code);
 	}
 	//게시글 좋아요 삭제
-	public int postLikeDel(int post_code) {
-		return dao.postLikeDel(post_code);
+	public int postLikeDel(int post_code,int user_code) {
+		return dao.postLikeDel(post_code,user_code);
 	}
 	//게시글 삭제
 		public int PostDelete(int post_code) {

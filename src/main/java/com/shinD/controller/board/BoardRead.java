@@ -36,7 +36,6 @@ public class BoardRead implements CommonControllerInterface {
 			List<BoardPostVO> boardpostlist = bservise.boardPostAll();//보드 목록+ 게시글을 받아서 리스트로 만듦
 			List<BoardVO> boardtop = bservise.boardTop();//보드 인기도 순 
 			List<String> boardserch = bservise.boardSerch(request.getParameter("board_name"));//검색
-			System.out.println("어옴");
 			
 			request.setAttribute("boardlist", boardlist);//보드리스트 값 리퀘스트에넣기
 			request.setAttribute("boardpostlist", boardpostlist);//보드리스트 값 리퀘스트에넣기
